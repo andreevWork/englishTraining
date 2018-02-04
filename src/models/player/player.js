@@ -2,7 +2,7 @@ import { types } from 'mobx-state-tree';
 
 export const PlayerModel = types
     .model('Player', {
-        isPaused: types.boolean
+        isPaused: true
     })
     .actions(self => {
         return {
