@@ -32,7 +32,11 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: [ '.jsx', '.js' ]
+        extensions: [ '.jsx', '.js' ],
+        alias: {
+            utils: path.resolve(__dirname, 'src', 'utils'),
+            reactions: path.resolve(__dirname, 'src', 'reactions'),
+        }
     },
     output: {
         filename: 'bundle.js',

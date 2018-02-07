@@ -2,22 +2,26 @@ import * as React from "react";
 import {LeftBottomControls} from "./controls/LeftBottomControls/LeftBottomControls";
 
 import s from "./Player.sass";
-import {autorun} from "mobx";
 import {inject} from "mobx-react";
+import {PlayerReactionsAgregator} from "reactions/player/PlayerReactionsAgregator";
+import {RightBottomControls} from "./controls/RightBottomControls/RightBottomControls";
 
-@inject('player')
+@inject(stores => ({stores}))
 export class Player extends React.PureComponent {
-
     videoEl;
+    playerReactionsAgregator;
 
     componentDidMount() {
-        autorun(() => {
-            if(this.props.player.isPaused) {
-                this.videoEl.pause();
-            } else {
-                this.videoEl.play();
-            }
-        });
+        this.playerReactionsAgregator = new PlayerReactionsAgregator(
+            this.props.stores,
+            this.videoEl
+        );
+
+        this.playerReactionsAgregator.run();
+    }
+
+    componentWillUnmount() {
+        this.playerReactionsAgregator.destroy();
     }
 
     render() {
@@ -30,6 +34,7 @@ export class Player extends React.PureComponent {
             </video>
             <div className={s.bottomControls}>
                 <LeftBottomControls />
+                <RightBottomControls />
             </div>
         </figure>;
     }

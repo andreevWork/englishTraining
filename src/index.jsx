@@ -2,7 +2,10 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "mobx-react";
 import {Player} from "./components/Player/Player";
-import {PlayerModel} from "./models/player/player";
+import {PlayerModel} from "./models/player/playerModel";
+
+import './index.sass';
+
 
 ReactDOM.render(<Provider player={PlayerModel.create()}>
     <Player />
