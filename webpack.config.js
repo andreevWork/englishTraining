@@ -25,7 +25,10 @@ module.exports = {
                         localIdentName: '[path][name]__[local]--[hash:base64:5]'
                     }
                 }, {
-                    loader: "sass-loader"
+                    loader: "sass-loader",
+                    options: {
+                        includePaths: [path.resolve(__dirname, 'src', 'styles', 'imported')]
+                    }
                 }]
             }
 
@@ -35,6 +38,7 @@ module.exports = {
         extensions: [ '.jsx', '.js' ],
         alias: {
             utils: path.resolve(__dirname, 'src', 'utils'),
+            services: path.resolve(__dirname, 'src', 'services'),
             reactions: path.resolve(__dirname, 'src', 'reactions'),
         }
     },

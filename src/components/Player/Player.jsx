@@ -1,10 +1,11 @@
 import * as React from "react";
-import {LeftBottomControls} from "./controls/LeftBottomControls/LeftBottomControls";
 
 import s from "./Player.sass";
 import {inject} from "mobx-react";
+import autobind from 'autobind-decorator';
 import {PlayerReactionsAgregator} from "reactions/player/PlayerReactionsAgregator";
-import {RightBottomControls} from "./controls/RightBottomControls/RightBottomControls";
+import {ProgressBar} from "./controls/ProgressBar/ProgressBar";
+import {BottomControls} from "./controls/BottomControls/BottomControls";
 
 @inject(stores => ({stores}))
 export class Player extends React.PureComponent {
@@ -24,17 +25,38 @@ export class Player extends React.PureComponent {
         this.playerReactionsAgregator.destroy();
     }
 
+    @autobind
+    onLoadedMetadata() {
+        const {duration} = this.videoEl;
+
+        this.props.stores.player.setDuration(duration);
+    }
+
+    @autobind
+    onTimeUpdate() {
+        const {currentTime} = this.videoEl;
+
+        this.props.stores.player.setCurrentTime(currentTime);
+    }
+
     render() {
         return <figure className={s.figure}>
-            <video ref={el => this.videoEl = el} preload="metadata" className={s.video}>
+            <video
+                ref={el => this.videoEl = el}
+                onLoadedMetadata={this.onLoadedMetadata}
+                onTimeUpdate={this.onTimeUpdate}
+                preload="metadata"
+                className={s.video}
+            >
                 <source
                     src="http://iandevlin.github.io/mdn/video-player/video/tears-of-steel-battle-clip-medium.mp4"
                     type="video/mp4"
                 />
             </video>
-            <div className={s.bottomControls}>
-                <LeftBottomControls />
-                <RightBottomControls />
+
+            <div className={s.controls}>
+                <ProgressBar />
+                <BottomControls />
             </div>
         </figure>;
     }

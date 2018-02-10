@@ -7,9 +7,11 @@ import {observer, inject} from "mobx-react";
 @observer
 export class LeftBottomControls extends React.Component {
     render() {
+        const {player} = this.props;
+
         return <div className={s.container}>
-            <div onClick={() => this.props.player.tooglePlay()}>
-                {this.props.player.isPaused ? 'play' : 'pause'}
+            <div onClick={() => player.tooglePlay()}>
+                {player.isPaused ? 'play' : 'pause'}
             </div>
         </div>;
     }

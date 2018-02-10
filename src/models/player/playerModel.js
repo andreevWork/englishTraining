@@ -3,7 +3,9 @@ import { types } from 'mobx-state-tree';
 export const PlayerModel = types
     .model('Player', {
         isPaused: true,
-        isFullScreen: false
+        isFullScreen: false,
+        duration: 0,
+        currentTime: 0
     })
     .actions(self => {
         return {
@@ -15,6 +17,12 @@ export const PlayerModel = types
             },
             setFullScreen(isFullScreen) {
                 self.isFullScreen = isFullScreen;
+            },
+            setDuration(duration) {
+                self.duration = duration;
+            },
+            setCurrentTime(currentTime) {
+                self.currentTime = currentTime;
             }
         };
     });
