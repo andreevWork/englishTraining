@@ -40,24 +40,26 @@ export class Player extends React.PureComponent {
     }
 
     render() {
-        return <figure className={s.figure}>
-            <video
-                ref={el => this.videoEl = el}
-                onLoadedMetadata={this.onLoadedMetadata}
-                onTimeUpdate={this.onTimeUpdate}
-                preload="metadata"
-                className={s.video}
-            >
-                <source
-                    src="http://iandevlin.github.io/mdn/video-player/video/tears-of-steel-battle-clip-medium.mp4"
-                    type="video/mp4"
-                />
-            </video>
+        return <div className={s.container}>
+            <figure className={s.figure}>
+                <video
+                    ref={el => this.videoEl = el}
+                    onLoadedMetadata={this.onLoadedMetadata}
+                    onTimeUpdate={this.onTimeUpdate}
+                    preload="metadata"
+                    className={s.video}
+                >
+                    <source
+                        src={this.props.videoSrc}
+                        type="video/mp4"
+                    />
+                </video>
 
-            <div className={s.controls}>
-                <ProgressBar />
-                <BottomControls />
-            </div>
-        </figure>;
+                <div className={s.controls}>
+                    <ProgressBar />
+                    <BottomControls />
+                </div>
+            </figure>
+        </div>;
     }
 }
