@@ -1,11 +1,9 @@
 import * as React from "react";
-
 import s from "./Player.sass";
 import {inject} from "mobx-react";
 import autobind from 'autobind-decorator';
 import {PlayerReactionsAgregator} from "reactions/player/PlayerReactionsAgregator";
-import {ProgressBar} from "./controls/ProgressBar/ProgressBar";
-import {BottomControls} from "./controls/BottomControls/BottomControls";
+import { PlayerElements } from './PlayerElements/PlayerElements';
 
 @inject(stores => ({stores}))
 export class Player extends React.PureComponent {
@@ -28,8 +26,13 @@ export class Player extends React.PureComponent {
     @autobind
     onLoadedMetadata() {
         const {duration} = this.videoEl;
-
-        this.props.stores.player.setDuration(duration);
+  
+      this.props.stores.player.setIsReady(true);
+      this.props.stores.player.setDuration(duration);
+      
+      requestAnimationFrame(() => {
+        this.props.stores.player.tooglePlay();
+      })
     }
 
     @autobind
@@ -54,11 +57,8 @@ export class Player extends React.PureComponent {
                         type="video/mp4"
                     />
                 </video>
-
-                <div className={s.controls}>
-                    <ProgressBar />
-                    <BottomControls />
-                </div>
+                
+                <PlayerElements />
             </figure>
         </div>;
     }

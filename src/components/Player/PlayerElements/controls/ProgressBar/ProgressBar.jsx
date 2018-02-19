@@ -11,8 +11,9 @@ export class ProgressBar extends React.Component {
     @autobind
     onClick(e) {
         const el = e.target;
-        const pos = (e.pageX  - el.offsetLeft) / el.offsetWidth;
-
+        const {left} = el.getBoundingClientRect();
+        const pos = (e.pageX  - left) / el.offsetWidth;
+        
         this.props.player.setCurrentTime(pos * this.props.player.duration);
     }
 

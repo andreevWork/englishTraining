@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const entryFile = path.resolve(__dirname, 'src', 'index.jsx');
-const outputDir = path.resolve(__dirname, 'dist');
+const outputDir = path.resolve(__dirname);
 
 module.exports = {
     entry: entryFile,
@@ -47,7 +47,10 @@ module.exports = {
         path: outputDir
     },
     plugins: [
-        new HtmlWebpackPlugin()
+        new HtmlWebpackPlugin({
+          title: 'English training video player',
+          favicon: path.resolve(outputDir, 'favicon.ico')
+        })
     ],
 
     devServer: {

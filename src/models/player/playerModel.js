@@ -5,6 +5,7 @@ export const PlayerModel = types
         videoSrc: types.maybe(types.string),
         subsSrc: types.maybe(types.string),
         isPaused: true,
+        isReady: false,
         isFullScreen: false,
         duration: 0,
         currentTime: 0
@@ -25,6 +26,9 @@ export const PlayerModel = types
             },
             setCurrentTime(currentTime) {
                 self.currentTime = currentTime;
+            },
+            setIsReady(isReady) {
+                self.isReady = isReady;
             },
             setSrc({videoSrc, subsSrc}) {
                 self.videoSrc = videoSrc;

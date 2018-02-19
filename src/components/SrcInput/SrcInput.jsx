@@ -7,7 +7,6 @@ import s from './SrcInput.sass';
 @inject('player')
 @observer
 export class SrcInput extends React.Component {
-
     state = {
         videoSrc: '',
         subsSrc: ''
@@ -28,23 +27,17 @@ export class SrcInput extends React.Component {
 
     render() {
         return <div className={s.container}>
-            <div className={s.content}>
-                <div>
-                    <label>
-                        Video:
-                        <input onInput={this.onChange('videoSrc')} type="text"/>
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        Subs:
-                        <input onInput={this.onChange('subsSrc')} type="text"/>
-                    </label>
-                </div>
-                <button onClick={this.onClick}>
-                    Go
-                </button>
-            </div>
+          <div>
+            <input placeholder="Type video src(mp4 only)..."
+                   className={s.input} onInput={this.onChange('videoSrc')} type="text"/>
+          </div>
+          <div>
+            <input placeholder="Type subtitles src ..."
+                   className={s.input} onInput={this.onChange('subsSrc')} type="text"/>
+          </div>
+          <div className={s.btn} onClick={this.onClick}>
+            WATCH
+          </div>
         </div>;
     }
 }

@@ -1,0 +1,42 @@
+@import "variables"
+
+.container
+  position: absolute
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%)
+  width: 40px
+  height: 40px
+
+  & div
+    width: 33%
+    height: 33%
+    background-color: $mainColor
+    float: left
+    animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out
+
+.cube_1
+    animation-delay: 0.2s !important
+.cube_2
+    animation-delay: 0.3s !important
+.cube_3
+    animation-delay: 0.4s !important
+.cube_4
+    animation-delay: 0.1s !important
+.cube_5
+    animation-delay: 0.2s !important
+.cube_6
+    animation-delay: 0.3s !important
+.cube_7
+    animation-delay: 0s !important
+.cube_8
+    animation-delay: 0.1s !important
+.cube_9
+    animation-delay: 0.2s !important
+
+
+@keyframes sk-cubeGridScaleDelay
+  0%, 70%, 100%
+      transform: scale3D(1, 1, 1)
+  35%
+      transform: scale3D(0, 0, 1)
