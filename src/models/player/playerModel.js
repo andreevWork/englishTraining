@@ -2,8 +2,8 @@ import { types } from 'mobx-state-tree';
 
 export const PlayerModel = types
     .model('Player', {
-        videoSrc: types.maybe(types.string),
-        subsSrc: types.maybe(types.string),
+        videoSrc: '/assets/qwe.mp4',
+        subsSrc: '/assets/qwe.srt',
         isPaused: true,
         isReady: false,
         isFullScreen: false,

@@ -1,11 +1,14 @@
-import {BasePlayerReaction} from "reactions/player/BasePlayerReaction";
+import { DiContainer } from 'DiContainer';
+import { BaseReaction } from 'reactions/BaseReaction';
 
-export default class TogglePlayReaction extends BasePlayerReaction {
+export class TogglePlayReaction extends BaseReaction {
     reaction() {
-        if(this.stores.player.isPaused) {
-            this.videoEl.pause();
+      const videoEl = DiContainer.get('videoEl');
+      
+        if(this._store.player.isPaused) {
+            videoEl.pause();
         } else {
-            this.videoEl.play();
+            videoEl.play();
         }
     }
 }

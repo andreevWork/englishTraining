@@ -1,15 +1,28 @@
 import {autorun} from "mobx";
+import { DiContainer } from 'DiContainer';
 
 /**
  * @abstract
  */
 export class BaseReaction {
-    stores;
+    static createAndRunReactions(reactionsClasses) {
+        return reactionsClasses
+          .map(ReactionClass => new ReactionClass())
+          .forEach(reactionInstance => reactionInstance.run());
+        
+    };
+  
+  static destroyReactions(reactionsInstances) {
+     reactionsInstances
+      .forEach(reactionInstance => reactionInstance.destroy());
+    
+  };
+    
+    _store;
+    _disposer;
 
-    disposer;
-
-    constructor(stores) {
-        this.stores = stores;
+    constructor() {
+        this._store = DiContainer.get('store');
     }
 
     /**
@@ -18,12 +31,10 @@ export class BaseReaction {
     reaction() {}
 
     run() {
-        this.disposer = autorun(() => {
-            this.reaction();
-        });
+        this._disposer = autorun(this.reaction.bind(this));
     }
 
     destroy() {
-        this.disposer();
+        this._disposer();
     }
 }

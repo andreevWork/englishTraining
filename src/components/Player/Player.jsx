@@ -2,44 +2,45 @@ import * as React from "react";
 import s from "./Player.sass";
 import {inject} from "mobx-react";
 import autobind from 'autobind-decorator';
-import {PlayerReactionsAgregator} from "reactions/player/PlayerReactionsAgregator";
 import { PlayerElements } from './PlayerElements/PlayerElements';
+import { DiContainer } from 'DiContainer';
+import { createAndRunPlayerReactions } from 'reactions/player';
+import { BaseReaction } from 'reactions/BaseReaction';
 
-@inject(stores => ({stores}))
+@inject('player')
 export class Player extends React.PureComponent {
     videoEl;
-    playerReactionsAgregator;
+    _reactions;
 
     componentDidMount() {
-        this.playerReactionsAgregator = new PlayerReactionsAgregator(
-            this.props.stores,
-            this.videoEl
-        );
-
-        this.playerReactionsAgregator.run();
+      DiContainer.register('videoEl', this.videoEl);
+      
+      this._reactions = createAndRunPlayerReactions();
     }
 
     componentWillUnmount() {
-        this.playerReactionsAgregator.destroy();
+      DiContainer.remove('videoEl');
+  
+      BaseReaction.destroyReactions(this._reactions);
     }
 
     @autobind
     onLoadedMetadata() {
-        const {duration} = this.videoEl;
+      const {duration} = this.videoEl;
   
-      this.props.stores.player.setIsReady(true);
-      this.props.stores.player.setDuration(duration);
+      this.props.player.setIsReady(true);
+      this.props.player.setDuration(duration);
       
-      requestAnimationFrame(() => {
-        this.props.stores.player.tooglePlay();
-      })
+//      requestAnimationFrame(() => {
+//        this.props.player.tooglePlay();
+//      })
     }
 
     @autobind
     onTimeUpdate() {
-        const {currentTime} = this.videoEl;
+      const {currentTime} = this.videoEl;
 
-        this.props.stores.player.setCurrentTime(currentTime);
+      this.props.player.setCurrentTime(currentTime);
     }
 
     render() {

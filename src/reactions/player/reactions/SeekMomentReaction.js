@@ -1,11 +1,14 @@
-import {BasePlayerReaction} from "reactions/player/BasePlayerReaction";
+import { DiContainer } from 'DiContainer';
+import { BaseReaction } from 'reactions/BaseReaction';
 
-export default class SeekMomentReaction extends BasePlayerReaction {
+export class SeekMomentReaction extends BaseReaction {
     reaction() {
-        if (this.videoEl.currentTime ===  this.stores.player.currentTime) {
+        const videoEl = DiContainer.get('videoEl');
+        
+        if (videoEl.currentTime ===  this._store.player.currentTime) {
             return;
         }
 
-        this.videoEl.currentTime = this.stores.player.currentTime;
+        videoEl.currentTime = this._store.player.currentTime;
     }
 }

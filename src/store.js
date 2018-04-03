@@ -1,8 +1,10 @@
-import { types } from "mobx-state-tree"
 import {PlayerModel} from "./models/player/playerModel";
+import { DiContainer } from 'DiContainer';
 
-const Store = types.model("Store", {
-    player: PlayerModel
-});
+const Store = {
+  player: PlayerModel.create()
+};
 
-export const store = Store.create();
+DiContainer.register('store', Store);
+
+export { Store };

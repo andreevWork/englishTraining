@@ -1,10 +1,11 @@
-import {BasePlayerReaction} from "reactions/player/BasePlayerReaction";
 import autobind from 'autobind-decorator';
+import { DiContainer } from 'DiContainer';
+import { BaseReaction } from 'reactions/BaseReaction';
 
-export default class ToggleFullScreenReaction extends BasePlayerReaction {
+export class ToggleFullScreenReaction extends BaseReaction {
 
-    constructor(...args) {
-        super(...args);
+    constructor() {
+        super();
 
         document.addEventListener("fullscreenchange",this.onFullSCreenChange);
         document.addEventListener("webkitfullscreenchange",this.onFullSCreenChange);
@@ -13,7 +14,7 @@ export default class ToggleFullScreenReaction extends BasePlayerReaction {
 
     @autobind
     onFullSCreenChange() {
-        this.stores.player.setFullScreen(this.isFullScreen());
+        this._store.player.setFullScreen(this.isFullScreen());
     }
 
     isFullScreen() {
@@ -21,19 +22,21 @@ export default class ToggleFullScreenReaction extends BasePlayerReaction {
     }
 
     reaction() {
-        if (this.isFullScreen() ===  this.stores.player.isFullScreen) {
+        if (this.isFullScreen() ===  this._store.player.isFullScreen) {
             return;
         }
+        
+        const videoEl = DiContainer.get('videoEl');
 
-        if(this.stores.player.isFullScreen) {
-            if(this.videoEl.requestFullscreen)
-                this.videoEl.requestFullscreen();
-            else if(this.videoEl.mozRequestFullScreen)
-                this.videoEl.mozRequestFullScreen();
-            else if(this.videoEl.webkitRequestFullscreen)
-                this.videoEl.webkitRequestFullscreen();
-            else if(this.videoEl.msRequestFullscreen)
-                this.videoEl.msRequestFullscreen();
+        if(this._store.player.isFullScreen) {
+            if(videoEl.requestFullscreen)
+                videoEl.requestFullscreen();
+            else if(videoEl.mozRequestFullScreen)
+                videoEl.mozRequestFullScreen();
+            else if(videoEl.webkitRequestFullscreen)
+                videoEl.webkitRequestFullscreen();
+            else if(videoEl.msRequestFullscreen)
+                videoEl.msRequestFullscreen();
         } else {
             if(document.exitFullscreen)
                 document.exitFullscreen();

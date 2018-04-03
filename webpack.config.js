@@ -37,6 +37,7 @@ module.exports = {
     resolve: {
         extensions: [ '.jsx', '.js' ],
         alias: {
+            DiContainer: path.resolve(__dirname, 'src', 'services', 'DI.js'),
             utils: path.resolve(__dirname, 'src', 'utils'),
             services: path.resolve(__dirname, 'src', 'services'),
             reactions: path.resolve(__dirname, 'src', 'reactions'),
@@ -55,7 +56,6 @@ module.exports = {
 
     devServer: {
         contentBase: outputDir,
-        compress: true,
         port: 3000
     }
 };
