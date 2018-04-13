@@ -6,39 +6,39 @@ import { PlayerElements } from './PlayerElements/PlayerElements';
 import { DiContainer } from 'DiContainer';
 import { createAndRunPlayerReactions } from 'reactions/player';
 import { BaseReaction } from 'reactions/BaseReaction';
+import { createAndRunSubtitlesReactions } from 'reactions/subtitles';
 
-@inject('player')
+@inject('player', 'subtitles')
 export class Player extends React.PureComponent {
-    videoEl;
+    _videoEl;
     _reactions;
 
     componentDidMount() {
-      DiContainer.register('videoEl', this.videoEl);
+      DiContainer.register('videoEl', this._videoEl);
       
       this._reactions = createAndRunPlayerReactions();
+      createAndRunSubtitlesReactions();
+    
+      this.props.subtitles.load(this.props.player.subsSrc );
     }
 
     componentWillUnmount() {
-      DiContainer.remove('videoEl');
+      DiContainer.remove('_videoEl');
   
       BaseReaction.destroyReactions(this._reactions);
     }
 
     @autobind
     onLoadedMetadata() {
-      const {duration} = this.videoEl;
+      const {duration} = this._videoEl;
   
       this.props.player.setIsReady(true);
       this.props.player.setDuration(duration);
-      
-//      requestAnimationFrame(() => {
-//        this.props.player.tooglePlay();
-//      })
     }
 
     @autobind
     onTimeUpdate() {
-      const {currentTime} = this.videoEl;
+      const {currentTime} = this._videoEl;
 
       this.props.player.setCurrentTime(currentTime);
     }
@@ -47,7 +47,7 @@ export class Player extends React.PureComponent {
         return <div className={s.container}>
             <figure className={s.figure}>
                 <video
-                    ref={el => this.videoEl = el}
+                    ref={el => this._videoEl = el}
                     onLoadedMetadata={this.onLoadedMetadata}
                     onTimeUpdate={this.onTimeUpdate}
                     preload="metadata"

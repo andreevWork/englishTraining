@@ -5,12 +5,13 @@ import { Spinner } from './Spinner/Spinner';
 import { ProgressBar } from './controls/ProgressBar/ProgressBar';
 import { BottomControls } from './controls/BottomControls/BottomControls';
 
-@inject('player')
+@inject('player', 'subtitles')
 @observer
 export class PlayerElements extends React.Component {
     render() {
         return <React.Fragment>
           {this.props.player.isReady && <div className={s.controls}>
+              <div> {this.props.subtitles.index + 1} / {this.props.subtitles.subs.length}</div>
             <ProgressBar />
             <BottomControls />
           </div>}

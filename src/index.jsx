@@ -8,7 +8,7 @@ import {Store} from './store';
 
 
 ReactDOM.render(
-    <Provider player={Store.player}>
+    <Provider player={Store.player} subtitles={Store.subtitles}>
         <Index />
     </Provider>,
     document.body
