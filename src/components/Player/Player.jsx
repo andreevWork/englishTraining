@@ -1,12 +1,14 @@
 import * as React from "react";
 import s from "./Player.sass";
-import {inject} from "mobx-react";
+import {inject, observer} from "mobx-react";
 import autobind from 'autobind-decorator';
 import { PlayerElements } from './PlayerElements/PlayerElements';
 import { DiContainer } from 'DiContainer';
 import { createAndRunPlayerReactions } from 'reactions/player';
 import { BaseReaction } from 'reactions/BaseReaction';
 import { createAndRunSubtitlesReactions } from 'reactions/subtitles';
+import { GameElements } from './GameElements/GameElements';
+import { createAndRunGameReactions } from 'reactions/game';
 
 @inject('player', 'subtitles')
 export class Player extends React.PureComponent {
@@ -18,8 +20,9 @@ export class Player extends React.PureComponent {
       
       this._reactions = createAndRunPlayerReactions();
       createAndRunSubtitlesReactions();
+      createAndRunGameReactions();
     
-      this.props.subtitles.load(this.props.player.subsSrc );
+      this.props.subtitles.load(this.props.player.subsSrc);
     }
 
     componentWillUnmount() {
@@ -58,9 +61,19 @@ export class Player extends React.PureComponent {
                         type="video/mp4"
                     />
                 </video>
-                
-                <PlayerElements />
+  
+                <div className={s.elements}>
+                  <Elements />
+                </div>
             </figure>
         </div>;
     }
+}
+
+@inject('store')
+@observer
+class Elements extends React.Component {
+  render() {
+    return this.props.store.isGameMod ? <GameElements /> : <PlayerElements />;
+  }
 }

@@ -6,7 +6,7 @@ const SubtitleModel = types.model("Subtitle", {
   startTime: types.number,
   endTime: types.number,
   text: types.string,
-})
+});
 
 export const SubtitlesModel = types
   .model('Subtitles', {
@@ -14,9 +14,14 @@ export const SubtitlesModel = types
     subs: types.array(SubtitleModel),
     index: types.number
   })
-//  .views(self => ({
-//    getSub
-//  }))
+  .views(self => ({
+    getSub() {
+      return self.subs[self.index];
+    },
+    hasActiveSub() {
+      return !!self.getSub();
+    }
+  }))
   .actions(self => {
     return {
       load: flow(function* (subsSrc) {

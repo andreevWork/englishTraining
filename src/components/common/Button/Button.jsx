@@ -1,0 +1,12 @@
+import React from 'react';
+import cn from 'classnames';
+
+import s from './Button.sass';
+
+export class Button extends React.PureComponent {
+  render() {
+    return <div onClick={this.props.onClick} className={cn(s.button, this.props.className)}>
+      {this.props.children}
+    </div>;
+  }
+}

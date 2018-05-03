@@ -31,6 +31,6 @@ export class Subtitles {
       if (isNaN(parts[i])) parts[i] = 0;
     }
     
-    return parts[1] * 3600000 + parts[2] * 60000 + parts[3] * 1000 + parts[4];
+    return parts[1] * 3600 + parts[2] * 60 + parts[3] + parts[4] / 1000;
   }
 }

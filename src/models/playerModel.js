@@ -15,6 +15,9 @@ export const PlayerModel = types
             tooglePlay() {
                 self.isPaused = !self.isPaused;
             },
+            pause() {
+                self.isPaused = true;
+            },
             toogleFullScreen() {
                 self.isFullScreen = !self.isFullScreen;
             },
@@ -29,6 +32,10 @@ export const PlayerModel = types
             },
             setIsReady(isReady) {
                 self.isReady = isReady;
+            },
+            playByTime(time) {
+              self.currentTime = time;
+              self.isPaused = false;
             },
             setSrc({videoSrc, subsSrc}) {
                 self.videoSrc = videoSrc;
