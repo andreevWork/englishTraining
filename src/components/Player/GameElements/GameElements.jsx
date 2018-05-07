@@ -3,6 +3,7 @@ import {observer, inject} from "mobx-react";
 import s from './GameElements.sass';
 import { Button } from 'common/Button/Button';
 import { JustShow } from 'games/JustShow/JustShow';
+import { Counter } from 'common/Counter/Counter';
 
 @inject('store')
 @observer
@@ -15,8 +16,19 @@ export class GameElements extends React.Component {
     }
   }
   
+  renderSubsCounter() {
+    const {startIndex, endIndex, setStartIndex, setEndIndex} = this.props.store.subtitles;
+    
+    return <div className={s.subsCounter}>
+      <Counter onChange={setStartIndex} max={endIndex} value={startIndex}/>
+      <Counter onChange={setEndIndex} min={startIndex} value={endIndex} />
+    </div>
+  }
+  
   render() {
     return <div className={s.gameElements}>
+      {this.renderSubsCounter()}
+      
       <div className={s.game}>
         {this.renderGame()}
       </div>

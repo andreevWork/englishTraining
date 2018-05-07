@@ -14,11 +14,13 @@ const StoreModel = types
     return {
       startGame() {
         self.isGameMod = true;
+        self.subtitles.setStartIndex(self.subtitles.index);
+        self.subtitles.setEndIndex(self.subtitles.index);
         self.repeatCurrentSubs();
       },
       
       repeatCurrentSubs() {
-        const startSubTime = self.subtitles.getSub().startTime;
+        const startSubTime = self.subtitles.getSub(self.subtitles.startIndex).startTime;
         self.player.playByTime(startSubTime);
       },
   
@@ -44,7 +46,9 @@ const Store = StoreModel.create({
   subtitles: {
     isPending: false,
     subs: [],
-    index: -1
+    startIndex: -1,
+    index: -1,
+    endIndex: -1
   }
 });
 

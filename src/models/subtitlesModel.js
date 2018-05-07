@@ -12,14 +12,27 @@ export const SubtitlesModel = types
   .model('Subtitles', {
     isPending: types.boolean,
     subs: types.array(SubtitleModel),
-    index: types.number
+    startIndex: types.number,
+    index: types.number,
+    endIndex: types.number
   })
   .views(self => ({
-    getSub() {
-      return self.subs[self.index];
+    getSub(index = self.index) {
+      return self.subs[index];
     },
     hasActiveSub() {
       return !!self.getSub();
+    },
+    getIndexByTime(timeMs) {
+      return binarySearch(self.subs.peek(), timeMs, (sub, time) => {
+        return time < sub.startTime ?
+          1
+          :
+          time > sub.endTime ?
+            -1
+            :
+            0;
+      }, true);
     }
   }))
   .actions(self => {
@@ -34,16 +47,16 @@ export const SubtitlesModel = types
         self.isPending = false;
       }),
       
-      setIndex(timeMs) {
-        self.index = binarySearch(self.subs.peek(), timeMs, (sub, time) => {
-          return time < sub.startTime ?
-            1
-            :
-            time > sub.endTime ?
-              -1
-              :
-              0;
-        }, true);
+      setStartIndex(startIndex) {
+        self.startIndex = startIndex;
+      },
+      
+      setEndIndex(endIndex) {
+        self.endIndex = endIndex;
+      },
+      
+      setIndex(index) {
+        self.index = index;
       }
     };
   });

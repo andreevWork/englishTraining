@@ -2,8 +2,12 @@ import { BaseReaction } from 'reactions/BaseReaction';
 
 export class SetIndexReaction extends BaseReaction {
   reaction() {
-    if (!this._store.isGameMod) {
-      this._store.subtitles.setIndex(this._store.player.currentTime);
+    let index = this._store.subtitles.getIndexByTime(this._store.player.currentTime);
+    
+    if (this._store.isGameMod && index > this._store.subtitles.endIndex) {
+      return;
     }
+    
+    this._store.subtitles.setIndex(index)
   }
 }

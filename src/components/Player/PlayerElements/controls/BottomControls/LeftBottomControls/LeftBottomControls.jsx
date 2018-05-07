@@ -13,9 +13,9 @@ export class LeftBottomControls extends React.Component {
             <div onClick={store.player.tooglePlay}>
                 {store.player.isPaused ? 'play' : 'pause'}
             </div>
-            <div onClick={store.startGame}>
+            {store.subtitles.hasActiveSub() && <div onClick={store.startGame}>
               show
-            </div>
+            </div>}
         </div>;
     }
 }
