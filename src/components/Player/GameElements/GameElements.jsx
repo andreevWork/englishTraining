@@ -17,11 +17,14 @@ export class GameElements extends React.Component {
   }
   
   renderSubsCounter() {
-    const {startIndex, endIndex, setStartIndex, setEndIndex} = this.props.store.subtitles;
+    let {startIndex, endIndex, setStartIndexFromHuman, setEndIndexFromHuman} = this.props.store.subtitles;
+  
+    startIndex = startIndex + 1;
+    endIndex = endIndex + 1;
     
     return <div className={s.subsCounter}>
-      <Counter onChange={setStartIndex} max={endIndex} value={startIndex}/>
-      <Counter onChange={setEndIndex} min={startIndex} value={endIndex} />
+      <Counter onChange={setStartIndexFromHuman} max={endIndex} value={startIndex}/>
+      <Counter onChange={setEndIndexFromHuman} min={startIndex} value={endIndex} />
     </div>
   }
   

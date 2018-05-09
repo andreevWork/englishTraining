@@ -32,7 +32,7 @@ export const SubtitlesModel = types
             -1
             :
             0;
-      }, true);
+      });
     }
   }))
   .actions(self => {
@@ -53,6 +53,14 @@ export const SubtitlesModel = types
       
       setEndIndex(endIndex) {
         self.endIndex = endIndex;
+      },
+  
+      setStartIndexFromHuman(startIndex) {
+        self.setStartIndex(startIndex - 1);
+      },
+  
+      setEndIndexFromHuman(endIndex) {
+        self.setEndIndex(endIndex - 1);
       },
       
       setIndex(index) {

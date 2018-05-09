@@ -50,6 +50,7 @@ export class Player extends React.PureComponent {
         return <div className={s.container}>
             <figure className={s.figure}>
                 <video
+                    autoPlay={true}
                     ref={el => this._videoEl = el}
                     onLoadedMetadata={this.onLoadedMetadata}
                     onTimeUpdate={this.onTimeUpdate}

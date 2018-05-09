@@ -6,7 +6,7 @@ import s from './Counter.sass';
 export class Counter extends React.PureComponent {
   
   static defaultProps = {
-    min: 0,
+    min: 1,
     max: Infinity
   };
   
