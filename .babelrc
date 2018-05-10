@@ -3,6 +3,7 @@
     "react"
   ],
   "plugins": [
+    "dynamic-import-webpack",
     "transform-decorators-legacy",
     "transform-decorators",
     "transform-object-rest-spread",

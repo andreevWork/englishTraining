@@ -40,6 +40,7 @@ module.exports = {
       alias: {
           DiContainer: path.resolve(__dirname, 'src', 'services', 'DI.js'),
           utils: path.resolve(__dirname, 'src', 'utils'),
+          constants: path.resolve(__dirname, 'src', 'constants'),
           common: path.resolve(__dirname, 'src', 'components/common'),
           games: path.resolve(__dirname, 'src', 'components/games'),
           player: path.resolve(__dirname, 'src', 'components/player'),

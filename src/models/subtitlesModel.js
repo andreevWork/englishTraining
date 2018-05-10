@@ -55,6 +55,7 @@ export const SubtitlesModel = types
         self.endIndex = endIndex;
       },
   
+      // Сделано так, чтобы отображались индекс от 1, а не от нуля #humanIndex
       setStartIndexFromHuman(startIndex) {
         self.setStartIndex(startIndex - 1);
       },
