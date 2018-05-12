@@ -1,0 +1,16 @@
+@import "variables"
+
+\:global
+  body:not(.touch)
+    .hover
+      cursor: pointer
+      transition: .2s
+
+    .hover:hover,
+    .hover:focus
+      border-color: $secondColor
+      box-shadow: 0 0.5em 0.5em -0.4em $secondColor
+      transform: translateY(-0.1rem)
+      color: $secondColor
+      fill: $secondColor
+

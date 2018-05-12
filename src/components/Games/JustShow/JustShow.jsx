@@ -88,7 +88,7 @@ export class JustShow extends React.Component {
     const {subtitles: subs} = this.props;
     
     return <div className={s.wrap}>
-      {this.prevSubIndex < subs.index ? this.renderTwoSubs() : this.renderOneSub()};
+      {this.prevSubIndex < subs.index ? this.renderTwoSubs() : this.renderOneSub()}
     </div>;
   }
 }

@@ -5,7 +5,17 @@ import s from './Button.sass';
 
 export class Button extends React.PureComponent {
   render() {
-    return <div onClick={this.props.onClick} className={cn(s.button, this.props.className)}>
+    const className = cn(
+      s.button,
+      this.props.className,
+      this.props.disabled && s.disabled,
+      !this.props.disabled && 'hover',
+    );
+    
+    return <div
+      onClick={this.props.onClick}
+      className={className}
+    >
       {this.props.children}
     </div>;
   }

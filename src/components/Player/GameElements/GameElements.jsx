@@ -41,18 +41,27 @@ export class GameElements extends React.Component {
     if (GameTypesData[gameType].component) {
       this.gameHasLoaded();
     } else {
+      let hasOneEvent = false;
+      
       // Делаем загрузку не сразу, дабы элемент погрузки был виден пользователю
       // Иначе с нормальным интернетом не видно спиннера, а просто мерцание
-      // TODO делать такую штуку только при быстром инете
       setTimeout(() => {
-        // Асинхронно грузим каждую игру, и затем пишем в общий словарь игр, чтобы не грузить еще раз
-        import(`games/${gameType}/${gameType}`)
-          .then(gameComponent => {
-            GameTypesData[gameType].component = gameComponent[gameType];
-            
+        if (hasOneEvent) {
+          this.gameHasLoaded();
+        }
+        hasOneEvent = true;
+      }, 1000);
+      
+      // Асинхронно грузим каждую игру, и затем пишем в общий словарь игр, чтобы не грузить еще раз
+      import(`games/${gameType}/${gameType}`)
+        .then(gameComponent => {
+          GameTypesData[gameType].component = gameComponent[gameType];
+          
+          if (hasOneEvent) {
             this.gameHasLoaded();
-          });
-      }, 1000)
+          }
+          hasOneEvent = true;
+        });
     }
   }
   

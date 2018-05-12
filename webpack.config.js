@@ -28,7 +28,10 @@ module.exports = {
               }, {
                   loader: "sass-loader",
                   options: {
-                      includePaths: [path.resolve(__dirname, 'src', 'styles', 'imported')]
+                      includePaths: [
+                        path.resolve(__dirname, 'src', 'styles', 'imported'),
+                        path.resolve(__dirname, 'src', 'styles', 'common')
+                      ]
                   }
               }]
           }

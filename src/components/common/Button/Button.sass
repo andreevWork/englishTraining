@@ -1,17 +1,13 @@
 @import "variables"
+@import "hover"
 
 .button
-  cursor: pointer
   color: $mainColor
-  transition: .3s
   border: 2px solid
+  user-select: none
   display: inline-block
   padding: 6px 12px
 
-  &:hover,
-  &:focus
-    border-color: adjust-hue($mainColor, 45deg)
-    box-shadow: 0 0.5em 0.5em -0.4em adjust-hue($mainColor, 45deg)
-    transform: translateY(-0.25em)
-    color: adjust-hue($mainColor, 45deg)
-
+.disabled
+  cursor: default
+  opacity: .5
