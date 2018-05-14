@@ -13,16 +13,33 @@ export class JustShow extends React.Component {
   componentDidUpdate() {
     const { index } = this.props.subtitles;
     const prevWordsRef = this.prevWordsRef.current;
+    const currentWordsRef = this.currentWordsRef.current;
     
-    if (this.prevSubIndex < index && prevWordsRef) {
+    if (this.prevSubIndex < index && prevWordsRef && currentWordsRef) {
       this.animateSubs();
     }
     
+    if (currentWordsRef) {
+      currentWordsRef.style.transform = '';
+      currentWordsRef.style.opacity = '';
+      currentWordsRef.style.transition = 'none';
+    }
+    
     if (prevWordsRef) {
-      this.resetSubsStyle();
+      prevWordsRef.style.transform = '';
+      prevWordsRef.style.opacity = '';
+      prevWordsRef.style.transition = 'none';
     }
     
     this.prevSubIndex = index;
+  }
+  
+  componentWillReact() {
+    const {subtitles: subs} = this.props;
+    
+    if (subs.index === subs.startIndex) {
+      this.prevSubIndex = undefined;
+    }
   }
   
   animateSubs() {
@@ -51,21 +68,10 @@ export class JustShow extends React.Component {
     });
   }
   
-  resetSubsStyle() {
-    const prevWordsRef = this.prevWordsRef.current;
-    const currentWordsRef = this.currentWordsRef.current;
-    
-    prevWordsRef.style.transform = '';
-    prevWordsRef.style.opacity = '';
-    prevWordsRef.style.transition = 'none';
-    currentWordsRef.style.transform = '';
-    currentWordsRef.style.transition = 'none';
-  }
-  
   renderOneSub() {
     const {subtitles: subs} = this.props;
     
-    return  <div className={s.words}>
+    return  <div className={s.words} ref={this.currentWordsRef}>
       {subs.getSub().text}
     </div>;
   }
