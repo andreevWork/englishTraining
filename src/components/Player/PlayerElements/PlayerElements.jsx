@@ -1,4 +1,5 @@
 import React from 'react';
+import s from "./PlayerElements.sass";
 import {observer, inject} from "mobx-react";
 import { ProgressBar } from './controls/ProgressBar/ProgressBar';
 import { BottomControls } from './controls/BottomControls/BottomControls';
@@ -9,10 +10,10 @@ import { Spinner } from 'common/Spinner/Spinner';
 export class PlayerElements extends React.Component {
     
     renderElements() {
-        return <React.Fragment>
+        return <div className={s.shadow}>
           <ProgressBar />
           <BottomControls />
-        </React.Fragment>;
+        </div>;
     }
     
     render() {

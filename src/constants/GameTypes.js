@@ -1,13 +1,14 @@
 export const GameTypesData = {
   JustShow: {
     name: 'Показ',
-    component: null
+    component: null,
+    comingSoon: false
   },
   
   RightOrder: {
     name: 'Правильный порядок',
     component: null,
-    comingSoon: true
+    comingSoon: false
   },
   
   TypeWords: {
