@@ -1,3 +1,25 @@
+@import "variables"
+
 .word
+  user-select: none
+  cursor: pointer
+  background: $mainColor
+  padding: 4px
+  border-radius: 4px
   display: inline-block
   margin-right: 10px
+  font-size: 1.2em
+
+.container
+  padding: 20px 0
+  height: 100%
+  overflow-y: auto
+
+.drag
+  margin: 14px 0
+  text-align: center
+
+  &:first-child
+    margin-top: 0
+  &:last-child
+    margin-bottom: 0
