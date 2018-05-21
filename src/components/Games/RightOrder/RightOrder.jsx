@@ -3,6 +3,7 @@ import * as Dragula from 'dragula';
 import {observer, inject} from "mobx-react";
 import s from './RightOrder.sass';
 import { shuffle } from 'utils/arrays/shuffle';
+import { CheckMarkIcon } from 'common/Icons/CheckMark/CheckMark';
 
 @inject('subtitles')
 @observer
@@ -68,39 +69,40 @@ export class RightOrder extends React.Component {
       .replace(/[-,.!?]/g, '');
   }
   
-  renderDragContainers() {
-    const {subtitles: subs} = this.props;
-    const dragContainers = [];
-    
+  componentWillUpdate() {
     this.containersRefs = [];
-    
-    for(let i = subs.startIndex; i <= subs.endIndex; i++) {
-      const subsText = this.getText(i);
+  }
   
-      if (this.state.resolved.includes(i)) {
-        dragContainers.push(<div key={i} className={s.drag}>
-          {subsText}
-        </div>);
-        continue;
-      }
-      const subsArray = subsText
-        .split(/\s+/)
-        .filter(Boolean);
-      
-      dragContainers.push(<div className={s.drag} key={i} ref={this.getRef(i)} data-index-sub={i}>
-        {shuffle(subsArray).map((word, index) => <div key={`${word}__${index}`} className={s.word}>
-            {word}
-          </div>)
-        }
-      </div>)
-    }
+  renderDragContainer(subIndex) {
+    const subsArray = this.getText(subIndex)
+      .split(/\s+/)
+      .filter(Boolean);
   
-    return dragContainers;
+    return <div
+      className={s.drag}
+      key={subIndex}
+      ref={this.getRef(subIndex)}
+      data-index-sub={subIndex}
+    >
+      {shuffle(subsArray).map((word, index) => <div key={`${word}__${index}`} className={s.word}>
+        {word}
+      </div>)}
+    </div>;
   }
   
   render() {
+    const {subtitles: subs} = this.props;
+    const subsIndexArray = Array(subs.endIndex - subs.startIndex  + 1).fill(0).map((_, i) => i + subs.startIndex);
+  
     return <div className={s.container}>
-      {this.renderDragContainers()}
+      {subsIndexArray.map(subIndex => <div key={subIndex} className={s.subContainer}>
+        <div className={s.subNumber}>№ {subIndex + 1} {this.state.resolved.includes(subIndex) && <CheckMarkIcon />}</div>
+        
+        {this.state.resolved.includes(subIndex) ?
+          <div className={s.text}>{this.getText(subIndex)}</div> :
+          this.renderDragContainer(subIndex)
+        }
+      </div>)}
     </div>;
   }
   

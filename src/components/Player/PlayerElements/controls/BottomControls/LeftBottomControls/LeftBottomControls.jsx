@@ -1,12 +1,12 @@
 import * as React from "react";
-
-import s from "./LeftBottomControls.sass";
-import { TogglePlay } from 'player/CommonElements/TogglePlay/TogglePlay';
+import { TogglePlay } from 'player/PlayerElements/controls/BottomControls/LeftBottomControls/TogglePlay/TogglePlay';
+import { TogglePlayGameMod } from 'player/PlayerElements/controls/BottomControls/LeftBottomControls/TogglePlay/TogglePlay.GameMod';
+import { GameOrPlayer } from 'player/GameOrPlayer/GameOrPlayer';
 
 export class LeftBottomControls extends React.Component {
   render() {
-    return <div className={s.container}>
-        <TogglePlay />
+    return <div>
+      <GameOrPlayer playerEl={TogglePlay} gameEl={TogglePlayGameMod} />
     </div>;
   }
 }

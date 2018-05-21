@@ -5,19 +5,30 @@ import s from './ProgressBar.sass';
 import {observer, inject} from "mobx-react";
 import {DateService} from "services/DateService/DateService";
 
-@inject('player')
-@observer
-export class ProgressBar extends React.Component {
+export class ProgressBarBase extends React.Component {
     
     progressWrapRef = React.createRef();
+    
+    getCurrentTime() {
+      return this.props.player.currentTime;
+    }
+    
+    getDuration() {
+      return this.props.player.duration;
+    }
+    
+    getStartTime() {
+      return 0;
+    }
     
     @autobind
     onClick(e) {
         const el = e.currentTarget;
         const {left} = el.getBoundingClientRect();
         const pos = (e.pageX  - left) / el.offsetWidth;
+        const time = this.getStartTime() + pos * this.getDuration();
         
-        this.props.player.setCurrentTime(pos * this.props.player.duration);
+        this.props.player.setCurrentTime(time);
     }
   
     getWidth() {
@@ -25,17 +36,14 @@ export class ProgressBar extends React.Component {
             return '';
         }
         
-        const {player} = this.props;
-        return (player.currentTime / player.duration * this.progressWrapRef.current.offsetWidth) + 'px';
+        return (this.getCurrentTime() / this.getDuration() * this.progressWrapRef.current.offsetWidth) + 'px';
     }
 
     render() {
-        const {player} = this.props;
+        const timeFormat = DateService.getTimeFormatFromS(this.getDuration());
 
-        const timeFormat = DateService.getTimeFormatFromS(player.duration);
-
-        const currentTime = DateService.getFormattedTimeFromS(player.currentTime, timeFormat);
-        const duration = DateService.getFormattedTimeFromS(player.duration, timeFormat);
+        const currentTime = DateService.getFormattedTimeFromS(this.getCurrentTime(), timeFormat);
+        const duration = DateService.getFormattedTimeFromS(this.getDuration(), timeFormat);
 
         return <div className={s.container}>
             <div className={s.time}>
@@ -54,3 +62,7 @@ export class ProgressBar extends React.Component {
         </div>;
     }
 }
+
+@inject('player')
+@observer
+export class ProgressBar extends ProgressBarBase {}

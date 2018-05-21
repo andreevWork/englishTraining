@@ -2,6 +2,7 @@ import React from 'react';
 import {observer, inject} from "mobx-react";
 import s from './GameHeader.sass';
 import { Counter } from 'common/Counter/Counter';
+import { OptionsIcon } from 'common/Icons/Options/Options';
 
 @inject('store')
 @observer
@@ -14,6 +15,9 @@ export class GameHeader extends React.Component {
     endIndex = endIndex + 1;
   
     return <div className={s.header}>
+      <div className={s.changeGame} onClick={this.props.store.resetGameType}>
+        <OptionsIcon />
+      </div>
       <Counter onChange={setStartIndexFromHuman} max={endIndex} value={startIndex}/>
       <Counter onChange={setEndIndexFromHuman} min={startIndex} value={endIndex} />
     </div>

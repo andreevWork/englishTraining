@@ -1,6 +1,6 @@
 import * as React from "react";
 import s from "./Player.sass";
-import {inject, observer} from "mobx-react";
+import {inject} from "mobx-react";
 import autobind from 'autobind-decorator';
 import { PlayerElements } from './PlayerElements/PlayerElements';
 import { DiContainer } from 'DiContainer';
@@ -64,17 +64,11 @@ export class Player extends React.PureComponent {
                 </video>
   
                 <div className={s.elements}>
-                  <Elements />
+                  <GameElements />
+                  <PlayerElements />
                 </div>
             </figure>
         </div>;
     }
 }
 
-@inject('store')
-@observer
-class Elements extends React.Component {
-  render() {
-    return this.props.store.isGameMod ? <GameElements /> : <PlayerElements />;
-  }
-}
