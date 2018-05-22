@@ -73,3 +73,11 @@ const Store = StoreModel.create({
 DiContainer.register('store', Store);
 
 export { Store };
+
+// todo
+// cross to close game and choice
+// disablde toggle playpause game mod
+// middle buttons in muidle
+// more icons
+// media queries on player icons
+

@@ -9,16 +9,20 @@ export class ProgressBarBase extends React.Component {
     
     progressWrapRef = React.createRef();
     
+    getStartTime() {
+      return 0;
+    }
+    
+    getEndTime() {
+      return this.props.player.duration;
+    }
+    
     getCurrentTime() {
       return this.props.player.currentTime;
     }
     
-    getDuration() {
-      return this.props.player.duration;
-    }
-    
-    getStartTime() {
-      return 0;
+    getCurrentDuration() {
+      return this.getEndTime() - this.getStartTime();
     }
     
     @autobind
@@ -26,9 +30,10 @@ export class ProgressBarBase extends React.Component {
         const el = e.currentTarget;
         const {left} = el.getBoundingClientRect();
         const pos = (e.pageX  - left) / el.offsetWidth;
-        const time = this.getStartTime() + pos * this.getDuration();
+        const time = this.getStartTime() + pos * this.getCurrentDuration();
         
         this.props.player.setCurrentTime(time);
+        this.props.player.play();
     }
   
     getWidth() {
@@ -36,14 +41,17 @@ export class ProgressBarBase extends React.Component {
             return '';
         }
         
-        return (this.getCurrentTime() / this.getDuration() * this.progressWrapRef.current.offsetWidth) + 'px';
+        const passedTime = this.getCurrentTime() - this.getStartTime();
+        
+        return (passedTime / this.getCurrentDuration() * this.progressWrapRef.current.offsetWidth) + 'px';
     }
 
     render() {
-        const timeFormat = DateService.getTimeFormatFromS(this.getDuration());
+        // Формат времени счиатем по общей длительности видео, чтобы не прыгало когда смотришь часть видео
+        const timeFormat = DateService.getTimeFormatFromS(this.props.player.duration);
 
         const currentTime = DateService.getFormattedTimeFromS(this.getCurrentTime(), timeFormat);
-        const duration = DateService.getFormattedTimeFromS(this.getDuration(), timeFormat);
+        const endTime = DateService.getFormattedTimeFromS(this.getEndTime(), timeFormat);
 
         return <div className={s.container}>
             <div className={s.time}>
@@ -57,7 +65,7 @@ export class ProgressBarBase extends React.Component {
               <div className={s.value} style={{ width: this.getWidth() }} />
             </div>
             <div className={s.time}>
-                {duration}
+                {endTime}
             </div>
         </div>;
     }

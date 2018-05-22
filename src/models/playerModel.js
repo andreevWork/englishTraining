@@ -18,6 +18,9 @@ export const PlayerModel = types
             pause() {
                 self.isPaused = true;
             },
+            play() {
+                self.isPaused = false;
+            },
             toogleFullScreen() {
                 self.isFullScreen = !self.isFullScreen;
             },
