@@ -75,9 +75,10 @@ DiContainer.register('store', Store);
 export { Store };
 
 // todo
+// разобраться с ебу***м варнингом от вебпака
 // cross to close game and choice
-// disablde toggle playpause game mod
-// middle buttons in muidle
-// more icons
+// disablde toggle playpause game mod +
+// middle buttons in muidle +
+// more icons +-
 // media queries on player icons
 

@@ -7,8 +7,6 @@ export class GameOrPlayer extends React.Component {
   render() {
     const {gameEl: GameEl, playerEl: PlayerEl} = this.props;
     
-    return <div>
-      {this.props.store.isGameMod ? <GameEl /> : <PlayerEl />}
-    </div>;
+    return this.props.store.isGameMod ? <GameEl /> : <PlayerEl />;
   }
 }

@@ -12,12 +12,17 @@ export class TogglePlayBase extends React.Component {
     player.tooglePlay();
   }
   
+  getIsDisabled() {}
+  
   render() {
     const { player } = this.props.store;
+    
+    const props = {
+      onClick: this.onClick,
+      disabled: this.getIsDisabled()
+    };
   
-    return <div onClick={this.onClick}>
-      {player.isPaused ? <PlayIcon /> : <PauseIcon />}
-    </div>;
+    return player.isPaused ? <PlayIcon {...props} /> : <PauseIcon {...props} />;
   }
 }
 

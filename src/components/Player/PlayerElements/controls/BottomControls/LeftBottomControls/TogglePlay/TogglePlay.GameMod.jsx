@@ -6,11 +6,10 @@ import autobind from 'autobind-decorator';
 @inject('store')
 @observer
 export class TogglePlayGameMod extends TogglePlayBase {
-  @autobind
-  onClick() {
-    console.log(423);
+  getIsDisabled() {
+    const { player, subtitles } = this.props.store;
     
-    super.onClick();
+    return player.currentTime >= subtitles.getSub(subtitles.endIndex).endTime;
   }
 }
 

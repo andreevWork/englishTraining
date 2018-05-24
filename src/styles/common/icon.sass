@@ -2,5 +2,12 @@
 
 \:global
   .icon
+    padding: 2px
     fill: $mainColor
     width: $iconWidth
+    cursor: pointer
+
+    &-disabled
+      opacity: .5
+      pointer-events: none
+      cursor: default

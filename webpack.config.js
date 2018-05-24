@@ -62,9 +62,12 @@ module.exports = {
         favicon: path.resolve(outputDir, 'favicon.ico')
       })
   ],
+  
+  stats: 'errors-only',
 
   devServer: {
     contentBase: outputDir,
+    quiet: true,
     open: true,
     port: 3000,
     watchOptions: {
