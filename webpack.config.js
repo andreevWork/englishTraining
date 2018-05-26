@@ -45,8 +45,8 @@ module.exports = {
           utils: path.resolve(__dirname, 'src', 'utils'),
           constants: path.resolve(__dirname, 'src', 'constants'),
           common: path.resolve(__dirname, 'src', 'components/common'),
-          games: path.resolve(__dirname, 'src', 'components/games'),
-          player: path.resolve(__dirname, 'src', 'components/player'),
+          games: path.resolve(__dirname, 'src', 'components/Games'),
+          player: path.resolve(__dirname, 'src', 'components/Player'),
           services: path.resolve(__dirname, 'src', 'services'),
           reactions: path.resolve(__dirname, 'src', 'reactions'),
       }
@@ -63,11 +63,8 @@ module.exports = {
       })
   ],
   
-  stats: 'errors-only',
-
   devServer: {
     contentBase: outputDir,
-    quiet: true,
     open: true,
     port: 3000,
     watchOptions: {

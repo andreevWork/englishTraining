@@ -5,6 +5,7 @@ import { GameHeader } from 'player/GameElements/GameHeader/GameHeader';
 import { GameChoice } from 'player/GameElements/GameChoice/GameChoice';
 import { Spinner } from 'common/Spinner/Spinner';
 import { GameTypesData } from 'constants/GameTypes';
+import { GameNavBar } from 'player/GameElements/GameNavBar/GameNavBar';
 
 @inject('store')
 @observer
@@ -79,9 +80,10 @@ export class GameElements extends React.Component {
       </div>
     </React.Fragment> : <Spinner />;
   }
-  
+
   render() {
     return this.props.store.isGameMod ? <div className={s.gameElements}>
+      <GameNavBar />
       {this.props.store.gameType ? this.renderGame() : <GameChoice />}
     </div> : null;
   }

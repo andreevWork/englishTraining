@@ -2,10 +2,10 @@ import React from 'react';
 import s from "./PlayerElements.sass";
 import cn from 'classnames';
 import {observer, inject} from "mobx-react";
-import { ProgressBar } from './controls/ProgressBar/ProgressBar';
 import { BottomControls } from './controls/BottomControls/BottomControls';
 import { Spinner } from 'common/Spinner/Spinner';
 import { GameOrPlayer } from 'player/GameOrPlayer/GameOrPlayer';
+import { ProgressBar } from 'player/PlayerElements/controls/ProgressBar/ProgressBar';
 import { ProgressBarGameMod } from 'player/PlayerElements/controls/ProgressBar/ProgressBar.GameMod';
 
 @inject('store')
