@@ -78,6 +78,3 @@ DiContainer.register('store', Store);
 
 export { Store };
 
-// todo
-// media queries on player icons
-
