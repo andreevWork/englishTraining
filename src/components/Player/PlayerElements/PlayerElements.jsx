@@ -11,17 +11,16 @@ import { ProgressBarGameMod } from 'player/PlayerElements/controls/ProgressBar/P
 @inject('store')
 @observer
 export class PlayerElements extends React.Component {
+  renderElements() {
+    const className = cn(!this.props.store.isGameMod && s.shadow);
     
-    renderElements() {
-      const className = cn(!this.props.store.isGameMod && s.shadow);
-      
-        return <div className={className}>
-          <GameOrPlayer playerEl={ProgressBar} gameEl={ProgressBarGameMod} />
-          <BottomControls />
-        </div>;
-    }
-    
-    render() {
-        return this.props.store.player.isReady ? this.renderElements() : <Spinner />;
-    }
+      return <div className={className}>
+        <GameOrPlayer playerEl={ProgressBar} gameEl={ProgressBarGameMod} />
+        <BottomControls />
+      </div>;
+  }
+  
+  render() {
+      return this.props.store.player.isReady ? this.renderElements() : <Spinner />;
+  }
 }

@@ -8,8 +8,7 @@ export class BaseReaction {
     static createAndRunReactions(reactionsClasses) {
         return reactionsClasses
           .map(ReactionClass => new ReactionClass())
-          .forEach(reactionInstance => reactionInstance.run());
-        
+          .map(reactionInstance => reactionInstance.run());
     };
   
   static destroyReactions(reactionsInstances) {
@@ -32,6 +31,8 @@ export class BaseReaction {
 
     run() {
         this._disposer = autorun(this.reaction.bind(this));
+        
+        return this;
     }
 
     destroy() {

@@ -1,5 +1,4 @@
 import {PlayerModel} from "./models/playerModel";
-import { DiContainer } from 'DiContainer';
 import { types } from 'mobx-state-tree';
 import { SubtitlesModel } from './models/subtitlesModel';
 import { GameTypes } from 'constants/GameTypes';
@@ -40,11 +39,29 @@ const StoreModel = types
       },
   
       leftFiveSec() {
-        const startSubTime = self.subtitles.getSub(self.subtitles.startIndex).startTime;
-        const newTime = self.player.currentTime - 5;
+        let newTime = self.player.currentTime - 5;
         
-        self.player.playByTime(newTime < startSubTime ? startSubTime : newTime);
+        if (self.isGameMod) {
+          const startSubTime = self.subtitles.getSub(self.subtitles.startIndex).startTime;
+  
+          newTime = newTime < startSubTime ? startSubTime : newTime;
+        }
+        
+        self.player.playByTime(newTime > 0 ? newTime : 0);
       },
+  
+      rightFiveSec() {
+        let newTime = self.player.currentTime + 5;
+  
+        if (self.isGameMod) {
+          const endSubTime = self.subtitles.getSub(self.subtitles.endIndex).endTime;
+  
+          newTime = newTime > endSubTime ? endSubTime : newTime;
+        }
+  
+        self.player.playByTime(newTime > self.player.duration ? self.player.duration : newTime);
+      },
+  
   
       continueWatch() {
         self.repeatCurrentSubs();
@@ -73,8 +90,6 @@ const Store = StoreModel.create({
     endIndex: -1
   }
 });
-
-DiContainer.register('store', Store);
 
 export { Store };
 

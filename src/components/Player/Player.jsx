@@ -9,6 +9,7 @@ import { BaseReaction } from 'reactions/BaseReaction';
 import { createAndRunSubtitlesReactions } from 'reactions/subtitles';
 import { GameElements } from './GameElements/GameElements';
 import { createAndRunGameReactions } from 'reactions/game';
+import { HotKeysService } from 'services/HotKeysService/HotKeysService';
 
 @inject('player', 'subtitles')
 export class Player extends React.PureComponent {
@@ -18,15 +19,23 @@ export class Player extends React.PureComponent {
     componentDidMount() {
       DiContainer.register('videoEl', this._videoEl);
       
-      this._reactions = createAndRunPlayerReactions();
-      createAndRunSubtitlesReactions();
-      createAndRunGameReactions();
+      this._reactions = [
+        ...createAndRunPlayerReactions(),
+        ...createAndRunSubtitlesReactions(),
+        ...createAndRunGameReactions()
+      ];
+  
+      this.hotKeyService = new HotKeysService();
+      
+      this.hotKeyService.run();
     
       this.props.subtitles.load(this.props.player.subsSrc);
     }
 
     componentWillUnmount() {
       DiContainer.remove('_videoEl');
+      
+      this.hotKeyService.destroy();
   
       BaseReaction.destroyReactions(this._reactions);
     }
@@ -44,6 +53,13 @@ export class Player extends React.PureComponent {
       const {currentTime} = this._videoEl;
 
       this.props.player.setCurrentTime(currentTime);
+    }
+    
+    @autobind
+    onClick(e) {
+      if (e.target.classList.contains(s.elements)) {
+        this.props.player.tooglePlay();
+      }
     }
 
     render() {
@@ -63,7 +79,7 @@ export class Player extends React.PureComponent {
                     />
                 </video>
   
-                <div className={s.elements}>
+                <div onClick={this.onClick} className={s.elements}>
                   <GameElements />
                   <PlayerElements />
                 </div>

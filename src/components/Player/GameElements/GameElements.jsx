@@ -33,7 +33,7 @@ export class GameElements extends React.Component {
     }
     
     // Если компонент уже загружен и игра выбрана - ничего не делаем
-    if (this.state.isGameComponentLoaded) {
+    if (this.state.isGameComponentLoaded && GameTypesData[gameType].component) {
       return;
     }
     
@@ -72,7 +72,7 @@ export class GameElements extends React.Component {
   renderGame() {
     const Game = GameTypesData[this.props.store.gameType].component;
     
-    return this.state.isGameComponentLoaded ?<React.Fragment>
+    return this.state.isGameComponentLoaded && Game ? <React.Fragment>
       <GameHeader />
   
       <div className={s.game}>
