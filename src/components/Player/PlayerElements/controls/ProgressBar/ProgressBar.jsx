@@ -45,28 +45,38 @@ export class ProgressBarBase extends React.Component {
         
         return (passedTime / this.getCurrentDuration() * this.progressWrapRef.current.offsetWidth) + 'px';
     }
+    
+    renderCurrentTime(currentTime) {
+      return <div className={s.time}>
+        {currentTime}
+      </div>;
+    }
+    
+    renderEndTime(endTime) {
+      return <div className={s.time}>
+        {endTime}
+      </div>;
+    }
 
     render() {
-        // Формат времени счиатем по общей длительности видео, чтобы не прыгало когда смотришь часть видео
-        const timeFormat = DateService.getTimeFormatFromS(this.props.player.duration);
+        // Формат (hh:mm:ss) времени счиатем по общей длительности видео, чтобы не прыгало когда смотришь часть видео
+        this.timeFormat = DateService.getTimeFormatFromS(this.props.player.duration);
 
-        const currentTime = DateService.getFormattedTimeFromS(this.getCurrentTime(), timeFormat);
-        const endTime = DateService.getFormattedTimeFromS(this.getEndTime(), timeFormat);
+        const currentTime = DateService.getFormattedTimeFromS(this.getCurrentTime(), this.timeFormat);
+        const endTime = DateService.getFormattedTimeFromS(this.getEndTime(), this.timeFormat);
 
         return <div className={s.container}>
-            <div className={s.time}>
-                {currentTime}
-            </div>
-            <div
-                onClick={this.onClick}
-                className={s.progress}
-                ref={this.progressWrapRef}
-            >
-              <div className={s.value} style={{ width: this.getWidth() }} />
-            </div>
-            <div className={s.time}>
-                {endTime}
-            </div>
+          {this.renderCurrentTime(currentTime)}
+          
+          <div
+              onClick={this.onClick}
+              className={s.progress}
+              ref={this.progressWrapRef}
+          >
+            <div className={s.value} style={{ width: this.getWidth() }} />
+          </div>
+          
+          {this.renderEndTime(endTime)}
         </div>;
     }
 }

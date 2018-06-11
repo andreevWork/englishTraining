@@ -13,6 +13,7 @@ export const SubtitlesModel = types
     isPending: types.boolean,
     subs: types.array(SubtitleModel),
     startIndex: types.number,
+    maxIndex: types.number,
     index: types.number,
     endIndex: types.number
   })
@@ -43,6 +44,7 @@ export const SubtitlesModel = types
         self.subs = yield fetch(subsSrc)
           .then(res => res.text())
           .then(Subtitles.parser);
+        self.maxIndex = self.subs.length - 1;
 
         self.isPending = false;
       }),
@@ -53,15 +55,6 @@ export const SubtitlesModel = types
       
       setEndIndex(endIndex) {
         self.endIndex = endIndex;
-      },
-  
-      // Сделано так, чтобы отображались индекс от 1, а не от нуля #humanIndex
-      setStartIndexFromHuman(startIndex) {
-        self.setStartIndex(startIndex - 1);
-      },
-  
-      setEndIndexFromHuman(endIndex) {
-        self.setEndIndex(endIndex - 1);
       },
       
       setIndex(index) {

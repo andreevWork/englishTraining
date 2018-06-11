@@ -9,7 +9,6 @@ import { BaseReaction } from 'reactions/BaseReaction';
 import { createAndRunSubtitlesReactions } from 'reactions/subtitles';
 import { GameElements } from './GameElements/GameElements';
 import { createAndRunGameReactions } from 'reactions/game';
-import { HotKeysService } from 'services/HotKeysService/HotKeysService';
 
 @inject('player', 'subtitles')
 export class Player extends React.PureComponent {
@@ -25,18 +24,12 @@ export class Player extends React.PureComponent {
         ...createAndRunGameReactions()
       ];
   
-      this.hotKeyService = new HotKeysService();
-      
-      this.hotKeyService.run();
-    
       this.props.subtitles.load(this.props.player.subsSrc);
     }
 
     componentWillUnmount() {
       DiContainer.remove('_videoEl');
       
-      this.hotKeyService.destroy();
-  
       BaseReaction.destroyReactions(this._reactions);
     }
 

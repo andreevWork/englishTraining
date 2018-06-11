@@ -1,7 +1,6 @@
 import React from 'react';
 import {observer, inject} from "mobx-react";
 import s from './GameElements.sass';
-import { GameHeader } from 'player/GameElements/GameHeader/GameHeader';
 import { GameChoice } from 'player/GameElements/GameChoice/GameChoice';
 import { Spinner } from 'common/Spinner/Spinner';
 import { GameTypesData } from 'constants/GameTypes';
@@ -72,13 +71,9 @@ export class GameElements extends React.Component {
   renderGame() {
     const Game = GameTypesData[this.props.store.gameType].component;
     
-    return this.state.isGameComponentLoaded && Game ? <React.Fragment>
-      <GameHeader />
-  
-      <div className={s.game}>
-        <Game />
-      </div>
-    </React.Fragment> : <Spinner />;
+    return this.state.isGameComponentLoaded && Game ? <div className={s.game}>
+      <Game />
+    </div> : <Spinner />;
   }
 
   render() {

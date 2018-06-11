@@ -5,6 +5,7 @@ import { RepeatSubtitlesIcon } from 'common/Icons/RepeatSubtitles/RepeatSubtitle
 import { RepeatFiveSecIcon } from 'common/Icons/RepeatFiveSec/RepeatFiveSec';
 import { ExitSubtitles } from 'common/Icons/ExitSubtitles/ExitSubtitles';
 import s from "./MiddleBottomControls.sass";
+import { WithKey } from 'common/WithKey/WithKey';
 
 
 @inject('store')
@@ -12,18 +13,24 @@ import s from "./MiddleBottomControls.sass";
 export class MiddleBottomControls extends React.Component {
   
   renderPlayerMode() {
-    return this.props.store.subtitles.hasActiveSub() && <div onClick={this.props.store.startGame} >
+    return this.props.store.subtitles.hasActiveSub() && <WithKey name="S" action={this.props.store.startGame}>
       <SubtitlesIcon />
-    </div>;
+    </WithKey>;
   }
   
   renderGameMod() {
     return <div className={s.container}>
-      <RepeatFiveSecIcon onClick={this.props.store.leftFiveSec} />
-      
-      <RepeatSubtitlesIcon onClick={this.props.store.repeatCurrentSubs} />
-      
-      <ExitSubtitles onClick={this.props.store.continueWatch} />
+      <WithKey name="◄" action={this.props.store.leftFiveSec}>
+        <RepeatFiveSecIcon />
+      </WithKey>
+  
+      <WithKey name="R" action={this.props.store.repeatCurrentSubs}>
+        <RepeatSubtitlesIcon />
+      </WithKey>
+  
+      <WithKey name="S" action={this.props.store.continueWatch}>
+        <ExitSubtitles />
+      </WithKey>
     </div>;
   }
   

@@ -33,6 +33,34 @@ const StoreModel = types
         self.setGameType('');
       },
       
+      reduceStartIndex() {
+        const newStartIndex = self.subtitles.startIndex - 1;
+
+        self.subtitles.setStartIndex(newStartIndex);
+        
+        self.player.setCurrentTime(self.subtitles.getSub(newStartIndex).startTime);
+      },
+  
+      increaseStartIndex() {
+        const newStartIndex = self.subtitles.startIndex + 1;
+    
+        self.subtitles.setStartIndex(newStartIndex);
+    
+        self.player.setCurrentTime(self.subtitles.getSub(newStartIndex).startTime);
+      },
+  
+      reduceEndIndex() {
+        const newEndIndex = self.subtitles.endIndex - 1;
+    
+        self.subtitles.setEndIndex(newEndIndex);
+      },
+  
+      increaseEndIndex() {
+        const newEndIndex = self.subtitles.endIndex + 1;
+    
+        self.subtitles.setEndIndex(newEndIndex);
+      },
+      
       repeatCurrentSubs() {
         const startSubTime = self.subtitles.getSub(self.subtitles.startIndex).startTime;
         self.player.playByTime(startSubTime);
@@ -86,6 +114,7 @@ const Store = StoreModel.create({
     isPending: false,
     subs: [],
     startIndex: -1,
+    maxIndex: -1,
     index: -1,
     endIndex: -1
   }
