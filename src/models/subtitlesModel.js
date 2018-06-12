@@ -13,6 +13,7 @@ export const SubtitlesModel = types
     isPending: types.boolean,
     subs: types.array(SubtitleModel),
     startIndex: types.number,
+    singleEndIndex: types.number,
     maxIndex: types.number,
     index: types.number,
     endIndex: types.number
@@ -59,6 +60,10 @@ export const SubtitlesModel = types
       
       setIndex(index) {
         self.index = index;
+      },
+      
+      setSingleEndIndex(singleEndIndex) {
+        self.singleEndIndex = singleEndIndex;
       }
     };
   });

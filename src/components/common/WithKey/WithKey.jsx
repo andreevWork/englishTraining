@@ -8,6 +8,7 @@ export class WithKey extends React.PureComponent {
   
   static KeyCodes = {
     Space: 32,
+    Enter: 13,
     F: 70,
     Esc: 27,
     S: 83,
@@ -50,7 +51,10 @@ export class WithKey extends React.PureComponent {
   }
   
   render() {
-    return <span onClick={!this.props.disabled ? this.props.action : undefined} className={s.wrap}>
+    return <span
+      onClick={!this.props.disabled ? this.props.action : undefined}
+      className={cn(s.wrap, this.props.className)}
+    >
       {React.cloneElement(React.Children.only(this.props.children), { disabled: this.props.disabled })}
       
       <div

@@ -13,6 +13,7 @@ export function createIcon(IconSvgCode, { className, ...svgProps }) {
         'icon',
         'hover',
         className,
+        this.props.className,
         this.props.disabled && 'icon-disabled'
       );
       

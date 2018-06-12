@@ -41,6 +41,7 @@ export class ProgressBarGameMod extends ProgressBarBase {
       );
       
       timesEl.push(<div
+        key="c1"
         onClick={this.props.store.reduceStartIndex}
         className={this.classChoiceTime}
       >
@@ -48,7 +49,7 @@ export class ProgressBarGameMod extends ProgressBarBase {
       </div>);
     }
   
-    timesEl.push(<div className={s.time}>{currentTime}</div>);
+    timesEl.push(<div key="c2" className={s.time}>{currentTime}</div>);
   
     if (subs.startIndex < maxStartIndex) {
       const rightStartTime = DateService.getFormattedTimeFromS(
@@ -57,6 +58,7 @@ export class ProgressBarGameMod extends ProgressBarBase {
       );
     
       timesEl.push(<div
+        key="c3"
         onClick={this.props.store.increaseStartIndex}
         className={this.classChoiceTime}
       >
@@ -81,6 +83,7 @@ export class ProgressBarGameMod extends ProgressBarBase {
       );
     
       timesEl.push(<div
+        key="e1"
         onClick={this.props.store.reduceEndIndex}
         className={this.classChoiceTime}
       >
@@ -88,7 +91,7 @@ export class ProgressBarGameMod extends ProgressBarBase {
       </div>);
     }
   
-    timesEl.push(<div className={s.time}>{endTime}</div>);
+    timesEl.push(<div key="e2" className={s.time}>{endTime}</div>);
   
     if (subs.endIndex < subs.maxIndex) {
       const rightEndTime = DateService.getFormattedTimeFromS(
@@ -97,6 +100,7 @@ export class ProgressBarGameMod extends ProgressBarBase {
       );
     
       timesEl.push(<div
+        key="e3"
         onClick={this.props.store.increaseEndIndex}
         className={this.classChoiceTime}
       >

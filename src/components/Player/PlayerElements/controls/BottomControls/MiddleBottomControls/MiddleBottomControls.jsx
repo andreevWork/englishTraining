@@ -13,7 +13,7 @@ import { WithKey } from 'common/WithKey/WithKey';
 export class MiddleBottomControls extends React.Component {
   
   renderPlayerMode() {
-    return this.props.store.subtitles.hasActiveSub() && <WithKey name="S" action={this.props.store.startGame}>
+    return this.props.store.subtitles.hasActiveSub() && <WithKey name="Enter" action={this.props.store.startGame}>
       <SubtitlesIcon />
     </WithKey>;
   }
@@ -28,7 +28,7 @@ export class MiddleBottomControls extends React.Component {
         <RepeatSubtitlesIcon />
       </WithKey>
   
-      <WithKey name="S" action={this.props.store.continueWatch}>
+      <WithKey name="Enter" action={this.props.store.continueWatch}>
         <ExitSubtitles />
       </WithKey>
     </div>;

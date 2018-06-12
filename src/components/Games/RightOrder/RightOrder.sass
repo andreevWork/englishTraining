@@ -23,12 +23,27 @@
 .subContainer
   padding: 0 40px
   position: relative
-  margin: 5px 0
+  margin: 14px 0
+
+  &:before
+    position: absolute
+    bottom: -7px
+    width: 60%
+    height: 3px
+    border-radius: 10px
+    content: ''
+    left: 50%
+    transform: translateX(-50%)
+    background: linear-gradient(to right, $secondColor, $mainColor)
+    opacity: .5
 
   &:first-child
     margin-top: 0
   &:last-child
     margin-bottom: 0
+
+    &:before
+      content: none
 
 .subNumber
   font-size: .8em
@@ -38,8 +53,15 @@
   left: 4px
 
 .text
+  line-height: 34px
   margin: 5px 0
   padding: 4px 0
   text-align: center
   font-size: 1.2em
   opacity: .7
+
+.repeat
+  position: absolute
+  right: 10px
+  top: calc(50% - 13px)
+  width: 26px

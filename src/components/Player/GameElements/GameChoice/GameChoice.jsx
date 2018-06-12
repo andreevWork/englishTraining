@@ -9,17 +9,15 @@ import { WithKey } from 'common/WithKey/WithKey';
 export class GameChoice extends React.Component {
   render() {
     return <div className={s.wrap}>
-      <div className={s.title}>
-        Выберите формат субтитров
-      </div>
       {Object.entries(GameTypesData).map(([gameType, gameData]) => <WithKey
+        className={s.button}
         withMargin
         key={gameType}
         disabled={gameData.comingSoon}
         name={gameData.key}
         action={() => !gameData.comingSoon && this.props.store.setGameType(gameType)}
       >
-        <Button className={s.button}>
+        <Button>
           {gameData.name}
         </Button>
       </WithKey>)}

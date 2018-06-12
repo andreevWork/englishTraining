@@ -4,11 +4,14 @@ import {observer, inject} from "mobx-react";
 import s from './RightOrder.sass';
 import { shuffle } from 'utils/arrays/shuffle';
 import { CheckMarkIcon } from 'common/Icons/CheckMark/CheckMark';
+import { RepeatSubtitlesIcon } from 'common/Icons/RepeatSubtitles/RepeatSubtitles';
 
-@inject('subtitles')
+@inject('store', 'subtitles')
 @observer
 export class RightOrder extends React.Component {
   containersRefs = [];
+  // Необходимо запоминать рандом, чтобы он не сбрасывался
+  shuffleCache = {};
   dragulaInstance;
   
   state = {
@@ -74,30 +77,39 @@ export class RightOrder extends React.Component {
   }
   
   renderDragContainer(subIndex) {
-    const subsArray = this.getText(subIndex)
-      .split(/\s+/)
-      .filter(Boolean);
+    const {subtitles: subs} = this.props;
+    
+    if (!this.shuffleCache[subIndex]) {
+      this.shuffleCache[subIndex] = shuffle(this.getText(subIndex)
+        .split(/\s+/)
+        .filter(Boolean));
+    }
   
-    return <div
-      className={s.drag}
-      key={subIndex}
-      ref={this.getRef(subIndex)}
-      data-index-sub={subIndex}
-    >
-      {shuffle(subsArray).map((word, index) => <div key={`${word}__${index}`} className={s.word}>
-        {word}
-      </div>)}
-    </div>;
+    return <React.Fragment>
+      {subs.endIndex - subs.startIndex > 0 && <RepeatSubtitlesIcon
+        onClick={this.props.store.repeatSingeTime.bind(null, subIndex)}
+        className={s.repeat}
+      />}
+      
+      <div
+        className={s.drag}
+        key={subIndex}
+        ref={this.getRef(subIndex)}
+        data-index-sub={subIndex}
+      >
+        {this.shuffleCache[subIndex].map((word, index) => <div key={`${word}__${index}`} className={s.word}>
+          {word}
+        </div>)}
+      </div>
+    </React.Fragment>;
   }
   
   render() {
     const {subtitles: subs} = this.props;
-    const subsIndexArray = Array(subs.endIndex - subs.startIndex  + 1).fill(0).map((_, i) => i + subs.startIndex);
+    const subsIndexArray = Array(subs.endIndex - subs.startIndex + 1).fill(0).map((_, i) => i + subs.startIndex);
   
     return <div className={s.container}>
       {subsIndexArray.map(subIndex => <div key={subIndex} className={s.subContainer}>
-        <div className={s.subNumber}>№ {subIndex + 1} {this.state.resolved.includes(subIndex) && <CheckMarkIcon />}</div>
-        
         {this.state.resolved.includes(subIndex) ?
           <div className={s.text}>{this.getText(subIndex)}</div> :
           this.renderDragContainer(subIndex)

@@ -33,6 +33,11 @@ const StoreModel = types
         self.setGameType('');
       },
       
+      repeatSingeTime(singleIndex) {
+        self.player.playByTime(self.subtitles.getSub(singleIndex).startTime);
+        self.subtitles.setSingleEndIndex(singleIndex);
+      },
+      
       reduceStartIndex() {
         const newStartIndex = self.subtitles.startIndex - 1;
 
@@ -115,6 +120,7 @@ const Store = StoreModel.create({
     subs: [],
     startIndex: -1,
     maxIndex: -1,
+    singleEndIndex: -1,
     index: -1,
     endIndex: -1
   }
