@@ -1,6 +1,6 @@
-import { BaseReaction } from 'reactions/BaseReaction';
+import { BasePlayerReaction } from '../BaseReaction';
 
-export class SetIndexReaction extends BaseReaction {
+export class SetIndexReaction extends BasePlayerReaction {
   reaction() {
     let index = this._store.subtitles.getIndexByTime(this._store.player.currentTime);
     

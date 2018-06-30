@@ -1,7 +1,7 @@
 import { DiContainer } from 'DiContainer';
-import { BaseReaction } from 'reactions/BaseReaction';
+import { BasePlayerReaction } from '../BaseReaction';
 
-export class SeekMomentReaction extends BaseReaction {
+export class SeekMomentReaction extends BasePlayerReaction {
     reaction() {
         const videoEl = DiContainer.get('videoEl');
         

@@ -1,16 +1,24 @@
 import React from 'react';
 import {observer, inject} from "mobx-react";
+import { Thumb } from 'common/Thumb/Thumb';
+import s from './Index.sass';
+import { SerialsLoaderContainer } from 'common/LoaderContainer/Serials/LoaderContainer.Serials';
+import autobind from 'autobind-decorator';
 
-import {Player} from "../../Player/Player";
-
-@inject('player')
+@inject('common')
 @observer
 export class Index extends React.Component {
-    render() {
-        return <div>
-            <h1 align="center">English training video player</h1>
   
-            <Player videoSrc={this.props.player.videoSrc} />
-        </div>;
-    }
+  @autobind
+  renderSerials({ items }) {
+    return items.values().map(episode => <Thumb key={episode.id} {...episode} />);
+  }
+  
+  render() {
+    return <div className={s.index}>
+      <SerialsLoaderContainer>
+        {this.renderSerials}
+      </SerialsLoaderContainer>
+    </div>;
+  }
 }

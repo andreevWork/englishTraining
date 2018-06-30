@@ -1,36 +1,30 @@
 import * as React from "react";
+import PropTypes from "prop-types";
 import s from "./Player.sass";
 import {inject} from "mobx-react";
 import autobind from 'autobind-decorator';
 import { PlayerElements } from './PlayerElements/PlayerElements';
 import { DiContainer } from 'DiContainer';
-import { createAndRunPlayerReactions } from 'reactions/player';
-import { BaseReaction } from 'reactions/BaseReaction';
-import { createAndRunSubtitlesReactions } from 'reactions/subtitles';
 import { GameElements } from './GameElements/GameElements';
-import { createAndRunGameReactions } from 'reactions/game';
 
 @inject('player', 'subtitles')
 export class Player extends React.PureComponent {
+  
+  static propTypes  = {
+    videoSrc: PropTypes.string,
+    subtitleSrc: PropTypes.string
+  };
+  
     _videoEl;
-    _reactions;
 
     componentDidMount() {
       DiContainer.register('videoEl', this._videoEl);
-      
-      this._reactions = [
-        ...createAndRunPlayerReactions(),
-        ...createAndRunSubtitlesReactions(),
-        ...createAndRunGameReactions()
-      ];
   
-      this.props.subtitles.load(this.props.player.subsSrc);
+      this.props.subtitles.load(this.props.subtitleSrc);
     }
 
     componentWillUnmount() {
       DiContainer.remove('_videoEl');
-      
-      BaseReaction.destroyReactions(this._reactions);
     }
 
     @autobind

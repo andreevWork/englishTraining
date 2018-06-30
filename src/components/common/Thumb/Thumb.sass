@@ -1,0 +1,35 @@
+.thumb
+  display: flex
+  width: 840px
+  height: 200px
+  overflow: hidden
+  cursor: pointer
+  transition: transform .3s
+  will-change: transform
+
+  &:hover
+    transform: scale(.9)
+
+.info
+  flex: none
+  width: 400px
+  height: 200px
+  display: flex
+  flex-direction: column
+  white-space: nowrap
+  font-weight: bold
+  font-size: 22px
+  padding-top: 20px
+
+.poster
+  flex: none
+  margin-right: 40px
+  height: 200px
+  width: 400px
+  background-repeat: no-repeat
+  background-size: cover
+  background-position: center center
+
+.text
+  overflow: hidden
+  text-overflow: ellipsis

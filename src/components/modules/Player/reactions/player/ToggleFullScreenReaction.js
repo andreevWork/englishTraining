@@ -1,8 +1,8 @@
 import autobind from 'autobind-decorator';
 import { DiContainer } from 'DiContainer';
-import { BaseReaction } from 'reactions/BaseReaction';
+import { BasePlayerReaction } from '../BaseReaction';
 
-export class ToggleFullScreenReaction extends BaseReaction {
+export class ToggleFullScreenReaction extends BasePlayerReaction {
 
     constructor() {
         super();

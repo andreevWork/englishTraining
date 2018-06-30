@@ -45,15 +45,16 @@ module.exports = {
           utils: path.resolve(__dirname, 'src', 'utils'),
           constants: path.resolve(__dirname, 'src', 'constants'),
           common: path.resolve(__dirname, 'src', 'components/common'),
-          games: path.resolve(__dirname, 'src', 'components/Games'),
-          player: path.resolve(__dirname, 'src', 'components/Player'),
+          games: path.resolve(__dirname, 'src', 'components/modules/Player/components/Games'),
+          player: path.resolve(__dirname, 'src', 'components/modules/Player/components'),
           services: path.resolve(__dirname, 'src', 'services'),
           reactions: path.resolve(__dirname, 'src', 'reactions'),
       }
   },
   output: {
       filename: 'bundle.js',
-      path: outputDir
+      path: outputDir,
+      publicPath: '/'
   },
   devtool: 'inline-source-map',
   plugins: [
@@ -65,6 +66,7 @@ module.exports = {
   
   devServer: {
     contentBase: outputDir,
+    historyApiFallback: true,
     open: true,
     port: 3000,
     watchOptions: {

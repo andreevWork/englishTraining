@@ -1,6 +1,6 @@
-import { BaseReaction } from 'reactions/BaseReaction';
+import { BasePlayerReaction } from '../BaseReaction';
 
-export class StopCurrentSubReaction extends BaseReaction {
+export class StopCurrentSubReaction extends BasePlayerReaction {
   reaction() {
     if (this._store.isGameMod) {
       let endTime;

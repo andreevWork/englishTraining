@@ -22,9 +22,11 @@ export const SubtitlesModel = types
     getSub(index = self.index) {
       return self.subs[index];
     },
+    
     hasActiveSub() {
       return !!self.getSub();
     },
+    
     getIndexByTime(timeMs) {
       return binarySearch(self.subs.peek(), timeMs, (sub, time) => {
         return time < sub.startTime ?
@@ -41,12 +43,13 @@ export const SubtitlesModel = types
     return {
       load: flow(function* (subsSrc) {
         self.isPending = true;
-  
+        
         self.subs = yield fetch(subsSrc)
           .then(res => res.text())
           .then(Subtitles.parser);
+        
         self.maxIndex = self.subs.length - 1;
-
+        
         self.isPending = false;
       }),
       
@@ -67,3 +70,13 @@ export const SubtitlesModel = types
       }
     };
   });
+
+export const SubtitlesModelDefaultData = {
+  isPending: false,
+  subs: [],
+  startIndex: -1,
+  maxIndex: -1,
+  singleEndIndex: -1,
+  index: -1,
+  endIndex: -1
+};
