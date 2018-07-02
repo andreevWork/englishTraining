@@ -11,10 +11,12 @@ export class Episode extends React.Component {
   renderPlayer({ items }) {
     const episode = items.get(this.props.common.currentEpisode.id);
   
-    return <FullPlayer
-      videoSrc={episode.videoSrc}
-      subtitleSrc={episode.subtitleSrc}
-    />;
+    return <div>
+      <FullPlayer
+        videoSrc={episode.videoSrc}
+        subtitleSrc={episode.subtitleSrc}
+      />
+    </div>;
   }
   
   render() {

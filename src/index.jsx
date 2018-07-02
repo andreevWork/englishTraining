@@ -9,6 +9,7 @@ import './index.sass';
 import {Index} from "./components/pages/Index";
 import { CommonStore } from './store';
 import { Episode } from './components/pages/Episode/Episode';
+import { Header } from './components/modules/Header/Header';
 
 const myHistory = createBrowserHistory();
 
@@ -35,11 +36,13 @@ if (episodeId) {
 ReactDOM.render(
   <Provider common={CommonStore} serials={CommonStore.serials}>
     <Router history={myHistory}>
-      <div>
+      <React.Fragment>
+        <Header />
+        
         <Route exact path="/" component={Index} />
         
         <Route path="/episode/:id" component={Episode} />
-      </div>
+      </React.Fragment>
     </Router>
   </Provider>,
   document.body

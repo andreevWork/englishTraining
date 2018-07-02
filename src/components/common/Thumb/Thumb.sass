@@ -1,7 +1,8 @@
+@import "variables"
+
 .thumb
   display: flex
-  width: 840px
-  height: 200px
+  height: $thumbHeight
   overflow: hidden
   cursor: pointer
   transition: transform .3s
@@ -12,8 +13,7 @@
 
 .info
   flex: none
-  width: 400px
-  height: 200px
+  height: $thumbHeight
   display: flex
   flex-direction: column
   white-space: nowrap
@@ -24,8 +24,8 @@
 .poster
   flex: none
   margin-right: 40px
-  height: 200px
-  width: 400px
+  height: $thumbHeight
+  width: 16 / 9 * $thumbHeight
   background-repeat: no-repeat
   background-size: cover
   background-position: center center
