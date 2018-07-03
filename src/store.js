@@ -1,7 +1,7 @@
 import { types, addMiddleware } from 'mobx-state-tree';
-import {actionLogger} from "mst-middlewares";
 import { SerialsModel, SerialsModelDefaultData } from './models/serials';
 import { CurrentEpisodeModel, CurrentEpisodeModelDefaultData } from './models/currentEpisode';
+import { mstLogger } from 'utils/mst/logger';
 
 const CommonStoreModel = types
   .model("CommonStore", {
@@ -14,7 +14,7 @@ const CommonStore = CommonStoreModel.create({
   currentEpisode: CurrentEpisodeModelDefaultData
 });
 
-addMiddleware(CommonStore, actionLogger);
+addMiddleware(CommonStore, mstLogger);
 
 export { CommonStore };
 

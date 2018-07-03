@@ -1,7 +1,7 @@
 import { types } from 'mobx-state-tree';
 
 export const CurrentEpisodeModel = types
-  .model("Episode", {
+  .model("CurrentEpisode", {
     id: types.maybe(types.number)
   })
   .actions(self => {

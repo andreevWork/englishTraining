@@ -44,13 +44,17 @@ export const SubtitlesModel = types
       load: flow(function* (subsSrc) {
         self.isPending = true;
         
-        self.subs = yield fetch(subsSrc)
-          .then(res => res.text())
-          .then(Subtitles.parser);
+        if (Subtitles.cache[subsSrc]) {
+          self.subs = Subtitles.cache[subsSrc];
+        } else {
+          self.isPending = true;
+          self.subs = yield fetch(subsSrc)
+            .then(res => res.text())
+            .then(text => Subtitles.parser(subsSrc, text));
+          self.isPending = false;
+        }
         
         self.maxIndex = self.subs.length - 1;
-        
-        self.isPending = false;
       }),
       
       setStartIndex(startIndex) {

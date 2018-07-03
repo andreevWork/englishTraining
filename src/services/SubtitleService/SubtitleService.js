@@ -1,5 +1,7 @@
 export class Subtitles {
-  static parser(data) {
+  static cache = {};
+  
+  static parser(src, data) {
     const items = [];
     const regex = /(\d+)\n(\d{2}:\d{2}:\d{2},\d{3}) --> (\d{2}:\d{2}:\d{2},\d{3})/g;
   
@@ -14,8 +16,10 @@ export class Subtitles {
         text: data[i + 3].trim()
       });
     }
+  
+    Subtitles.cache[src] = items;
 
-    return items;
+    return Subtitles.cache[src];
   }
   
   static timeMs(val) {

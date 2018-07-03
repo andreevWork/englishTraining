@@ -3,6 +3,7 @@ import autobind from 'autobind-decorator';
 import {inject} from "mobx-react";
 import { FullPlayer } from '../../modules/Player';
 import { SerialsLoaderContainer } from 'common/LoaderContainer/Serials/LoaderContainer.Serials';
+import { LeftMenu } from './LeftMenu/LeftMenu';
 
 @inject('common')
 export class Episode extends React.Component {
@@ -13,9 +14,16 @@ export class Episode extends React.Component {
   
     return <div>
       <FullPlayer
+        key={episode.id}
         videoSrc={episode.videoSrc}
         subtitleSrc={episode.subtitleSrc}
       />
+      
+      <div>
+        {episode.title}
+      </div>
+  
+      <LeftMenu serials={items.values()} />
     </div>;
   }
   

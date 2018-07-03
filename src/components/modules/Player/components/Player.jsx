@@ -1,14 +1,16 @@
 import * as React from "react";
 import PropTypes from "prop-types";
+import cn from "classnames";
 import s from "./Player.sass";
-import {inject} from "mobx-react";
+import {inject, observer} from "mobx-react";
 import autobind from 'autobind-decorator';
 import { PlayerElements } from './PlayerElements/PlayerElements';
 import { DiContainer } from 'DiContainer';
 import { GameElements } from './GameElements/GameElements';
 
-@inject('player', 'subtitles')
-export class Player extends React.PureComponent {
+@inject('store', 'player', 'subtitles')
+@observer
+export class Player extends React.Component {
   
   static propTypes  = {
     videoSrc: PropTypes.string,
@@ -18,6 +20,8 @@ export class Player extends React.PureComponent {
     _videoEl;
 
     componentDidMount() {
+      this.props.store.reset();
+      
       DiContainer.register('videoEl', this._videoEl);
   
       this.props.subtitles.load(this.props.subtitleSrc);
@@ -66,7 +70,7 @@ export class Player extends React.PureComponent {
                     />
                 </video>
   
-                <div onClick={this.onClick} className={s.elements}>
+                <div onClick={this.onClick} className={cn(s.elements, this.props.player.isFullScreen && s.fullScreen)}>
                   <GameElements />
                   <PlayerElements />
                 </div>

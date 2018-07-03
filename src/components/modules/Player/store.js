@@ -1,14 +1,9 @@
-import { FullPlayerModel } from './models';
-import { PlayerModelDefaultData } from './models/player';
-import { SubtitlesModelDefaultData } from './models/subtitles';
+import { FullPlayerDefaultData, FullPlayerModel } from './models';
+import { addMiddleware } from 'mobx-state-tree';
+import { mstLogger } from 'utils/mst/logger';
 
+const FullPlayerStore = FullPlayerModel.create(FullPlayerDefaultData);
 
-const FullPlayerStore = FullPlayerModel.create({
-  player: PlayerModelDefaultData,
-  subtitles: SubtitlesModelDefaultData,
-  
-  isGameMod: false,
-  gameType: '',
-});
+addMiddleware(FullPlayerStore, mstLogger);
 
 export { FullPlayerStore };

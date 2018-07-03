@@ -1,6 +1,6 @@
 import {autorun} from "mobx";
 import { DiContainer } from 'DiContainer';
-import { BaseReaction } from 'reactions/BaseReaction';
+import { BaseReaction } from 'utils/mst/BaseReaction';
 
 /**
  * @abstract

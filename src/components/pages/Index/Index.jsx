@@ -1,12 +1,9 @@
 import React from 'react';
-import {observer, inject} from "mobx-react";
 import { Thumb } from 'common/Thumb/Thumb';
 import s from './Index.sass';
 import { SerialsLoaderContainer } from 'common/LoaderContainer/Serials/LoaderContainer.Serials';
 import autobind from 'autobind-decorator';
 
-@inject('common')
-@observer
 export class Index extends React.Component {
   
   @autobind

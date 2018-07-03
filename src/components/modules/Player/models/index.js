@@ -1,6 +1,6 @@
-import { PlayerModel } from "./player";
-import { types } from 'mobx-state-tree';
-import { SubtitlesModel } from './subtitles';
+import { PlayerModel, PlayerModelDefaultData } from "./player";
+import { types, applySnapshot } from 'mobx-state-tree';
+import { SubtitlesModel, SubtitlesModelDefaultData } from './subtitles';
 import { GameTypes } from 'constants/GameTypes';
 
 export const FullPlayerModel = types
@@ -13,6 +13,10 @@ export const FullPlayerModel = types
   })
   .actions(self => {
     return {
+      reset: () => {
+        applySnapshot(self, FullPlayerDefaultData);
+      },
+      
       startGame() {
         self.isGameMod = true;
         self.subtitles.setStartIndex(self.subtitles.index);
@@ -102,3 +106,11 @@ export const FullPlayerModel = types
       }
     };
   });
+
+export const FullPlayerDefaultData = {
+  player: PlayerModelDefaultData,
+  subtitles: SubtitlesModelDefaultData,
+  
+  isGameMod: false,
+  gameType: '',
+};
