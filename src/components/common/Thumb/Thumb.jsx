@@ -24,11 +24,15 @@ export class Thumb extends React.PureComponent {
       <div className={s.poster} style={{ backgroundImage: `url(${previewImageSrc})` }} />
       
       <div className={s.info}>
-        {season && <div className={s.text}>Season - {season}</div>}
+        <div className={s.title}>{title}</div>
         
-        {episode && <div className={s.text}>Episode - {episode}</div>}
-  
-        <div className={s.text}>{title}</div>
+        <div className={s.seasonInfo}>
+          <div className={s.subtitle}>
+            {season && `Season ${season}`}
+            ,&nbsp;&nbsp;
+            {episode && `Episode ${episode}`}
+          </div>
+        </div>
       </div>
     </Link>;
   }

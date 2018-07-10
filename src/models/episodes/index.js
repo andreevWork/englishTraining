@@ -1,18 +1,29 @@
 import { types, flow } from 'mobx-state-tree';
 
+const SerialModel = types
+  .model("Episode", {
+    id: types.identifier(types.number),
+    title: types.string,
+    description: types.string
+  });
+
 const EpisodeModel = types
   .model("Episode", {
     id: types.identifier(types.number),
     title: types.string,
     episode: types.number,
     season: types.number,
+    
+    serial: SerialModel,
+    
     previewImageSrc: types.string,
     videoSrc: types.string,
     subtitleSrc: types.string
   });
 
-export const SerialsModel = types
+export const EpisodesModel = types
   .model('Subtitles', {
+    currentId: types.number,
     isPending: types.boolean,
     items: types.map(EpisodeModel)
   })
@@ -21,7 +32,7 @@ export const SerialsModel = types
       load: flow(function* () {
         self.isPending = true;
         
-        self.items = yield fetch('http://127.0.0.1:5000/serials')
+        self.items = yield fetch('http://127.0.0.1:5000/episodes')
           .then(res => res.json())
           .then(serialsList => {
             return serialsList.reduce((acc, episode) => {
@@ -32,11 +43,16 @@ export const SerialsModel = types
           });
         
         self.isPending = false;
-      })
+      }),
+  
+      setCurrentId(id) {
+        self.currentId = id;
+      }
     };
   });
 
-export const SerialsModelDefaultData = {
+export const EpisodesModelDefaultData = {
+  currentId: -1,
   isPending: true,
   items: {}
 };

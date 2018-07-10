@@ -1,7 +1,7 @@
 import React from 'react';
 import { Thumb } from 'common/Thumb/Thumb';
 import s from './Index.sass';
-import { SerialsLoaderContainer } from 'common/LoaderContainer/Serials/LoaderContainer.Serials';
+import { EpisodesLoaderContainer } from 'common/LoaderContainer/Serials/LoaderContainer.Episodes';
 import autobind from 'autobind-decorator';
 
 export class Index extends React.Component {
@@ -13,9 +13,9 @@ export class Index extends React.Component {
   
   render() {
     return <div className={s.index}>
-      <SerialsLoaderContainer>
+      <EpisodesLoaderContainer>
         {this.renderSerials}
-      </SerialsLoaderContainer>
+      </EpisodesLoaderContainer>
     </div>;
   }
 }

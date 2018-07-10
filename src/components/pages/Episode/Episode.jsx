@@ -1,16 +1,14 @@
 import React from 'react';
 import autobind from 'autobind-decorator';
-import {inject} from "mobx-react";
 import { FullPlayer } from '../../modules/Player';
-import { SerialsLoaderContainer } from 'common/LoaderContainer/Serials/LoaderContainer.Serials';
+import { EpisodesLoaderContainer } from 'common/LoaderContainer/Serials/LoaderContainer.Episodes';
 import { LeftMenu } from './LeftMenu/LeftMenu';
 
-@inject('common')
 export class Episode extends React.Component {
   
   @autobind
-  renderPlayer({ items }) {
-    const episode = items.get(this.props.common.currentEpisode.id);
+  renderPlayer({ items, currentId }) {
+    const episode = items.get(currentId);
   
     return <div>
       <FullPlayer
@@ -23,13 +21,13 @@ export class Episode extends React.Component {
         {episode.title}
       </div>
   
-      <LeftMenu serials={items.values()} />
+      <LeftMenu episodes={items.values()} />
     </div>;
   }
   
   render() {
-    return <SerialsLoaderContainer>
+    return <EpisodesLoaderContainer>
       {this.renderPlayer}
-    </SerialsLoaderContainer>;
+    </EpisodesLoaderContainer>;
   }
 }

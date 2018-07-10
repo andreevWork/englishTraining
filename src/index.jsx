@@ -23,18 +23,18 @@ myHistory.listen(({ pathname }) => {
   const episodeId = getEpisodeIdFromPath(pathname);
   
   if (episodeId) {
-    CommonStore.currentEpisode.setId(episodeId);
+    CommonStore.episodes.setCurrentId(episodeId);
   }
 });
 
 const episodeId = getEpisodeIdFromPath(myHistory.location.pathname);
 
 if (episodeId) {
-  CommonStore.currentEpisode.setId(episodeId);
+  CommonStore.episodes.setCurrentId(episodeId);
 }
 
 ReactDOM.render(
-  <Provider common={CommonStore} serials={CommonStore.serials}>
+  <Provider episodes={CommonStore.episodes}>
     <Router history={myHistory}>
       <React.Fragment>
         <Header />

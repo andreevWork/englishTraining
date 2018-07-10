@@ -1,35 +1,40 @@
 @import "variables"
 
 .thumb
-  display: flex
-  height: $thumbHeight
-  overflow: hidden
-  cursor: pointer
-  transition: transform .3s
-  will-change: transform
-
-  &:hover
-    transform: scale(.9)
+  box-shadow: inset 0 5px 20px 6px rgba(0, 0, 0, .2)
+  margin-bottom: 40px
+  display: block
+  width: 16 / 9 * $thumbHeight
 
 .info
-  flex: none
-  height: $thumbHeight
   display: flex
   flex-direction: column
   white-space: nowrap
-  font-weight: bold
-  font-size: 22px
-  padding-top: 20px
+  padding: 20px 10px
+
+.seasonInfo
+  display: flex
 
 .poster
-  flex: none
-  margin-right: 40px
+  box-shadow: 0px -4px 10px 0px rgba(0, 0, 0, 0.7)
+  cursor: pointer
+  transition: transform .3s
+  will-change: transform
   height: $thumbHeight
-  width: 16 / 9 * $thumbHeight
   background-repeat: no-repeat
   background-size: cover
   background-position: center center
 
-.text
+  &:hover
+    transform: scale(.9)
+
+.title
+  font-size: 22px
+  line-height: 36px
+  font-weight: bold
   overflow: hidden
   text-overflow: ellipsis
+
+.subtitle
+  font-size: 12px
+  color: #848484

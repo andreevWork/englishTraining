@@ -2,20 +2,20 @@ import React from 'react';
 import { LoaderContainer } from 'common/LoaderContainer/LoaderContainer';
 import { inject, observer } from 'mobx-react';
 
-@inject('serials')
+@inject('episodes')
 @observer
-export class SerialsLoaderContainer extends LoaderContainer {
+export class EpisodesLoaderContainer extends LoaderContainer {
 
   loadData() {
-    this.props.serials.load();
+    this.props.episodes.load();
   }
 
   hasData() {
-    return this.props.serials.items.size > 0;
+    return this.props.episodes.items.size > 0;
   }
 
   getData() {
-    return this.props.serials;
+    return this.props.episodes;
   }
 }
 
