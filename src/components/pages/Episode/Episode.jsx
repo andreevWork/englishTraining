@@ -1,33 +1,28 @@
 import React from 'react';
-import autobind from 'autobind-decorator';
 import { FullPlayer } from '../../modules/Player';
-import { EpisodesLoaderContainer } from 'common/LoaderContainer/Serials/LoaderContainer.Episodes';
 import { LeftMenu } from './LeftMenu/LeftMenu';
+import autobind from 'autobind-decorator';
+import { EpisodesLoaderContainer } from 'common/LoaderContainer/Episodes/LoaderContainer.Episodes';
 
 export class Episode extends React.Component {
-  
   @autobind
   renderPlayer({ items, currentId }) {
     const episode = items.get(currentId);
   
-    return <div>
-      <FullPlayer
-        key={episode.id}
-        videoSrc={episode.videoSrc}
-        subtitleSrc={episode.subtitleSrc}
-      />
-      
-      <div>
-        {episode.title}
-      </div>
-  
-      <LeftMenu episodes={items.values()} />
-    </div>;
+    return <FullPlayer
+      key={episode.id}
+      videoSrc={episode.videoSrc}
+      subtitleSrc={episode.subtitleSrc}
+    />;
   }
   
   render() {
-    return <EpisodesLoaderContainer>
-      {this.renderPlayer}
-    </EpisodesLoaderContainer>;
+    return <React.Fragment>
+      <EpisodesLoaderContainer>
+        {this.renderPlayer}
+      </EpisodesLoaderContainer>
+      
+      <LeftMenu />
+    </React.Fragment>;
   }
 }

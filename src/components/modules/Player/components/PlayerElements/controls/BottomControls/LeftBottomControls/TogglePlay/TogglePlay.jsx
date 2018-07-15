@@ -1,5 +1,4 @@
 import * as React from "react";
-import autobind from "autobind-decorator";
 import {observer, inject} from "mobx-react";
 import { PlayIcon } from 'common/Icons/Play/Play';
 import { PauseIcon } from 'common/Icons/Pause/Pause';

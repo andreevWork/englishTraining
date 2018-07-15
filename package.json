@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "autobind-decorator": "^2.1.0",
+    "baron": "^3.0.3",
     "classnames": "^2.2.5",
     "dragula": "^3.7.2",
     "history": "^4.7.2",
@@ -50,9 +51,11 @@
     "normalize.css": "^7.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.3.2",
+    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.3.2",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-transition-group": "^2.4.0"
+    "react-transition-group": "^2.4.0",
+    "simplebar": "^2.6.1"
   }
 }

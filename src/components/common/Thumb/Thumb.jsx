@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 
 import s from './Thumb.sass';
+import { PlayIcon } from 'common/Icons/Play/Play';
 
 export class Thumb extends React.PureComponent {
   
@@ -22,6 +23,8 @@ export class Thumb extends React.PureComponent {
     return <Link to={`/episode/${id}`} className={s.thumb}>
       
       <div className={s.poster} style={{ backgroundImage: `url(${previewImageSrc})` }} />
+  
+      <PlayIcon notHover className={s.icon} />
       
       <div className={s.info}>
         <div className={s.title}>{title}</div>

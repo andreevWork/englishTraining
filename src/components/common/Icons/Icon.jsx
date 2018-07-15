@@ -1,7 +1,7 @@
 import * as React from "react";
 import cn from "classnames";
 
-export function createIcon(IconSvgCode, { className, ...svgProps }) {
+export function createIcon(IconSvgCode, { className,  ...svgProps }) {
   
   return class extends React.PureComponent {
     static defaultProps = {
@@ -11,7 +11,7 @@ export function createIcon(IconSvgCode, { className, ...svgProps }) {
     render() {
       const classNames = cn(
         'icon',
-        'hover',
+        !this.props.notHover && 'hover',
         className,
         this.props.className,
         this.props.disabled && 'icon-disabled'

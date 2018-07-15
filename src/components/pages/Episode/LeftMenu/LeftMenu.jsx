@@ -3,7 +3,9 @@ import autobind from 'autobind-decorator';
 import cn from 'classnames';
 
 import s from './LeftMenu.sass';
-import { Thumb } from 'common/Thumb/Thumb';
+import { Episodes } from '../../../modules/Episodes/Episodes';
+import { Scrollbars } from 'react-custom-scrollbars';
+import { PlayListIcon } from 'common/Icons/PlayList/PlayList';
 
 export class LeftMenu extends React.Component {
   state = {
@@ -18,12 +20,20 @@ export class LeftMenu extends React.Component {
   }
   
   render() {
-    return <React.Fragment>
-      <div className={cn(s.menu, this.state.isOpen && s.menuOpen)}>
-        <div className={s.opener} onClick={this.toggle} />
-        
-        {this.props.episodes.map(episode => <Thumb key={episode.id} {...episode} />)}
+    return <div className={cn(s.menu, this.state.isOpen && s.menuOpen)}>
+      <div className={s.opener} onClick={this.toggle}>
+        <PlayListIcon className={s.icon} notHover />
       </div>
-    </React.Fragment>;
+      
+      <Scrollbars
+        style={{
+          width: '445px',
+          height: 'calc(100vh - 110px)'
+        }}
+        autoHide
+      >
+        <Episodes />
+      </Scrollbars>
+    </div>;
   }
 }
