@@ -1,13 +1,21 @@
 @import "variables"
 
-.headerWrap
-  height: $headerHeight
-  margin-bottom: $headerHeight / 2
-
 .header
+  display: flex
+  align-items: center
+  justify-content: space-between
   position: absolute
   left: 0
-  right: 0
   top: 0
+  right: 0
   height: $headerHeight
-  background: #D1D7D3
+
+.logo
+  position: absolute
+  left: 0
+  width: 110px
+  height: 40px
+  background-image: url(/assets/logo.svg)
+  background-repeat: no-repeat
+  background-size: cover
+  background-position: center
