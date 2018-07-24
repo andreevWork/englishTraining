@@ -1,7 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const entryFile = path.resolve(__dirname, 'src', 'index.jsx');
+const entryHTML = path.resolve(__dirname, 'src', 'index.html');
 const outputDir = path.resolve(__dirname);
 
 module.exports = {
@@ -67,9 +69,10 @@ module.exports = {
   devtool: 'inline-source-map',
   plugins: [
       new HtmlWebpackPlugin({
-        title: 'English training video player',
-        favicon: path.resolve(outputDir, 'favicon.ico')
-      })
+        template: entryHTML
+      }),
+    
+      new Dotenv()
   ],
   
   devServer: {

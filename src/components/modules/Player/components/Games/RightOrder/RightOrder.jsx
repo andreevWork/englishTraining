@@ -5,6 +5,7 @@ import s from './RightOrder.sass';
 import { shuffle } from 'utils/arrays/shuffle';
 import { CheckMarkIcon } from 'common/Icons/CheckMark/CheckMark';
 import { RepeatSubtitlesIcon } from 'common/Icons/RepeatSubtitles/RepeatSubtitles';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 @inject('store', 'subtitles')
 @observer
@@ -108,14 +109,19 @@ export class RightOrder extends React.Component {
     const {subtitles: subs} = this.props;
     const subsIndexArray = Array(subs.endIndex - subs.startIndex + 1).fill(0).map((_, i) => i + subs.startIndex);
   
-    return <div className={s.container}>
-      {subsIndexArray.map(subIndex => <div key={subIndex} className={s.subContainer}>
-        {this.state.resolved.includes(subIndex) ?
-          <div className={s.text}>{this.getText(subIndex)}</div> :
-          this.renderDragContainer(subIndex)
-        }
-      </div>)}
-    </div>;
+    return <Scrollbars
+        style={{
+          height: '100%'
+        }}
+        autoHide
+      >
+        {subsIndexArray.map(subIndex => <div key={subIndex} className={s.subContainer}>
+          {this.state.resolved.includes(subIndex) ?
+            <div className={s.text}>{this.getText(subIndex)}</div> :
+            this.renderDragContainer(subIndex)
+          }
+        </div>)}
+      </Scrollbars>;
   }
   
   componentWillUnmount() {

@@ -48,7 +48,7 @@ export const SubtitlesModel = types
           self.subs = Subtitles.cache[subsSrc];
         } else {
           self.isPending = true;
-          self.subs = yield fetch(subsSrc)
+          self.subs = yield fetch(`${process.env.MEDIA_HOST}${subsSrc}`)
             .then(res => res.text())
             .then(text => Subtitles.parser(subsSrc, text));
           self.isPending = false;

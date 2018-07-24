@@ -10,6 +10,9 @@ export class Thumb extends React.PureComponent {
   
   static propTypes = {
     id: PropTypes.number.isRequired,
+    serial: PropTypes.shape({
+      title: PropTypes.string.isRequired
+    }).isRequired,
     title: PropTypes.string.isRequired,
     previewImageSrc: PropTypes.string.isRequired,
     episode: PropTypes.number,
@@ -17,14 +20,38 @@ export class Thumb extends React.PureComponent {
     
   };
   
+  getColorForLabel(str) {
+    let hash = 0;
+  
+    for (let i = 0; i < str.length; i++) {
+      hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+  
+    const c = (hash & 0x00FFFFFF)
+      .toString(16)
+      .toUpperCase();
+  
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(`000000${c}`.substr(-6));
+  
+    return `rgba(${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}, .7)`;
+  }
+  
+  
   render() {
-    const { previewImageSrc, season, episode, title, id } = this.props;
+    const { previewImageSrc, season, episode, title, id, serial } = this.props;
     
     return <Link to={`/episode/${id}`} className={s.thumb}>
       
-      <div className={s.poster} style={{ backgroundImage: `url(${previewImageSrc})` }} />
+      <div className={s.poster} style={{ backgroundImage: `url(${process.env.MEDIA_HOST}${previewImageSrc})` }} />
   
       <PlayIcon notHover className={s.icon} />
+      
+      <div
+        className={s.serialName}
+        style={{ backgroundColor: this.getColorForLabel(serial.title) }}
+      >
+        {serial.title}
+      </div>
       
       <div className={s.info}>
         <div className={s.title}>{title}</div>

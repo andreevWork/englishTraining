@@ -1,5 +1,9 @@
 @import "variables"
 
+.elements
+  transition: transform .3s
+  will-change: transform
+
 .shadow
   position: absolute
   bottom: 0
@@ -7,3 +11,6 @@
   right: 0
   height: $progressBarPlayerHeight + $bottomPlayerControlsHeight
   box-shadow: 0px -2px 8px 4px $playerControlsBg
+
+.hide
+  transform: translateY(120%)

@@ -4,7 +4,7 @@ const SerialModel = types
   .model("Episode", {
     id: types.identifier(types.number),
     title: types.string,
-    description: types.string
+    description: types.union(types.string, types.null)
   });
 
 const EpisodeModel = types
@@ -32,7 +32,7 @@ export const EpisodesModel = types
       load: flow(function* () {
         self.isPending = true;
         
-        self.items = yield fetch('http://127.0.0.1:5000/episodes')
+        self.items = yield fetch(`${process.env.API_HOST}/episodes`)
           .then(res => res.json())
           .then(serialsList => {
             return serialsList.reduce((acc, episode) => {

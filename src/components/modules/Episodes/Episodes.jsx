@@ -6,7 +6,7 @@ import autobind from 'autobind-decorator';
 export class Episodes extends React.PureComponent {
   @autobind
   renderEpisodes({ items }) {
-    return items.values().concat(items.values()).map(episode => <Thumb key={episode.id} {...episode} />);
+    return items.values().map(episode => <Thumb key={episode.id} {...episode} />);
   }
   
   render() {

@@ -22,10 +22,16 @@ export class DateService {
 
     static getTimeFormatFromS(num) {
         const time = DateService.getTimeFromS(num);
+        let flag = false;
+        const res = [];
 
-        return Object.entries(time)
-            .map(([key, value]) => value > 0 ? key : null)
-            .filter(Boolean)
-            .join(DateService.timeSep);
+        for (const [key, value] of Object.entries(time)) {
+          if (value > 0 || flag) {
+            res.push(key);
+            flag = true;
+          }
+        }
+        
+        return res.join(DateService.timeSep);
     }
 }

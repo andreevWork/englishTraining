@@ -4,6 +4,7 @@ export const PlayerModel = types
   .model('Player', {
     isPaused: types.boolean,
     isReady: types.boolean,
+    isActive: types.boolean,
     isFullScreen: types.boolean,
     duration: types.number,
     currentTime: types.number
@@ -31,6 +32,9 @@ export const PlayerModel = types
       setCurrentTime(currentTime) {
         self.currentTime = currentTime;
       },
+      setIsActive(isActive) {
+        self.isActive = isActive;
+      },
       setIsReady(isReady) {
         self.isReady = isReady;
       },
@@ -42,8 +46,9 @@ export const PlayerModel = types
   });
 
 export const PlayerModelDefaultData = {
-  isPaused: true,
+  isPaused: false,
   isReady: false,
+  isActive: true,
   isFullScreen: false,
   duration: 0,
   currentTime: 0

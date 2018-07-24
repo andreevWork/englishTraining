@@ -1,6 +1,7 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
+import { throttle } from 'throttle-debounce';
 import s from "./Player.sass";
 import {inject, observer} from "mobx-react";
 import autobind from 'autobind-decorator';
@@ -18,6 +19,15 @@ export class Player extends React.Component {
   };
   
     _videoEl;
+  
+    componentWillMount() {
+      const t = throttle(300, this.mouseMove.bind(this));
+      
+      this.mouseMoveThrottle = e => {
+        e.persist();
+        t(e);
+      }
+    }
 
     componentDidMount() {
       this.props.store.reset();
@@ -34,7 +44,7 @@ export class Player extends React.Component {
     @autobind
     onLoadedMetadata() {
       const {duration} = this._videoEl;
-  
+      
       this.props.player.setIsReady(true);
       this.props.player.setDuration(duration);
     }
@@ -52,6 +62,18 @@ export class Player extends React.Component {
         this.props.player.tooglePlay();
       }
     }
+    
+    mouseMove(e) {
+      clearTimeout(this.mouseMoveTimer);
+      
+      this.props.player.setIsActive(true);
+      
+      if (!e.target.closest(".playerElements")) {
+        this.mouseMoveTimer = setTimeout(() => {
+          this.props.player.setIsActive(false);
+        }, 2000);
+      }
+    }
 
     render() {
         return <div className={s.container}>
@@ -65,14 +87,20 @@ export class Player extends React.Component {
                     className={s.video}
                 >
                     <source
-                        src={this.props.videoSrc}
+                        src={`${process.env.MEDIA_HOST}${this.props.videoSrc}`}
                         type="video/mp4"
                     />
                 </video>
   
-                <div onClick={this.onClick} className={cn(s.elements, this.props.player.isFullScreen && s.fullScreen)}>
+                <div
+                  onMouseMove={this.props.store.isGameMod ? undefined : this.mouseMoveThrottle}
+                  onClick={this.onClick}
+                  className={cn(s.elements, this.props.player.isFullScreen && s.fullScreen)}
+                >
                   <GameElements />
-                  <PlayerElements />
+                  <div className="playerElements">
+                    <PlayerElements />
+                  </div>
                 </div>
             </figure>
         </div>;
