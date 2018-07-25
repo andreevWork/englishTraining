@@ -11,6 +11,7 @@ import {Index} from "./components/pages/Index";
 import { CommonStore } from './store';
 import { Episode } from './components/pages/Episode/Episode';
 import { Header } from './components/modules/Header/Header';
+import { RightMenu } from './components/modules/RightMenu/RightMenu';
 
 const myHistory = createBrowserHistory();
 
@@ -35,10 +36,12 @@ if (episodeId) {
 }
 
 ReactDOM.render(
-  <Provider episodes={CommonStore.episodes}>
+  <Provider episodes={CommonStore.episodes} saveData={CommonStore.saveData}>
     <Router history={myHistory}>
       <React.Fragment>
         <Header />
+  
+        <RightMenu />
   
         <Scrollbars
           style={{

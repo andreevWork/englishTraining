@@ -1,40 +1,49 @@
 import * as React from "react";
+import autobind from "autobind-decorator";
 import { inject, observer } from 'mobx-react/index';
 import { SubtitlesIcon } from 'common/Icons/Subtitles/Subtitles';
-import { RepeatSubtitlesIcon } from 'common/Icons/RepeatSubtitles/RepeatSubtitles';
-import { RepeatFiveSecIcon } from 'common/Icons/RepeatFiveSec/RepeatFiveSec';
-import { ExitSubtitles } from 'common/Icons/ExitSubtitles/ExitSubtitles';
 import s from "./MiddleBottomControls.sass";
 import { WithKey } from 'common/WithKey/WithKey';
+import { SaveIcon } from 'common/Icons/Save/Save';
 
-
-@inject('store')
-@observer
-export class MiddleBottomControls extends React.Component {
+export class MiddleBottomControlsBase extends React.Component {
   
-  renderPlayerMode() {
+  @autobind
+  save() {
+    this.props.saveData.saveSub({
+      episode_id: this.props.episodes.currentId,
+      sub_id: this.props.store.subtitles.index
+    });
+  }
+  
+  renderSave() {
+    return this.props.store.subtitles.hasActiveSub() && <WithKey name="S" action={this.save}>
+      <SaveIcon />
+    </WithKey>;
+  }
+  
+  renderContent() {
+    return null;
+  }
+  
+  render() {
+    return <div className={s.container}>
+      {this.renderSave()}
+      {this.renderContent()}
+    </div>;
+  }
+}
+
+@inject('store', 'saveData', 'episodes')
+@observer
+export class MiddleBottomControls extends MiddleBottomControlsBase {
+  renderStartGame() {
     return this.props.store.subtitles.hasActiveSub() && <WithKey name="Enter" action={this.props.store.startGame}>
       <SubtitlesIcon />
     </WithKey>;
   }
   
-  renderGameMod() {
-    return <div className={s.container}>
-      <WithKey name="◄" action={this.props.store.leftFiveSec}>
-        <RepeatFiveSecIcon />
-      </WithKey>
-  
-      <WithKey name="R" action={this.props.store.repeatCurrentSubs}>
-        <RepeatSubtitlesIcon />
-      </WithKey>
-  
-      <WithKey name="Enter" action={this.props.store.continueWatch}>
-        <ExitSubtitles />
-      </WithKey>
-    </div>;
-  }
-  
-  render() {
-    return this.props.store.isGameMod ? this.renderGameMod() : this.renderPlayerMode();
+  renderContent() {
+    return this.renderStartGame();
   }
 }
