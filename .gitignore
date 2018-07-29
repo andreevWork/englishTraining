@@ -1,6 +1,6 @@
 .idea/
 node_modules/
-assets/
 *.txt
 .env
 .DS_Store
+assets/*.mp4
