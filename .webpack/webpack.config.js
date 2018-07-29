@@ -2,13 +2,13 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
-const entryFile = path.resolve(__dirname, 'src', 'index.jsx');
-const entryHTML = path.resolve(__dirname, 'src', 'index.html');
-const outputDir = path.resolve(__dirname);
+const srcDir = path.resolve(__dirname, '..', 'src');
+const entryFile = path.resolve(srcDir, 'index.jsx');
+const entryHTML = path.resolve(srcDir, 'index.html');
 
 module.exports = {
-  mode: 'development',
   entry: entryFile,
+  
   module: {
       rules: [
           {
@@ -39,8 +39,8 @@ module.exports = {
                   loader: "sass-loader",
                   options: {
                       includePaths: [
-                        path.resolve(__dirname, 'src', 'styles', 'imported'),
-                        path.resolve(__dirname, 'src', 'styles', 'common')
+                        path.resolve(srcDir, 'styles', 'imported'),
+                        path.resolve(srcDir, 'styles', 'common')
                       ]
                   }
               }]
@@ -48,41 +48,26 @@ module.exports = {
 
       ]
   },
+  
   resolve: {
       extensions: [ '.jsx', '.js' ],
       alias: {
-          DiContainer: path.resolve(__dirname, 'src', 'services', 'DI.js'),
-          utils: path.resolve(__dirname, 'src', 'utils'),
-          constants: path.resolve(__dirname, 'src', 'constants'),
-          common: path.resolve(__dirname, 'src', 'components/common'),
-          games: path.resolve(__dirname, 'src', 'components/modules/Player/components/Games'),
-          player: path.resolve(__dirname, 'src', 'components/modules/Player/components'),
-          services: path.resolve(__dirname, 'src', 'services'),
-          reactions: path.resolve(__dirname, 'src', 'reactions'),
+          DiContainer: path.resolve(srcDir, 'services', 'DI.js'),
+          utils: path.resolve(srcDir, 'utils'),
+          constants: path.resolve(srcDir, 'constants'),
+          common: path.resolve(srcDir, 'components/common'),
+          games: path.resolve(srcDir, 'components/modules/Player/components/Games'),
+          player: path.resolve(srcDir, 'components/modules/Player/components'),
+          services: path.resolve(srcDir, 'services'),
+          reactions: path.resolve(srcDir, 'reactions'),
       }
   },
-  output: {
-      filename: 'bundle.js',
-      path: outputDir,
-      publicPath: '/'
-  },
-  devtool: 'inline-source-map',
+  
   plugins: [
       new HtmlWebpackPlugin({
         template: entryHTML
       }),
     
       new Dotenv()
-  ],
-  
-  devServer: {
-    contentBase: outputDir,
-    historyApiFallback: true,
-    open: true,
-    port: 3000,
-    watchOptions: {
-      aggregateTimeout: 300,
-      poll: 1000
-    }
-  }
+  ]
 };
