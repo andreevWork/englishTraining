@@ -16,8 +16,8 @@ export class Thumb extends React.PureComponent {
     title: PropTypes.string.isRequired,
     previewImageSrc: PropTypes.string.isRequired,
     episode: PropTypes.number,
-    season: PropTypes.number
-    
+    season: PropTypes.number,
+    momentsCount: PropTypes.number
   };
   
   getColorForLabel(str) {
@@ -38,7 +38,7 @@ export class Thumb extends React.PureComponent {
   
   
   render() {
-    const { previewImageSrc, season, episode, title, id, serial } = this.props;
+    const { previewImageSrc, season, episode, title, id, serial, momentsCount } = this.props;
     
     return <Link to={`/episode/${id}`} className={s.thumb}>
       
@@ -46,11 +46,18 @@ export class Thumb extends React.PureComponent {
   
       <PlayIcon notHover className={s.icon} />
       
-      <div
-        className={s.serialName}
-        style={{ backgroundColor: this.getColorForLabel(serial.title) }}
-      >
-        {serial.title}
+      <div className={s.header}>
+        <div
+          className={s.serialName}
+          style={{ backgroundColor: this.getColorForLabel(serial.title) }}
+        >
+          {serial.title}
+        </div>
+        {momentsCount && <div
+          className={s.momentsCount}
+        >
+          {momentsCount} moment{momentsCount > 1 && 's'}
+        </div>}
       </div>
       
       <div className={s.info}>

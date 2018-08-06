@@ -5,12 +5,9 @@ import cn from 'classnames';
 import s from './RightMenu.sass';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { PlayListIcon } from 'common/Icons/PlayList/PlayList';
-import { inject, observer } from 'mobx-react';
 import { EpisodesLoaderContainer } from 'common/LoaderContainer/Episodes/LoaderContainer.Episodes';
 import { Thumb } from 'common/Thumb/Thumb';
 
-@inject('saveData', 'episodes')
-@observer
 export class RightMenu extends React.Component {
   state = {
     isOpen: false
@@ -27,8 +24,7 @@ export class RightMenu extends React.Component {
   renderSaves({ items }) {
     return this.props.saveData.subs.entries().map(([ episode_id, data ]) =>
       <div>
-        <Thumb key={episode_id} {...items.get(episode_id)} />
-        {data.subs_ids.length}
+        <Thumb key={episode_id} {...items.get(episode_id)} momentsCount={data.subs_ids.length} />
       </div>
     );
   }

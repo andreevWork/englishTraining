@@ -21,11 +21,11 @@ export class Player extends React.Component {
     _videoEl;
   
     componentWillMount() {
-      const t = throttle(300, this.mouseMove.bind(this));
+      const throttleMouseMove = throttle(1000, this.mouseMove.bind(this));
       
       this.mouseMoveThrottle = e => {
         e.persist();
-        t(e);
+        throttleMouseMove(e);
       }
     }
 

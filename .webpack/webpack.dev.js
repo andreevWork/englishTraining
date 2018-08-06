@@ -9,6 +9,7 @@ module.exports = merge(common, {
   
   output: {
       filename: 'whatever.js',
+      publicPath: '/',
       path: rootDir
   },
   

@@ -5,8 +5,12 @@ import autobind from 'autobind-decorator';
 
 export class Episodes extends React.PureComponent {
   @autobind
-  renderEpisodes({ items }) {
-    return items.values().map(episode => <Thumb key={episode.id} {...episode} />);
+  renderEpisodes({ items, savedMoments }) {
+    return items.values().map(episode => <Thumb
+      key={episode.id}
+      {...episode}
+      momentsCount={savedMoments.get(episode.id) && savedMoments.get(episode.id).length}
+    />);
   }
   
   render() {

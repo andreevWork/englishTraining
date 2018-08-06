@@ -11,6 +11,7 @@ const SubtitleModel = types.model("Subtitle", {
 export const SubtitlesModel = types
   .model('Subtitles', {
     isPending: types.boolean,
+    isReady: types.boolean,
     subs: types.array(SubtitleModel),
     startIndex: types.number,
     singleEndIndex: types.number,
@@ -42,16 +43,22 @@ export const SubtitlesModel = types
   .actions(self => {
     return {
       load: flow(function* (subsSrc) {
-        self.isPending = true;
+        if (self.isPending) {
+          return null;
+        }
+        
         
         if (Subtitles.cache[subsSrc]) {
           self.subs = Subtitles.cache[subsSrc];
         } else {
           self.isPending = true;
+  
           self.subs = yield fetch(`${process.env.MEDIA_HOST}${subsSrc}`)
             .then(res => res.text())
             .then(text => Subtitles.parser(subsSrc, text));
+  
           self.isPending = false;
+          self.isReady = true;
         }
         
         self.maxIndex = self.subs.length - 1;
@@ -77,6 +84,7 @@ export const SubtitlesModel = types
 
 export const SubtitlesModelDefaultData = {
   isPending: false,
+  isReady: false,
   subs: [],
   startIndex: -1,
   maxIndex: -1,

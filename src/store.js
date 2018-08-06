@@ -1,23 +1,20 @@
 import { types, addMiddleware } from 'mobx-state-tree';
 import { mstLogger } from 'utils/mst/logger';
 import { EpisodesModel, EpisodesModelDefaultData } from './models/episodes';
-import { SaveModel, SaveModelDefaultData } from './models/saveData';
 import { persist } from 'utils/mst/persist';
 
 const CommonStoreModel = types
   .model("CommonStore", {
-    episodes: EpisodesModel,
-    saveData: SaveModel
+    episodes: EpisodesModel
   });
 
 const CommonStore = CommonStoreModel.create({
-  episodes: EpisodesModelDefaultData,
-  saveData: SaveModelDefaultData
+  episodes: EpisodesModelDefaultData
 });
 
 addMiddleware(CommonStore, mstLogger);
 
-persist(CommonStore.saveData, 'saveData');
+persist(CommonStore.episodes.savedMoments, 'savedMoments');
 
 export { CommonStore };
 

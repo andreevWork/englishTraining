@@ -5,8 +5,8 @@ import {observer, inject} from "mobx-react";
 import { BottomControls } from './controls/BottomControls/BottomControls';
 import { Spinner } from 'common/Spinner/Spinner';
 import { GameOrPlayer } from 'player/GameOrPlayer/GameOrPlayer';
-import { ProgressBar } from 'player/PlayerElements/controls/ProgressBar/ProgressBar';
-import { ProgressBarGameMod } from 'player/PlayerElements/controls/ProgressBar/ProgressBar.GameMod';
+import { ProgressBarPlayer } from 'player/PlayerElements/controls/ProgressBar/player/ProgressBar.player';
+import { ProgressBarGameMod } from 'player/PlayerElements/controls/ProgressBar/gameMod/ProgressBar.GameMod';
 
 @inject('store')
 @observer
@@ -19,7 +19,7 @@ export class PlayerElements extends React.Component {
     );
     
       return <div className={className}>
-        <GameOrPlayer playerEl={ProgressBar} gameEl={ProgressBarGameMod} />
+        <GameOrPlayer playerEl={ProgressBarPlayer} gameEl={ProgressBarGameMod} />
         <BottomControls />
       </div>;
   }
