@@ -21,6 +21,7 @@ export const FullPlayerModel = types
         self.isGameMod = true;
         self.subtitles.setStartIndex(self.subtitles.index);
         self.subtitles.setEndIndex(self.subtitles.index);
+        
         if (self.gameType) {
           self.repeatCurrentSubs();
         }
@@ -28,6 +29,8 @@ export const FullPlayerModel = types
       
       stopGame() {
         self.isGameMod = false;
+        self.player.play();
+        self.player.setIsActive(true);
       },
       
       setGameType(gameType) {
@@ -98,11 +101,6 @@ export const FullPlayerModel = types
         }
         
         self.player.playByTime(newTime > self.player.duration ? self.player.duration : newTime);
-      },
-      
-      continueWatch() {
-        self.repeatCurrentSubs();
-        self.isGameMod = false;
       }
     };
   });

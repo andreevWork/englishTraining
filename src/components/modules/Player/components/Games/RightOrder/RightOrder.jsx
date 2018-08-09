@@ -87,11 +87,6 @@ export class RightOrder extends React.Component {
     }
   
     return <React.Fragment>
-      {subs.endIndex - subs.startIndex > 0 && <RepeatSubtitlesIcon
-        onClick={this.props.store.repeatSingeTime.bind(null, subIndex)}
-        className={s.repeat}
-      />}
-      
       <div
         className={s.drag}
         key={subIndex}
@@ -102,6 +97,10 @@ export class RightOrder extends React.Component {
           {word}
         </div>)}
       </div>
+      {subs.endIndex - subs.startIndex > 0 && <RepeatSubtitlesIcon
+        onClick={this.props.store.repeatSingeTime.bind(null, subIndex)}
+        className={s.repeat}
+      />}
     </React.Fragment>;
   }
   
