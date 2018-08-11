@@ -9,7 +9,7 @@ module.exports = merge(common, {
   
   output: {
     filename: 'main.js',
-    publicPath: '/dist',
+    publicPath: '/',
     path: distDir
   }
 });

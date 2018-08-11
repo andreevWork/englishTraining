@@ -7,7 +7,7 @@ import createBrowserHistory  from 'history/createBrowserHistory';
 
 import './index.sass';
 import { Scrollbars } from 'react-custom-scrollbars';
-import {Index} from "./components/pages/Index";
+import {Index} from "./components/pages/Index/Index";
 import { CommonStore } from './store';
 import { Episode } from './components/pages/Episode/Episode';
 import { Header } from './components/modules/Header/Header';

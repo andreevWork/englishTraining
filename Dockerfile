@@ -15,4 +15,6 @@ FROM nginx:1.15
 
 COPY --from=build /app/dist/ /app/
 
+COPY --from=build /app/assets/ /app/assets
+
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
