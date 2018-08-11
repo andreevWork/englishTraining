@@ -30,8 +30,6 @@ export class ProgressBarPlayer extends ProgressBarBase {
     
     const width = Math.ceil((endTime - startTime) / this.getCurrentDuration() * this.progressWrapRef.current.offsetWidth);
     
-    console.log(width);
-    
     return {
       width: width + 1 + 'px',
       left: startTime / this.getCurrentDuration() * 100 + '%'

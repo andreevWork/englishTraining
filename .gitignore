@@ -3,5 +3,4 @@ node_modules/
 *.txt
 .env
 .DS_Store
-assets/*.mp4
 dist/
