@@ -1,1 +1,35 @@
+@import "variables"
 
+$imageUrl: 'http://ic.pics.livejournal.com/masterok/50816465/582464/582464_original.jpg'
+
+.banner
+  position: relative
+  margin-bottom: 40px
+  height: 45vh
+  background: linear-gradient(black, rgba(0, 0, 0, .7), rgba(0, 0, 0, 0.5)), url($imageUrl) repeat
+
+.bannerTitle
+  text-align: center
+  width: 100%
+  position: absolute
+  left: 50%
+  top: $headerHeight + $headerHeight/ 2
+  transform: translateX(-50%)
+  font-size: 38px
+  font-weight: bold
+  color: white
+  line-height: 50px
+
+.bannerSubTitle
+  font-size: 16px
+  line-height: 22px
+  font-weight: normal
+  color: rgba(255, 255, 255, .7)
+  margin-top: 20px
+  position: absolute
+  left: 50%
+  transform: translateX(-50%)
+  width: 60vw
+
+  b
+    color: white

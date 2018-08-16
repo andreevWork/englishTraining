@@ -37,22 +37,16 @@ if (episodeId) {
 ReactDOM.render(
   <Provider episodes={CommonStore.episodes}>
     <Router history={myHistory}>
-      <React.Fragment>
-        <Header />
-  
         <Scrollbars
-          style={{
-            height: 'calc(100vh - 90px)'
-          }}
+          style={{ height: '100vh' }}
           autoHide
         >
-          <div style={{ padding: '0 40px 40px' }}>
-            <Route exact path="/" component={Index} />
+          <Header />
+          
+          <Route exact path="/" component={Index} />
   
-            <Route path="/episode/:id" component={Episode} />
-          </div>
+          <Route path="/episode/:id" component={Episode} />
         </Scrollbars>
-      </React.Fragment>
     </Router>
   </Provider>,
   document.body
