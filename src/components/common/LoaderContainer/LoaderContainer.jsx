@@ -1,5 +1,4 @@
 import React from 'react';
-import { Spinner } from 'common/Spinner/Spinner';
 
 export class LoaderContainer extends React.Component {
   
@@ -25,8 +24,6 @@ export class LoaderContainer extends React.Component {
   getData() {}
   
   render() {
-    return this.hasData() ? this.props.children(this.getData()): <div>
-      <Spinner />
-    </div>;
+    return this.hasData() ? this.props.children(this.getData()) : null;
   }
 }

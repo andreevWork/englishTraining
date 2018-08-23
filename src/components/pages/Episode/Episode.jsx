@@ -1,4 +1,5 @@
 import React from 'react';
+import s from './Episode.sass';
 import { FullPlayer } from '../../modules/Player';
 import { LeftMenu } from './LeftMenu/LeftMenu';
 import autobind from 'autobind-decorator';
@@ -9,11 +10,19 @@ export class Episode extends React.Component {
   renderPlayer({ items, currentId }) {
     const episode = items.get(currentId);
   
-    return <FullPlayer
-      key={episode.id}
-      videoSrc={episode.videoSrc}
-      subtitleSrc={episode.subtitleSrc}
-    />;
+    return <div className={s.player}>
+      <div>
+        <FullPlayer
+          key={episode.id}
+          videoSrc={episode.videoSrc}
+          subtitleSrc={episode.subtitleSrc}
+        />
+  
+        <div className={s.info}>
+          {episode.title}
+        </div>
+      </div>
+    </div>;
   }
   
   render() {

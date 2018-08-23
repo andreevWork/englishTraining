@@ -15,7 +15,13 @@ export class Player extends React.Component {
   
   static propTypes  = {
     videoSrc: PropTypes.string,
+    autoPlay: PropTypes.string,
+    className: PropTypes.string,
     subtitleSrc: PropTypes.string
+  };
+  
+  static defaultProps = {
+    autoPlay: true
   };
   
     _videoEl;
@@ -47,6 +53,12 @@ export class Player extends React.Component {
       
       this.props.player.setIsReady(true);
       this.props.player.setDuration(duration);
+      
+      if (this.props.autoPlay) {
+        this.props.player.play();
+      } else {
+        this.props.player.pause();
+      }
     }
 
     @autobind
@@ -76,10 +88,10 @@ export class Player extends React.Component {
     }
 
     render() {
-        return <div className={s.container}>
+        return <div className={cn(this.props.className, s.container)}>
             <figure className={s.figure}>
                 <video
-                    autoPlay={true}
+                    autoPlay={this.props.autoPlay}
                     ref={el => this._videoEl = el}
                     onLoadedMetadata={this.onLoadedMetadata}
                     onTimeUpdate={this.onTimeUpdate}

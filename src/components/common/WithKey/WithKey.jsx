@@ -31,7 +31,9 @@ export class WithKey extends React.PureComponent {
   @autobind
   onKeyUp(event) {
     if (WithKey.KeyCodes[this.props.name] === event.keyCode && !this.props.disabled) {
-      setTimeout(this.props.action, 300);
+      event.stopPropagation();
+      event.preventDefault();
+      setTimeout(this.props.action, 200);
       
       this.setState({
         animated: true

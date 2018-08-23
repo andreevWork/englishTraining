@@ -3,33 +3,55 @@
 $imageUrl: 'http://ic.pics.livejournal.com/masterok/50816465/582464/582464_original.jpg'
 
 .banner
+  color: white
   position: relative
   margin-bottom: 40px
-  height: 45vh
+  height: 60vh
   background: linear-gradient(black, rgba(0, 0, 0, .7), rgba(0, 0, 0, 0.5)), url($imageUrl) repeat
 
 .bannerTitle
+  position: absolute
+  top: $headerHeight + 20px
   text-align: center
   width: 100%
-  position: absolute
-  left: 50%
-  top: $headerHeight + $headerHeight/ 2
-  transform: translateX(-50%)
-  font-size: 38px
+  font-size: 28px
   font-weight: bold
-  color: white
-  line-height: 50px
+  letter-spacing: 1px
 
-.bannerSubTitle
-  font-size: 16px
-  line-height: 22px
-  font-weight: normal
-  color: rgba(255, 255, 255, .7)
-  margin-top: 20px
+.bannerInfo
+  margin-left: 40px
+  display: flex
+  justify-content: center
+  align-items: flex-start
+
+  li
+    opacity: .9
+    font-size: 18px
+    font-weight: bold
+    line-height: 40px
+
+.episodes
+  min-height: 30vh
+  position: relative
+  padding: 0 20px 20px
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-around
+  align-items: center
+
+  > *
+    margin-bottom: 30px
+
+.bannerPlayer
+  width: calc(80vh - #{$headerHeight} * 2) !important
+  margin: 0 !important
+
+.bannerContent
+  width: 100%
   position: absolute
+  bottom: 40px
   left: 50%
   transform: translateX(-50%)
-  width: 60vw
-
-  b
-    color: white
+  display: flex
+  justify-content: center
+  align-items: center
