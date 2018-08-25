@@ -19,7 +19,12 @@ export class Episode extends React.Component {
         />
   
         <div className={s.info}>
-          {episode.title}
+          <div className={s.infoSerial}>
+            {episode.serial.title}: Season {episode.season} Episode {episode.episode}
+          </div>
+          <div>
+            {episode.title}
+          </div>
         </div>
       </div>
     </div>;
