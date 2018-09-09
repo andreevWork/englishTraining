@@ -1,13 +1,9 @@
 {
   "name": "englishTraining",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "g": "node scripts/generateComponent/generateComponent.js",
     "build": "webpack  --config .webpack/webpack.prod.js",
-    "start": "webpack-dev-server --config .webpack/webpack.dev.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server --config .webpack/webpack.dev.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +25,7 @@
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-react": "^6.24.1",
+    "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^0.28.9",
     "dotenv-webpack": "^1.5.7",
     "html-webpack-plugin": "^3.2.0",
