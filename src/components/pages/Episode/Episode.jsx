@@ -3,7 +3,7 @@ import s from './Episode.sass';
 import { FullPlayer } from '../../modules/Player';
 import { LeftMenu } from './LeftMenu/LeftMenu';
 import autobind from 'autobind-decorator';
-import { EpisodesLoaderContainer } from 'common/LoaderContainer/Episodes/LoaderContainer.Episodes';
+import { EpisodesLoaderContainer } from 'modules/LoaderContainer/Episodes/LoaderContainer.Episodes';
 
 export class Episode extends React.Component {
   @autobind

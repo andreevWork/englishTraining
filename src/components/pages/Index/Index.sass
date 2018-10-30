@@ -6,32 +6,22 @@ $imageUrl: 'http://ic.pics.livejournal.com/masterok/50816465/582464/582464_origi
   color: white
   position: relative
   margin-bottom: 40px
-  height: 60vh
+  height: 40vh
   background: linear-gradient(black, rgba(0, 0, 0, .7), rgba(0, 0, 0, 0.5)), url($imageUrl) repeat
 
 .bannerTitle
   position: absolute
-  top: $headerHeight + 20px
+  top: 50%
   text-align: center
   width: 100%
-  font-size: 28px
+  font-size: 20px
+  line-height: 30px
   font-weight: bold
   letter-spacing: 1px
+  transform: translateY(-50%)
 
-.bannerInfo
-  margin-left: 40px
-  display: flex
-  justify-content: center
-  align-items: flex-start
-
-  li
-    opacity: .9
-    font-size: 18px
-    font-weight: bold
-    line-height: 40px
-
-.episodes
-  min-height: 30vh
+.serials
+  min-height: 50vh
   position: relative
   padding: 0 20px 20px
   display: flex
@@ -41,17 +31,3 @@ $imageUrl: 'http://ic.pics.livejournal.com/masterok/50816465/582464/582464_origi
 
   > *
     margin-bottom: 30px
-
-.bannerPlayer
-  width: calc(80vh - #{$headerHeight} * 2) !important
-  margin: 0 !important
-
-.bannerContent
-  width: 100%
-  position: absolute
-  bottom: 40px
-  left: 50%
-  transform: translateX(-50%)
-  display: flex
-  justify-content: center
-  align-items: center

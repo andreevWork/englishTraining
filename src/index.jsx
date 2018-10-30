@@ -6,7 +6,6 @@ import { Provider } from "mobx-react";
 import createBrowserHistory  from 'history/createBrowserHistory';
 
 import './index.sass';
-import { Scrollbars } from 'react-custom-scrollbars';
 import {Index} from "./components/pages/Index/Index";
 import { CommonStore } from './store';
 import { Episode } from './components/pages/Episode/Episode';
@@ -35,18 +34,15 @@ if (episodeId) {
 }
 
 ReactDOM.render(
-  <Provider episodes={CommonStore.episodes}>
+  <Provider episodes={CommonStore.episodes} serials={CommonStore.serials}>
     <Router history={myHistory}>
-        <Scrollbars
-          style={{ height: '100vh' }}
-          autoHide
-        >
-          <Header />
-          
-          <Route exact path="/" component={Index} />
+      <React.Fragment>
+        <Header />
+        
+        <Route exact path="/" component={Index} />
   
-          <Route path="/episode/:id" component={Episode} />
-        </Scrollbars>
+        <Route path="/episode/:id" component={Episode} />
+      </React.Fragment>
     </Router>
   </Provider>,
   document.body

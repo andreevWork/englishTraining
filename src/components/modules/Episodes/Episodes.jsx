@@ -1,6 +1,6 @@
 import React from 'react';
 import { Thumb } from 'common/Thumb/Thumb';
-import { EpisodesLoaderContainer } from 'common/LoaderContainer/Episodes/LoaderContainer.Episodes';
+import { EpisodesLoaderContainer } from 'modules/LoaderContainer/Episodes/LoaderContainer.Episodes';
 import autobind from 'autobind-decorator';
 
 export class Episodes extends React.PureComponent {

@@ -55,6 +55,7 @@ module.exports = {
           utils: path.resolve(srcDir, 'utils'),
           constants: path.resolve(srcDir, 'constants'),
           common: path.resolve(srcDir, 'components/common'),
+          modules: path.resolve(srcDir, 'components/modules'),
           games: path.resolve(srcDir, 'components/modules/Player/components/Games'),
           player: path.resolve(srcDir, 'components/modules/Player/components'),
           services: path.resolve(srcDir, 'services'),

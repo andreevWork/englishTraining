@@ -1,5 +1,5 @@
 import React from 'react';
-import { LoaderContainer } from 'common/LoaderContainer/LoaderContainer';
+import { LoaderContainer } from '../LoaderContainer';
 import { inject, observer } from 'mobx-react';
 
 @inject('episodes')
