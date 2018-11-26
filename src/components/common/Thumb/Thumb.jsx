@@ -44,7 +44,7 @@ export class Thumb extends React.PureComponent {
       
       <div className={s.poster} style={{ backgroundImage: `url(${process.env.MEDIA_HOST}${previewImageSrc})` }} />
   
-      <PlayIcon notHover className={s.icon} />
+      <PlayIcon className={s.icon} />
       
       <div className={s.header}>
         <div

@@ -11,7 +11,6 @@ export function createIcon(IconSvgCode, { className,  ...svgProps }) {
     render() {
       const classNames = cn(
         'icon',
-        !this.props.notHover && 'hover',
         className,
         this.props.className,
         this.props.disabled && 'icon-disabled'

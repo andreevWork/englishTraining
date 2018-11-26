@@ -3,7 +3,6 @@ import * as Dragula from 'dragula';
 import {observer, inject} from "mobx-react";
 import s from './RightOrder.sass';
 import { shuffle } from 'utils/arrays/shuffle';
-import { CheckMarkIcon } from 'common/Icons/CheckMark/CheckMark';
 import { RepeatSubtitlesIcon } from 'common/Icons/RepeatSubtitles/RepeatSubtitles';
 import { Scrollbars } from 'react-custom-scrollbars';
 

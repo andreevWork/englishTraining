@@ -1,5 +1,4 @@
 import { types, flow } from 'mobx-state-tree';
-import { Subtitles } from 'services/SubtitleService/SubtitleService';
 import {binarySearch} from "utils/arrays/binarySearch";
 
 const SubtitleModel = types.model("Subtitle", {
@@ -7,6 +6,8 @@ const SubtitleModel = types.model("Subtitle", {
   endTime: types.number,
   text: types.string,
 });
+
+const SubtitlesCache = {};
 
 export const SubtitlesModel = types
   .model('Subtitles', {
@@ -47,15 +48,15 @@ export const SubtitlesModel = types
           return null;
         }
         
-        
-        if (Subtitles.cache[subsSrc]) {
-          self.subs = Subtitles.cache[subsSrc];
+        if (SubtitlesCache[subsSrc]) {
+          self.subs = SubtitlesCache[subsSrc];
         } else {
           self.isPending = true;
   
-          self.subs = yield fetch(`${process.env.MEDIA_HOST}${subsSrc}`)
-            .then(res => res.text())
-            .then(text => Subtitles.parser(subsSrc, text));
+          self.subs = yield fetch(subsSrc)
+            .then(res => res.json());
+  
+          SubtitlesCache[subsSrc] = self.subs.peek();
   
           self.isPending = false;
           self.isReady = true;

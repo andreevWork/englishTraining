@@ -17,7 +17,7 @@ const CommonStore = CommonStoreModel.create({
 
 addMiddleware(CommonStore, mstLogger);
 
-persist(CommonStore.episodes.savedMoments, 'savedMoments');
+//persist(CommonStore.episodes.savedMoments, 'savedMoments');
 
 export { CommonStore };
 

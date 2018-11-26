@@ -16,6 +16,11 @@ export const SerialsModel = types
     isPending: types.boolean,
     items: types.map(SerialModel)
   })
+  .views(self => ({
+    getCurrentSerial() {
+      return self.items.get(self.currentId);
+    }
+  }))
   .actions(self => {
     return {
       load: flow(function* () {

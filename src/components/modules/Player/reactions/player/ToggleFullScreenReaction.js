@@ -26,9 +26,10 @@ export class ToggleFullScreenReaction extends BasePlayerReaction {
             return;
         }
         
-        const videoEl = DiContainer.get('videoEl');
+        const videoEl = DiContainer.get('videoEl').closest('div');
 
         if(this._store.player.isFullScreen) {
+            
             if(videoEl.requestFullscreen)
                 videoEl.requestFullscreen();
             else if(videoEl.mozRequestFullScreen)
@@ -37,6 +38,9 @@ export class ToggleFullScreenReaction extends BasePlayerReaction {
                 videoEl.webkitRequestFullscreen();
             else if(videoEl.msRequestFullscreen)
                 videoEl.msRequestFullscreen();
+  
+          screen.orientation.lock('landscape-primary');
+  
         } else {
             if(document.exitFullscreen)
                 document.exitFullscreen();

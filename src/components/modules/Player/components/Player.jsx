@@ -15,7 +15,6 @@ export class Player extends React.Component {
   
   static propTypes  = {
     videoSrc: PropTypes.string,
-    autoPlay: PropTypes.string,
     className: PropTypes.string,
     subtitleSrc: PropTypes.string
   };
@@ -91,7 +90,7 @@ export class Player extends React.Component {
         return <div className={cn(this.props.className, s.container)}>
             <figure className={s.figure}>
                 <video
-                    autoPlay={this.props.autoPlay}
+                    autoPlay
                     ref={el => this._videoEl = el}
                     onLoadedMetadata={this.onLoadedMetadata}
                     onTimeUpdate={this.onTimeUpdate}
@@ -99,7 +98,7 @@ export class Player extends React.Component {
                     className={s.video}
                 >
                     <source
-                        src={`${process.env.MEDIA_HOST}${this.props.videoSrc}`}
+                        src={this.props.videoSrc}
                         type="video/mp4"
                     />
                 </video>

@@ -8,8 +8,7 @@ export class Button extends React.PureComponent {
     const className = cn(
       s.button,
       this.props.className,
-      this.props.disabled && s.disabled,
-      !this.props.disabled && 'hover',
+      this.props.disabled && s.disabled
     );
     
     return <div

@@ -3,7 +3,6 @@ import autobind from "autobind-decorator";
 import { inject, observer } from 'mobx-react/index';
 import { SubtitlesIcon } from 'common/Icons/Subtitles/Subtitles';
 import s from "./MiddleBottomControls.sass";
-import { WithKey } from 'common/WithKey/WithKey';
 import { SaveIcon } from 'common/Icons/Save/Save';
 
 export class MiddleBottomControlsBase extends React.Component {
@@ -17,9 +16,7 @@ export class MiddleBottomControlsBase extends React.Component {
   }
   
   renderSave() {
-    return this.props.store.subtitles.hasActiveSub() && <WithKey name="S" action={this.save}>
-      <SaveIcon />
-    </WithKey>;
+    return this.props.store.subtitles.hasActiveSub() && <SaveIcon onClick={this.save} />;
   }
   
   renderContent() {
@@ -38,9 +35,7 @@ export class MiddleBottomControlsBase extends React.Component {
 @observer
 export class MiddleBottomControls extends MiddleBottomControlsBase {
   renderStartGame() {
-    return this.props.store.subtitles.hasActiveSub() && <WithKey name="Enter" action={this.props.store.startGame}>
-      <SubtitlesIcon />
-    </WithKey>;
+    return this.props.store.subtitles.hasActiveSub() && <SubtitlesIcon onClick={this.props.store.startGame} />;
   }
   
   renderContent() {

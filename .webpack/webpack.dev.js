@@ -20,6 +20,7 @@ module.exports = merge(common, {
     historyApiFallback: true,
     open: true,
     port: 3000,
+    host: '0.0.0.0',
     watchOptions: {
       aggregateTimeout: 300,
       poll: 1000

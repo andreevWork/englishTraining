@@ -11,11 +11,13 @@ export class ThumbWrap extends React.PureComponent {
   };
   
   render() {
-    const { posterSrc, href } = this.props;
+    const { posterSrc, href, children } = this.props;
     
     return <Link to={href} className={s.thumb}>
       
       <div className={s.poster} style={{ backgroundImage: `url(${posterSrc})` }} />
+      
+      {children}
   
     </Link>;
   }

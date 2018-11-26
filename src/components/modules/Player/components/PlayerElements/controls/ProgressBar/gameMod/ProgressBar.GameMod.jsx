@@ -1,4 +1,5 @@
 import * as React from "react";
+import cn from "classnames";
 
 import {observer, inject} from "mobx-react";
 import s from './ProgressBar.GameMod.sass';
@@ -8,9 +9,6 @@ import { DateService } from 'services/DateService/DateService';
 @inject('store', 'player')
 @observer
 export class ProgressBarGameMod extends ProgressBarBase {
-  
-  classChoiceTime = `${s.choiceTime} hover`;
-  
   getStartTime() {
     const startSubTime = this.props.store.subtitles.getSub(this.props.store.subtitles.startIndex).startTime;
   
@@ -43,13 +41,11 @@ export class ProgressBarGameMod extends ProgressBarBase {
       timesEl.push(<div
         key="c1"
         onClick={this.props.store.reduceStartIndex}
-        className={this.classChoiceTime}
+        className={s.choiceTime}
       >
         {leftStartTime}
       </div>);
     }
-  
-    timesEl.push(<div key="c2" className={s.time}>{currentTime}</div>);
   
     if (subs.startIndex < maxStartIndex) {
       const rightStartTime = DateService.getFormattedTimeFromS(
@@ -60,7 +56,7 @@ export class ProgressBarGameMod extends ProgressBarBase {
       timesEl.push(<div
         key="c3"
         onClick={this.props.store.increaseStartIndex}
-        className={this.classChoiceTime}
+        className={cn(s.choiceTime, s.rightChoice)}
       >
         {rightStartTime}
       </div>);
@@ -68,6 +64,7 @@ export class ProgressBarGameMod extends ProgressBarBase {
     
     return <div className={s.timeWrapper}>
       {timesEl}
+      <div className={s.time}>{currentTime}</div>
     </div>;
   }
   
@@ -85,13 +82,11 @@ export class ProgressBarGameMod extends ProgressBarBase {
       timesEl.push(<div
         key="e1"
         onClick={this.props.store.reduceEndIndex}
-        className={this.classChoiceTime}
+        className={s.choiceTime}
       >
         {leftEndTime}
       </div>);
     }
-  
-    timesEl.push(<div key="e2" className={s.time}>{endTime}</div>);
   
     if (subs.endIndex < subs.maxIndex) {
       const rightEndTime = DateService.getFormattedTimeFromS(
@@ -102,7 +97,7 @@ export class ProgressBarGameMod extends ProgressBarBase {
       timesEl.push(<div
         key="e3"
         onClick={this.props.store.increaseEndIndex}
-        className={this.classChoiceTime}
+        className={cn(s.choiceTime, s.rightChoice)}
       >
         {rightEndTime}
       </div>);
@@ -110,6 +105,7 @@ export class ProgressBarGameMod extends ProgressBarBase {
   
     return <div className={s.timeWrapper}>
       {timesEl}
+      <div className={s.time}>{endTime}</div>
     </div>;
   }
 }

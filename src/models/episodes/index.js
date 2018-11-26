@@ -1,11 +1,4 @@
-import { types, flow } from 'mobx-state-tree';
-
-const SerialModel = types
-  .model("Serial", {
-    id: types.identifier(types.number),
-    title: types.string,
-    description: types.union(types.string, types.null)
-  });
+import { types, flow, getRoot } from 'mobx-state-tree';
 
 const EpisodeModel = types
   .model("Episode", {
@@ -13,10 +6,8 @@ const EpisodeModel = types
     title: types.string,
     episode: types.number,
     season: types.number,
-    
-    serial: SerialModel,
-    
-    previewImageSrc: types.string,
+  
+    posterSrc: types.string,
     videoSrc: types.string,
     subtitleSrc: types.string
   });
@@ -25,14 +16,11 @@ export const EpisodesModel = types
   .model('Episodes', {
     currentId: types.number,
     isPending: types.boolean,
-    items: types.map(EpisodeModel),
-    savedMoments: types.map(types.array(types.number))
+    items: types.map(EpisodeModel)
   })
   .views(self => ({
-    getCurrentSavedMoments() {
-      const savedMoments = self.savedMoments.get(self.currentId);
-      
-      return savedMoments && savedMoments.peek() || null;
+    getCurrentEpisode() {
+      return self.items.get(self.currentId);
     }
   }))
   .actions(self => {
@@ -44,11 +32,18 @@ export const EpisodesModel = types
         
         self.isPending = true;
         
-        self.items = yield fetch(`${process.env.API_HOST}/episodes`)
+        const root = getRoot(self);
+        
+        self.items = yield fetch(`${process.env.API_HOST}/episodes/${root.serials.currentId}`)
           .then(res => res.json())
-          .then(serialsList => {
-            return serialsList.reduce((acc, episode) => {
+          .then(episodes => {
+            return episodes.reduce((acc, episode) => {
+              const { static_dirname } = root.serials.getCurrentSerial();
+              
               acc[episode.id] = episode;
+              acc[episode.id].posterSrc = `${process.env.MEDIA_HOST}/${static_dirname}/s${episode.season}/e${episode.episode}/frame.jpg`;
+              acc[episode.id].videoSrc = `${process.env.MEDIA_HOST}/${static_dirname}/s${episode.season}/e${episode.episode}/movie.mp4`;
+              acc[episode.id].subtitleSrc = `${process.env.MEDIA_HOST}/${static_dirname}/s${episode.season}/e${episode.episode}/subs.json`;
               
               return acc;
             }, {})

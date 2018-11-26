@@ -12,15 +12,15 @@ export class ProgressBarPlayer extends ProgressBarBase {
       return null;
     }
     
-    const savedMoments = this.props.episodes.getCurrentSavedMoments();
-    
-    if (savedMoments) {
-      return savedMoments.map(sub_id => <div
-        key={sub_id}
-        style={this.getMomentStyle(sub_id)}
-        className={s.moment}
-      />)
-    }
+//    const savedMoments = this.props.episodes.getCurrentSavedMoments();
+//
+//    if (savedMoments) {
+//      return savedMoments.map(sub_id => <div
+//        key={sub_id}
+//        style={this.getMomentStyle(sub_id)}
+//        className={s.moment}
+//      />)
+//    }
     
     return null;
   }
