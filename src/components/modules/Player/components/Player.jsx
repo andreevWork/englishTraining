@@ -90,7 +90,6 @@ export class Player extends React.Component {
         return <div className={cn(this.props.className, s.container)}>
             <figure className={s.figure}>
                 <video
-                    autoPlay
                     ref={el => this._videoEl = el}
                     onLoadedMetadata={this.onLoadedMetadata}
                     onTimeUpdate={this.onTimeUpdate}
