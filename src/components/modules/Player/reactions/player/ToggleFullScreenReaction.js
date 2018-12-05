@@ -26,18 +26,18 @@ export class ToggleFullScreenReaction extends BasePlayerReaction {
             return;
         }
         
-        const videoEl = DiContainer.get('videoEl').closest('div');
+        const videoFullscreenEl = DiContainer.get('videoEl').closest('.fullscreen-container');
 
         if(this._store.player.isFullScreen) {
             
-            if(videoEl.requestFullscreen)
-                videoEl.requestFullscreen();
-            else if(videoEl.mozRequestFullScreen)
-                videoEl.mozRequestFullScreen();
-            else if(videoEl.webkitRequestFullscreen)
-                videoEl.webkitRequestFullscreen();
-            else if(videoEl.msRequestFullscreen)
-                videoEl.msRequestFullscreen();
+            if(videoFullscreenEl.requestFullscreen)
+                videoFullscreenEl.requestFullscreen();
+            else if(videoFullscreenEl.mozRequestFullScreen)
+                videoFullscreenEl.mozRequestFullScreen();
+            else if(videoFullscreenEl.webkitRequestFullscreen)
+                videoFullscreenEl.webkitRequestFullscreen();
+            else if(videoFullscreenEl.msRequestFullscreen)
+                videoFullscreenEl.msRequestFullscreen();
   
           screen.orientation.lock('landscape-primary');
   

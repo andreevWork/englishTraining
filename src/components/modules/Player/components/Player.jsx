@@ -8,6 +8,7 @@ import autobind from 'autobind-decorator';
 import { PlayerElements } from './PlayerElements/PlayerElements';
 import { DiContainer } from 'DiContainer';
 import { GameElements } from './GameElements/GameElements';
+import { BottomBar } from 'modules/Player/components/BottomBar/BottomBar';
 
 @inject('store', 'player', 'subtitles')
 @observer
@@ -87,7 +88,7 @@ export class Player extends React.Component {
     }
 
     render() {
-        return <div className={cn(this.props.className, s.container)}>
+        return <div className={cn(this.props.className, s.container, 'fullscreen-container')}>
             <figure className={s.figure}>
                 <video
                     ref={el => this._videoEl = el}
@@ -113,6 +114,8 @@ export class Player extends React.Component {
                   </div>
                 </div>
             </figure>
+  
+            <BottomBar />
         </div>;
     }
 }

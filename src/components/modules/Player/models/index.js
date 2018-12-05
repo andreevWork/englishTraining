@@ -2,10 +2,12 @@ import { PlayerModel, PlayerModelDefaultData } from "./player";
 import { types, applySnapshot } from 'mobx-state-tree';
 import { SubtitlesModel, SubtitlesModelDefaultData } from './subtitles';
 import { GameTypes } from 'constants/GameTypes';
+import { DataModel, DataModelDefaultData } from 'modules/Player/models/data';
 
 export const FullPlayerModel = types
   .model("Store", {
     player: PlayerModel,
+    data: DataModel,
     subtitles: SubtitlesModel,
     
     isGameMod: types.boolean,
@@ -107,6 +109,7 @@ export const FullPlayerModel = types
 
 export const FullPlayerDefaultData = {
   player: PlayerModelDefaultData,
+  data: DataModelDefaultData,
   subtitles: SubtitlesModelDefaultData,
   
   isGameMod: false,

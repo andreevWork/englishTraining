@@ -1,0 +1,36 @@
+.bottom
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  background: #fff
+  z-index: 100000000000
+  color: #000
+  overflow-y: auto
+
+.cross
+  fill: #000
+  position: absolute
+  right: 20px
+  top: 20px
+
+\:global
+  .example-enter
+    opacity: 0.01
+    transform: translateY(100vh)
+
+  .example-enter.example-enter-active
+    opacity: 1
+    transform: translateY(0)
+    transition: opacity 600ms ease-in, transform 600ms
+
+
+  .example-leave
+    opacity: 1
+
+
+  .example-leave.example-leave-active
+    opacity: 0.01
+    transform: translateY(100vh)
+    transition: opacity 600ms ease-in, transform 600ms

@@ -16,14 +16,13 @@ module.exports = merge(common, {
   devtool: 'inline-source-map',
   
   devServer: {
+    hot: false,
+    inline: false,
     contentBase: rootDir,
     historyApiFallback: true,
     open: true,
     port: 3000,
     host: '0.0.0.0',
-    watchOptions: {
-      aggregateTimeout: 300,
-      poll: 1000
-    }
+    watchContentBase: false
   }
 });

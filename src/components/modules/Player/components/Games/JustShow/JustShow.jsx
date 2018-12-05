@@ -1,6 +1,7 @@
 import React from 'react';
 import {observer, inject} from "mobx-react";
 import s from './JustShow.sass';
+import { TextWithDictionary } from 'modules/Player/components/TextWithDictionary/TextWithDictionary';
 
 @inject('subtitles')
 @observer
@@ -32,6 +33,14 @@ export class JustShow extends React.Component {
     }
     
     this.prevSubIndex = index;
+  }
+  
+  onClickWrap(e) {
+    if (e.target.classList && e.target.classList.contains('word-translate')) {
+      const word = e.target.textContent;
+      
+      console.log(word);
+    }
   }
   
   componentWillReact() {
@@ -68,24 +77,27 @@ export class JustShow extends React.Component {
     });
   }
   
-  renderOneSub() {
+  getText(isPrev) {
     const {subtitles: subs} = this.props;
+    const text = subs.getSub(isPrev ? subs.index - 1 : undefined).text;
     
+    return isPrev ? text : <TextWithDictionary text={text} />;
+  }
+  
+  renderOneSub() {
     return  <div className={s.words} ref={this.currentWordsRef}>
-      {subs.getSub().text}
+      {this.getText()}
     </div>;
   }
   
   renderTwoSubs() {
-    const {subtitles: subs} = this.props;
-    
     return <React.Fragment>
       <div className={s.words} ref={this.prevWordsRef}>
-        {subs.getSub(subs.index - 1).text}
+        {this.getText(true)}
       </div>
       
       <div className={s.words} ref={this.currentWordsRef}>
-        {subs.getSub().text}
+        {this.getText()}
       </div>
     </React.Fragment>;
   }
@@ -93,7 +105,7 @@ export class JustShow extends React.Component {
   render() {
     const {subtitles: subs} = this.props;
     
-    return <div className={s.wrap}>
+    return <div onClick={this.onClickWrap} className={s.wrap}>
       {this.prevSubIndex < subs.index ? this.renderTwoSubs() : this.renderOneSub()}
     </div>;
   }
