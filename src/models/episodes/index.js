@@ -54,18 +54,6 @@ export const EpisodesModel = types
   
       setCurrentId(id) {
         self.currentId = id;
-      },
-  
-      saveMoment({ episode_id, sub_id }) {
-        let data = self.savedMoments.get(episode_id);
-        
-        if (data) {
-          data = data.filter(id => id !== sub_id).concat(sub_id);
-        } else {
-          data = [sub_id];
-        }
-    
-        self.savedMoments.set(episode_id, data);
       }
     };
   });
@@ -73,6 +61,5 @@ export const EpisodesModel = types
 export const EpisodesModelDefaultData = {
   currentId: -1,
   isPending: false,
-  items: {},
-  savedMoments: {}
+  items: {}
 };

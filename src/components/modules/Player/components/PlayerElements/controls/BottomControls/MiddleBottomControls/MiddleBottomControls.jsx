@@ -9,7 +9,8 @@ export class MiddleBottomControlsBase extends React.Component {
   
   @autobind
   save() {
-    this.props.episodes.saveMoment({
+    this.props.data.addMoment({
+      serial_id: this.props.serials.currentId,
       episode_id: this.props.episodes.currentId,
       sub_id: this.props.store.subtitles.index
     });
@@ -31,7 +32,7 @@ export class MiddleBottomControlsBase extends React.Component {
   }
 }
 
-@inject('store', 'episodes')
+@inject('store', 'data', 'episodes', 'serials')
 @observer
 export class MiddleBottomControls extends MiddleBottomControlsBase {
   renderStartGame() {

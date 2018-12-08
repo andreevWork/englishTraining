@@ -2,6 +2,7 @@ import React from 'react';
 import autobind from 'autobind-decorator';
 import s from './Translation.sass';
 import { inject, observer } from 'mobx-react/index';
+import { Spinner } from 'common/Spinner/Spinner';
 
 @inject('subtitles')
 @observer
@@ -26,18 +27,18 @@ export class Translation extends React.Component {
   }
   
   @autobind
-  renderWord({ text, pos, tr }) {
-    return <div className={s.word}>
+  renderWord({ text, pos, tr }, index) {
+    return <div key={index} className={s.word}>
       <div className={s.title}>
         <b>{text}</b> <i>{pos}</i>
       </div>
       
       <ul className={s.translationOptionsContent}>
-        {tr.map(({ text, ex }) => <li>
+        {tr.map(({ text, ex }, index) => <li key={index}>
           <b>{text}</b>
     
           {ex && <div className={s.examples}>
-            {ex.map(({ text, tr }) => <div>
+            {ex.map(({ text, tr }, index) => <div key={index}>
               {text} - {tr.map(({ text }) => text).join(';')}
             </div>)}
           </div>}
@@ -59,7 +60,9 @@ export class Translation extends React.Component {
   render() {
     const {isPending} = this.state;
   
-    return isPending ? null : <div className={s.container}>
+    return isPending ? <div className={s.spinner}>
+      <Spinner />
+    </div> : <div className={s.container}>
       {this.renderTranslate()}
     </div>;
   }

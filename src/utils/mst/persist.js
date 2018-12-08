@@ -1,12 +1,12 @@
 import { onSnapshot, applySnapshot } from 'mobx-state-tree';
 
-export const persist = (store, name) => {
+export const persist = (store, name, beforeApply) => {
   const data = localStorage.getItem(name);
   
   if (data) {
     const snapshot = JSON.parse(data);
     
-    applySnapshot(store, snapshot);
+    applySnapshot(store, beforeApply(snapshot));
   }
   
   setTimeout(() => {

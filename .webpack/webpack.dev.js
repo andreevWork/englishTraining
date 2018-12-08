@@ -22,7 +22,6 @@ module.exports = merge(common, {
     historyApiFallback: true,
     open: true,
     port: 3000,
-    host: '0.0.0.0',
     watchContentBase: false
   }
 });

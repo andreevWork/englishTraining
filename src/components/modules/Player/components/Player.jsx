@@ -25,15 +25,6 @@ export class Player extends React.Component {
   };
   
     _videoEl;
-  
-    componentWillMount() {
-      const throttleMouseMove = throttle(1000, this.mouseMove.bind(this));
-      
-      this.mouseMoveThrottle = e => {
-        e.persist();
-        throttleMouseMove(e);
-      }
-    }
 
     componentDidMount() {
       this.props.store.reset();
@@ -70,20 +61,20 @@ export class Player extends React.Component {
     
     @autobind
     onClick(e) {
-      if (e.target.classList.contains(s.elements)) {
+      if (this.props.player.isActive && e.target.classList.contains(s.elements)) {
         this.props.player.tooglePlay();
       }
-    }
-    
-    mouseMove(e) {
-      clearTimeout(this.mouseMoveTimer);
-      
-      this.props.player.setIsActive(true);
-      
-      if (!e.target.closest(".playerElements")) {
-        this.mouseMoveTimer = setTimeout(() => {
+  
+      clearTimeout(this.isActiveTimer);
+  
+      if (!this.props.player.isActive) {
+        this.props.player.setIsActive(true);
+      }
+  
+      if (!this.props.player.isPaused && !this.props.store.isGameMod) {
+        this.isActiveTimer = setTimeout(() => {
           this.props.player.setIsActive(false);
-        }, 2000);
+        }, 3000);
       }
     }
 
@@ -104,7 +95,6 @@ export class Player extends React.Component {
                 </video>
   
                 <div
-                  onMouseMove={this.props.store.isGameMod ? undefined : this.mouseMoveThrottle}
                   onClick={this.onClick}
                   className={cn(s.elements, this.props.player.isFullScreen && s.fullScreen)}
                 >

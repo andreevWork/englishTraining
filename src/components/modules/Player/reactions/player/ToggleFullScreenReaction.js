@@ -10,11 +10,21 @@ export class ToggleFullScreenReaction extends BasePlayerReaction {
         document.addEventListener("fullscreenchange",this.onFullSCreenChange);
         document.addEventListener("webkitfullscreenchange",this.onFullSCreenChange);
         document.addEventListener("mozfullscreenchange",this.onFullSCreenChange);
+        window.addEventListener('orientationchange', this.orientationChange);
     }
 
     @autobind
     onFullSCreenChange() {
         this._store.player.setFullScreen(this.isFullScreen());
+    }
+    
+    @autobind
+    orientationChange() {
+        if (!this._store.player.isFullScreen && screen.orientation.type === 'landscape-primary') {
+          window.requestAnimationFrame(() => {
+            this._store.player.setFullScreen(true);
+          })
+        }
     }
 
     isFullScreen() {
@@ -22,10 +32,16 @@ export class ToggleFullScreenReaction extends BasePlayerReaction {
     }
 
     reaction() {
-        if (this.isFullScreen() ===  this._store.player.isFullScreen) {
+        if (this.isFullScreen() === this._store.player.isFullScreen) {
             return;
         }
-        
+  
+        if (this._store.player.isFullScreen) {
+          screen.orientation.lock('landscape-primary');
+        } else {
+          this._store.stopGame();
+        }
+
         const videoFullscreenEl = DiContainer.get('videoEl').closest('.fullscreen-container');
 
         if(this._store.player.isFullScreen) {
@@ -38,9 +54,6 @@ export class ToggleFullScreenReaction extends BasePlayerReaction {
                 videoFullscreenEl.webkitRequestFullscreen();
             else if(videoFullscreenEl.msRequestFullscreen)
                 videoFullscreenEl.msRequestFullscreen();
-  
-          screen.orientation.lock('landscape-primary');
-  
         } else {
             if(document.exitFullscreen)
                 document.exitFullscreen();
@@ -57,6 +70,7 @@ export class ToggleFullScreenReaction extends BasePlayerReaction {
         document.removeEventListener("fullscreenchange",this.onFullSCreenChange);
         document.removeEventListener("webkitfullscreenchange",this.onFullSCreenChange);
         document.removeEventListener("mozfullscreenchange",this.onFullSCreenChange);
+        document.removeEventListener("orientationchange",this.orientationChange);
 
         super.destroy();
     }
