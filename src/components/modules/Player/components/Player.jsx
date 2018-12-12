@@ -1,14 +1,13 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
-import { throttle } from 'throttle-debounce';
 import s from "./Player.sass";
 import {inject, observer} from "mobx-react";
 import autobind from 'autobind-decorator';
 import { PlayerElements } from './PlayerElements/PlayerElements';
 import { DiContainer } from 'DiContainer';
-import { GameElements } from './GameElements/GameElements';
-import { BottomBar } from 'modules/Player/components/BottomBar/BottomBar';
+import { BottomBarLazy } from 'modules/Player/components/BottomBar/BottomBarLazy';
+import { PlayerPopup } from 'modules/Player/components/PlayerPopup/PlayerPopup';
 
 @inject('store', 'player', 'subtitles')
 @observer
@@ -71,7 +70,7 @@ export class Player extends React.Component {
         this.props.player.setIsActive(true);
       }
   
-      if (!this.props.player.isPaused && !this.props.store.isGameMod) {
+      if (!this.props.player.isPaused && !this.props.store.isGameMod()) {
         this.isActiveTimer = setTimeout(() => {
           this.props.player.setIsActive(false);
         }, 3000);
@@ -98,14 +97,15 @@ export class Player extends React.Component {
                   onClick={this.onClick}
                   className={cn(s.elements, this.props.player.isFullScreen && s.fullScreen)}
                 >
-                  <GameElements />
+                  <PlayerPopup />
+                  
                   <div className="playerElements">
                     <PlayerElements />
                   </div>
                 </div>
             </figure>
   
-            <BottomBar />
+            <BottomBarLazy />
         </div>;
     }
 }

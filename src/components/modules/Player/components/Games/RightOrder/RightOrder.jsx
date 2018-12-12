@@ -8,7 +8,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 @inject('store', 'subtitles')
 @observer
-export class RightOrder extends React.Component {
+export default class RightOrder extends React.Component {
   containersRefs = [];
   // Необходимо запоминать рандом, чтобы он не сбрасывался
   shuffleCache = {};

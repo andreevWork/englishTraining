@@ -1,0 +1,22 @@
+@import "variables"
+
+.moment
+  position: absolute
+  background: white
+  top: 0
+  height: 100%
+  border-radius: 4px
+  z-index: 10
+  width: 6px
+
+  &:before
+    position: absolute
+    top: -20px
+    transform: translate(-50%, -100%)
+    content: attr(data-time)
+    left: 0
+    font-size: 1.4em
+    background: $mainColor
+    padding: 5px
+    border-radius: 4px
+

@@ -5,7 +5,7 @@ import { TextWithDictionary } from 'modules/Player/components/TextWithDictionary
 
 @inject('subtitles')
 @observer
-export class JustShow extends React.Component {
+export default class JustShow extends React.Component {
   
   prevSubIndex = this.props.subtitles.index;
   prevWordsRef = React.createRef();

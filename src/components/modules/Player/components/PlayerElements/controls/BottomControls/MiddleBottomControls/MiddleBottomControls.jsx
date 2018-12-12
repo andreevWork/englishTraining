@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react/index';
 import { SubtitlesIcon } from 'common/Icons/Subtitles/Subtitles';
 import s from "./MiddleBottomControls.sass";
 import { SaveIcon } from 'common/Icons/Save/Save';
+import { SavedDataIcon } from 'common/Icons/SavedData/SavedData';
 
 export class MiddleBottomControlsBase extends React.Component {
   
@@ -20,13 +21,24 @@ export class MiddleBottomControlsBase extends React.Component {
     return this.props.store.subtitles.hasActiveSub() && <SaveIcon onClick={this.save} />;
   }
   
+  renderSavedMoments() {
+    return this.props.store.data.hasSavedMoments({
+        serial_id: this.props.serials.currentId,
+        episode_id: this.props.episodes.currentId
+      }) &&
+      <SavedDataIcon onClick={this.props.store.openSavedMoments} />;
+  }
+  
   renderContent() {
     return null;
   }
   
   render() {
     return <div className={s.container}>
-      {this.renderSave()}
+      <div className={s.moments}>
+        {this.renderSavedMoments()}
+        {this.renderSave()}
+      </div>
       {this.renderContent()}
     </div>;
   }

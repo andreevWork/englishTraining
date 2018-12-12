@@ -1,21 +1,23 @@
+import { JustShowLazy } from 'modules/Player/components/Games/JustShow/JustShowLazy';
+import { RightOrderLazy } from 'modules/Player/components/Games/RightOrder/RightOrderLazy';
+
 export const GameTypesData = {
   JustShow: {
-    name: 'Показ',
-    component: null,
+    name: 'Show subtitles',
+    component: JustShowLazy,
     key: 'X',
     comingSoon: false
   },
   
   RightOrder: {
-    name: 'Правильный порядок',
-    component: null,
+    name: 'Right order',
+    component: RightOrderLazy,
     key: 'C',
     comingSoon: false
   },
   
   TypeWords: {
-    name: 'Ввод с клавиатуры',
-    component: null,
+    name: 'Enter by spell',
     key: 'V',
     comingSoon: true
   }

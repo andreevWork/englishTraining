@@ -4,7 +4,7 @@ import { RepeatSubtitlesIcon } from 'common/Icons/RepeatSubtitles/RepeatSubtitle
 import { MiddleBottomControlsBase } from 'player/PlayerElements/controls/BottomControls/MiddleBottomControls/MiddleBottomControls';
 
 
-@inject('store')
+@inject('store', 'data', 'episodes', 'serials')
 @observer
 export class MiddleBottomControlsGameMod extends MiddleBottomControlsBase {
   renderRepeat() {

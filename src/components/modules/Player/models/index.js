@@ -10,9 +10,18 @@ export const FullPlayerModel = types
     data: DataModel,
     subtitles: SubtitlesModel,
     
-    isGameMod: types.boolean,
+    popupKey: types.string,
     gameType: types.enumeration(GameTypes.concat(''))
   })
+  .views(self => ({
+    isGameMod() {
+      return self.popupKey === 'game';
+    },
+    
+    isMomentsPopup() {
+      return self.popupKey === 'moments';
+    }
+  }))
   .actions(self => {
     return {
       reset: () => {
@@ -20,7 +29,8 @@ export const FullPlayerModel = types
       },
       
       startGame() {
-        self.isGameMod = true;
+        self.popupKey = 'game';
+        self.player.pause();
         self.subtitles.setStartIndex(self.subtitles.index);
         self.subtitles.setEndIndex(self.subtitles.index);
         
@@ -28,11 +38,25 @@ export const FullPlayerModel = types
           self.repeatCurrentSubs();
         }
       },
+  
+      closePopup() {
+        self.popupKey = '';
+      },
+  
+      hasPopup() {
+        return Boolean(self.popupKey);
+      },
+  
+      openSavedMoments() {
+        self.player.pause();
+        self.popupKey = 'moments';
+      },
       
-      stopGame() {
-        self.isGameMod = false;
-        self.player.play();
-        self.player.setIsActive(true);
+      openSavedMomentToPlay(sub_id) {
+        self.subtitles.setIndex(sub_id);
+        self.player.setCurrentTime(self.subtitles.getSub(sub_id).startTime);
+        self.setGameType('');
+        self.startGame();
       },
       
       setGameType(gameType) {
@@ -79,31 +103,31 @@ export const FullPlayerModel = types
       repeatCurrentSubs() {
         const startSubTime = self.subtitles.getSub(self.subtitles.startIndex).startTime;
         self.player.playByTime(startSubTime);
-      },
-      
-      leftFiveSec() {
-        let newTime = self.player.currentTime - 5;
-        
-        if (self.isGameMod) {
-          const startSubTime = self.subtitles.getSub(self.subtitles.startIndex).startTime;
-          
-          newTime = newTime < startSubTime ? startSubTime : newTime;
-        }
-        
-        self.player.playByTime(newTime > 0 ? newTime : 0);
-      },
-      
-      rightFiveSec() {
-        let newTime = self.player.currentTime + 5;
-        
-        if (self.isGameMod) {
-          const endSubTime = self.subtitles.getSub(self.subtitles.endIndex).endTime;
-          
-          newTime = newTime > endSubTime ? endSubTime : newTime;
-        }
-        
-        self.player.playByTime(newTime > self.player.duration ? self.player.duration : newTime);
       }
+      
+//      leftFiveSec() {
+//        let newTime = self.player.currentTime - 5;
+//
+//        if (self.popupKey === 'game') {
+//          const startSubTime = self.subtitles.getSub(self.subtitles.startIndex).startTime;
+//
+//          newTime = newTime < startSubTime ? startSubTime : newTime;
+//        }
+//
+//        self.player.playByTime(newTime > 0 ? newTime : 0);
+//      },
+//
+//      rightFiveSec() {
+//        let newTime = self.player.currentTime + 5;
+//
+//        if (self.isGameMod) {
+//          const endSubTime = self.subtitles.getSub(self.subtitles.endIndex).endTime;
+//
+//          newTime = newTime > endSubTime ? endSubTime : newTime;
+//        }
+//
+//        self.player.playByTime(newTime > self.player.duration ? self.player.duration : newTime);
+//      }
     };
   });
 
@@ -112,6 +136,6 @@ export const FullPlayerDefaultData = {
   data: DataModelDefaultData,
   subtitles: SubtitlesModelDefaultData,
   
-  isGameMod: false,
-  gameType: '',
+  popupKey: '',
+  gameType: ''
 };

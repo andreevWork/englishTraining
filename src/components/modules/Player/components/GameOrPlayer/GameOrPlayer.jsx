@@ -5,8 +5,12 @@ import {observer, inject} from "mobx-react";
 @observer
 export class GameOrPlayer extends React.Component {
   render() {
-    const {gameEl: GameEl, playerEl: PlayerEl} = this.props;
+    const {gameEl: GameEl, playerEl: PlayerEl, momentsEl: MomentsEl} = this.props;
     
-    return this.props.store.isGameMod ? <GameEl /> : <PlayerEl />;
+    if (this.props.store.isMomentsPopup() && MomentsEl) {
+      return <MomentsEl />
+    }
+    
+    return this.props.store.isGameMod() ? <GameEl /> : <PlayerEl />;
   }
 }

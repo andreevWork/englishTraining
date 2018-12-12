@@ -19,7 +19,7 @@ DiContainer.register('FullPlayerStore', FullPlayerStore);
   ToggleFullScreenReaction,
   TogglePlayReaction
 ])
-export class FullPlayer extends React.PureComponent {
+export default class FullPlayer extends React.PureComponent {
   
   static propTypes = Player.propTypes;
   

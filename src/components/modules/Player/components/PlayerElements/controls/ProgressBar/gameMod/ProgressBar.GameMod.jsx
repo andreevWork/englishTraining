@@ -33,10 +33,7 @@ export class ProgressBarGameMod extends ProgressBarBase {
     const timesEl = [];
     
     if (subs.startIndex !== 0) {
-      const leftStartTime = DateService.getFormattedTimeFromS(
-        subs.getSub(subs.startIndex - 1).startTime,
-        this.timeFormat
-      );
+      const leftStartTime = this.getFormattedTime(subs.getSub(subs.startIndex - 1).startTime);
       
       timesEl.push(<div
         key="c1"
@@ -48,10 +45,7 @@ export class ProgressBarGameMod extends ProgressBarBase {
     }
   
     if (subs.startIndex < maxStartIndex) {
-      const rightStartTime = DateService.getFormattedTimeFromS(
-        subs.getSub(subs.startIndex + 1).startTime,
-        this.timeFormat
-      );
+      const rightStartTime = this.getFormattedTime(subs.getSub(subs.startIndex + 1).startTime);
     
       timesEl.push(<div
         key="c3"
@@ -74,10 +68,7 @@ export class ProgressBarGameMod extends ProgressBarBase {
     const timesEl = [];
   
     if (subs.endIndex > maxEndIndex) {
-      const leftEndTime = DateService.getFormattedTimeFromS(
-        subs.getSub(subs.endIndex - 1).endTime,
-        this.timeFormat
-      );
+      const leftEndTime = this.getFormattedTime(subs.getSub(subs.endIndex - 1).endTime);
     
       timesEl.push(<div
         key="e1"
@@ -89,10 +80,7 @@ export class ProgressBarGameMod extends ProgressBarBase {
     }
   
     if (subs.endIndex < subs.maxIndex) {
-      const rightEndTime = DateService.getFormattedTimeFromS(
-        subs.getSub(subs.endIndex + 1).endTime,
-        this.timeFormat
-      );
+      const rightEndTime = this.getFormattedTime(subs.getSub(subs.endIndex + 1).endTime);
     
       timesEl.push(<div
         key="e3"

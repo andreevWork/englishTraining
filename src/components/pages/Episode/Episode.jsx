@@ -3,31 +3,18 @@ import { FullPlayer } from '../../modules/Player';
 import autobind from 'autobind-decorator';
 import { EpisodesLoaderContainer } from 'modules/LoaderContainer/Episodes/LoaderContainer.Episodes';
 import { SerialsLoaderContainer } from 'modules/LoaderContainer/Serials/LoaderContainer.Serials';
+import { FullPlayerLazy } from 'modules/Player/indexLazy';
 
 export class Episode extends React.Component {
   @autobind
   renderPlayer(episodes) {
     const episode = episodes.getCurrentEpisode();
   
-    return <FullPlayer
+    return <FullPlayerLazy
       key={episode.id}
       videoSrc={episode.videoSrc}
       subtitleSrc={episode.subtitleSrc}
     />;
-//      <div className={s.player}>
-//      <div>
-//
-//
-//        {/*<div className={s.info}>*/}
-//          {/*<div className={s.infoSerial}>*/}
-//            {/*{episode.serial.title}: Season {episode.season} Episode {episode.episode}*/}
-//          {/*</div>*/}
-//          {/*<div>*/}
-//            {/*{episode.title}*/}
-//          {/*</div>*/}
-//        {/*</div>*/}
-//      </div>
-//    </div>;
   }
   
   render() {

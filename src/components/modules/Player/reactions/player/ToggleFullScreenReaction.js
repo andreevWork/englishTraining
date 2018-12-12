@@ -39,7 +39,9 @@ export class ToggleFullScreenReaction extends BasePlayerReaction {
         if (this._store.player.isFullScreen) {
           screen.orientation.lock('landscape-primary');
         } else {
-          this._store.stopGame();
+          if (this._store.hasPopup()) {
+            this._store.closePopup();
+          }
         }
 
         const videoFullscreenEl = DiContainer.get('videoEl').closest('.fullscreen-container');

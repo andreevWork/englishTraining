@@ -7,7 +7,7 @@ import { Translation } from 'modules/Player/components/BottomBar/Translation/Tra
 
 @inject('data')
 @observer
-export class BottomBar extends React.Component {
+export default class BottomBar extends React.Component {
   renderContent() {
     const {textForTranslate} = this.props.data;
     

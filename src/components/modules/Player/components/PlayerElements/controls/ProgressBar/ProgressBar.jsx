@@ -61,12 +61,16 @@ export class ProgressBarBase extends React.Component {
     return null;
   }
   
-  render() {
+  getFormattedTime(time) {
     // Формат (hh:mm:ss) времени счиатем по общей длительности видео, чтобы не прыгало когда смотришь часть видео
-    this.timeFormat = DateService.getTimeFormatFromS(this.props.player.duration);
+    const timeFormat = DateService.getTimeFormatFromS(this.props.player.duration);
     
-    const currentTime = DateService.getFormattedTimeFromS(this.getCurrentTime(), this.timeFormat);
-    const endTime = DateService.getFormattedTimeFromS(this.getEndTime(), this.timeFormat);
+    return DateService.getFormattedTimeFromS(time, timeFormat);
+  }
+  
+  render() {
+    const currentTime = this.getFormattedTime(this.getCurrentTime());
+    const endTime = this.getFormattedTime(this.getEndTime());
     
     return <div className={s.container}>
       {this.renderCurrentTime(currentTime)}

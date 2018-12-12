@@ -2,7 +2,7 @@ import { BasePlayerReaction } from '../BaseReaction';
 
 export class StopCurrentSubReaction extends BasePlayerReaction {
   reaction() {
-    if (this._store.isGameMod) {
+    if (this._store.isGameMod()) {
       let endTime;
       
       if (this._store.subtitles.singleEndIndex > -1) {
