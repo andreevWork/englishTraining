@@ -11,6 +11,6 @@ export class GameOrPlayer extends React.Component {
       return <MomentsEl />
     }
     
-    return this.props.store.isGameMod() ? <GameEl /> : <PlayerEl />;
+    return this.props.store.isGameMod() && GameEl ? <GameEl /> : <PlayerEl />;
   }
 }

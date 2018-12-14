@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 import autobind from "autobind-decorator";
 import { inject } from 'mobx-react/index';
 
@@ -18,6 +19,6 @@ export class TextWithDictionary extends React.Component {
     
     const newText = text.replace(/(?:^|\s)(\w+?)(?=[$,!?.\s])/gi, word => `<span class="translate">${word}</span>`);
   
-    return <div dangerouslySetInnerHTML={{ __html: newText }} onClick={this.showTranslate} />;
+    return <div className={cn(this.props.className)} dangerouslySetInnerHTML={{ __html: newText }} onClick={this.showTranslate} />;
   }
 }

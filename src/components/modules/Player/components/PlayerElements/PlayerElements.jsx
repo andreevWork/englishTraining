@@ -25,7 +25,11 @@ export class PlayerElements extends React.Component {
           momentsEl={ProgressBarMoments}
           gameEl={ProgressBarGameMod}
         />
-        <BottomControls />
+  
+        <GameOrPlayer
+          playerEl={BottomControls}
+          momentsEl={() => <div className={s.bottomStub} />}
+        />
       </div>;
   }
   

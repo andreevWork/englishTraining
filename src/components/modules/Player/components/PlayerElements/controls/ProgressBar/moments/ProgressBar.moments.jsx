@@ -20,4 +20,14 @@ export class ProgressBarMoments extends ProgressBarBase {
       className={s.moment}
     />;
   }
+  
+  getCurrentTime() {
+    return 0;
+  }
+  
+  onClick() {}
+  
+  getWidth() {
+    return '100%';
+  }
 }

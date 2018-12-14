@@ -13,6 +13,10 @@ export const DataModel = types
   
       return self.moments_sub.get(key);
     },
+    
+    getMomentsCount(...args) {
+      return (self.getMoments(...args) || []).length;
+    },
   
     hasSavedMoments(...args) {
       return Boolean(self.getMoments(...args));
@@ -47,6 +51,22 @@ export const DataModel = types
       
       setCurrentIndexSavedMoment(index) {
         self.currentIndexSavedMoment = index;
+      },
+      
+      leftCurrentIndexSavedMoment(...args) {
+        if (self.currentIndexSavedMoment === 0) {
+          self.setCurrentIndexSavedMoment(self.getMomentsCount(...args) - 1);
+        } else {
+          self.setCurrentIndexSavedMoment(self.currentIndexSavedMoment - 1);
+        }
+      },
+      
+      rightCurrentIndexSavedMoment(...args) {
+        if (self.currentIndexSavedMoment === self.getMomentsCount(...args) - 1) {
+          self.setCurrentIndexSavedMoment(0);
+        } else {
+          self.setCurrentIndexSavedMoment(self.currentIndexSavedMoment + 1);
+        }
       }
     };
   });

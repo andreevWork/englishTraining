@@ -5,6 +5,7 @@ import s from './RightOrder.sass';
 import { shuffle } from 'utils/arrays/shuffle';
 import { RepeatSubtitlesIcon } from 'common/Icons/RepeatSubtitles/RepeatSubtitles';
 import { Scrollbars } from 'react-custom-scrollbars';
+import { TextWithDictionary } from 'modules/Player/components/TextWithDictionary/TextWithDictionary';
 
 @inject('store', 'subtitles')
 @observer
@@ -115,7 +116,7 @@ export default class RightOrder extends React.Component {
       >
         {subsIndexArray.map(subIndex => <div key={subIndex} className={s.subContainer}>
           {this.state.resolved.includes(subIndex) ?
-            <div className={s.text}>{this.getText(subIndex)}</div> :
+            <TextWithDictionary className={s.text} text={this.getText(subIndex)} /> :
             this.renderDragContainer(subIndex)
           }
         </div>)}
