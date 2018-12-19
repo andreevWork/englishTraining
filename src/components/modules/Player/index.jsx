@@ -27,7 +27,6 @@ export default class FullPlayer extends React.PureComponent {
     return <Provider
       store={FullPlayerStore}
       player={FullPlayerStore.player}
-      data={FullPlayerStore.data}
       subtitles={FullPlayerStore.subtitles}
     >
       <Player {...this.props} />

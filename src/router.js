@@ -9,6 +9,7 @@ import { Serial } from './components/pages/Serial/Serial';
 import { Header } from './components/modules/Header/Header';
 import Path from 'path-parser'
 import { Episode } from './components/pages/Episode/Episode';
+import { HistoryTranslate } from './components/pages/HistoryTranslate/HistoryTranslate';
 
 const myHistory = createBrowserHistory();
 const serialPath = "/serial/:id/";
@@ -37,6 +38,8 @@ export const RootRouter = () => <Router history={myHistory}>
     <Header />
     
     <Route exact path="/" component={Index} />
+    
+    <Route exact path="/history/translate" component={HistoryTranslate} />
     
     <Route path={serialPath} exact component={Serial} />
     

@@ -22,7 +22,7 @@ export class MiddleBottomControlsBase extends React.Component {
   }
   
   renderSavedMoments() {
-    return this.props.store.data.hasSavedMoments({
+    return this.props.data.hasSavedMoments({
         serial_id: this.props.serials.currentId,
         episode_id: this.props.episodes.currentId
       }) &&

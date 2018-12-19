@@ -32,7 +32,7 @@ export const DataModel = types
         text = text.trim();
         
         if (text) {
-          self.textForTranslateHistory.push(text);
+          self.textForTranslateHistory.push(text.toLowerCase());
         }
         
         self.textForTranslate = text;
@@ -74,8 +74,8 @@ export const DataModel = types
 export const DataModelDefaultData = {
   textForTranslate: '',
   currentIndexSavedMoment: 0,
-  textForTranslateHistory: [],
-  moments_sub: {}
+  textForTranslateHistory: JSON.parse(localStorage.getItem('textForTranslateHistory')) || [],
+  moments_sub: JSON.parse(localStorage.getItem('moments_sub')) || {}
 };
 
 function getKey(serial_id, episode_id) {

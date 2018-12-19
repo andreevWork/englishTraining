@@ -7,7 +7,7 @@ import { CommonStore } from './store';
 import { RootRouter } from './router';
 
 ReactDOM.render(
-  <Provider episodes={CommonStore.episodes} serials={CommonStore.serials}>
+  <Provider episodes={CommonStore.episodes} serials={CommonStore.serials} data={CommonStore.data}>
     <RootRouter />
   </Provider>,
   document.body

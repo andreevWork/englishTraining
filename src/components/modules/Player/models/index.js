@@ -2,12 +2,10 @@ import { PlayerModel, PlayerModelDefaultData } from "./player";
 import { types, applySnapshot } from 'mobx-state-tree';
 import { SubtitlesModel, SubtitlesModelDefaultData } from './subtitles';
 import { GameTypes } from 'constants/GameTypes';
-import { DataModel, DataModelDefaultData } from 'modules/Player/models/data';
 
 export const FullPlayerModel = types
   .model("Store", {
     player: PlayerModel,
-    data: DataModel,
     subtitles: SubtitlesModel,
     
     popupKey: types.string,
@@ -61,6 +59,7 @@ export const FullPlayerModel = types
       
       setGameType(gameType) {
         self.gameType = gameType;
+        self.player.play();
       },
       
       resetGameType() {
@@ -133,7 +132,6 @@ export const FullPlayerModel = types
 
 export const FullPlayerDefaultData = {
   player: PlayerModelDefaultData,
-  data: DataModelDefaultData,
   subtitles: SubtitlesModelDefaultData,
   
   popupKey: '',
