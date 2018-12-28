@@ -1,8 +1,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const srcDir = path.resolve(__dirname, '..', 'src');
+const distDir = path.resolve(__dirname, '..', 'dist');
 const entryFile = path.resolve(srcDir, 'index.jsx');
 const entryHTML = path.resolve(srcDir, 'index.html');
 
@@ -68,6 +70,8 @@ module.exports = {
         template: entryHTML
       }),
     
-      new Dotenv()
+      new Dotenv(),
+  
+      new CleanWebpackPlugin([distDir], { root: path.resolve(__dirname, '..') })
   ]
 };

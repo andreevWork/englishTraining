@@ -18,7 +18,7 @@ export class Bar extends React.PureComponent {
           </div>
         </div>
       </div>,
-      document.body
+      document.getElementById('app')
     );
   }
 }

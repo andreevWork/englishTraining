@@ -10,5 +10,5 @@ ReactDOM.render(
   <Provider episodes={CommonStore.episodes} serials={CommonStore.serials} data={CommonStore.data}>
     <RootRouter />
   </Provider>,
-  document.body
+  document.getElementById('app')
 );

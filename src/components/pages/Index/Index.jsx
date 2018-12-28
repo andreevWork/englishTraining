@@ -3,6 +3,7 @@ import s from './Index.sass';
 import autobind from 'autobind-decorator';
 import { SerialsLoaderContainer } from 'modules/LoaderContainer/Serials/LoaderContainer.Serials';
 import { SerialThumb } from 'common/Thumb/SerialThumb/SerialThumb';
+import { PageTitle } from 'common/PageTitle/PageTitle';
 
 export class Index extends React.Component {
   @autobind
@@ -12,14 +13,9 @@ export class Index extends React.Component {
   
   render() {
     return <React.Fragment>
-      {/*<div className={s.banner}>*/}
-        {/*<div className={s.bannerTitle}>*/}
-          {/*Смотрите сериалы. <br />*/}
-          {/*Разбирайте не понятные фразы. <br />*/}
-          {/*Улучшайте английский. <br />*/}
-        {/*</div>*/}
-      {/*</div>*/}
-      {/**/}
+      <PageTitle>
+        TV Series
+      </PageTitle>
       <div className={s.serials}>
         <SerialsLoaderContainer>
           {this.renderSerials}

@@ -17,7 +17,7 @@ const episodePath = `${serialPath}episode/:id/`;
 
 const serialPathChecker = pathname => {
   const { id } = Path.createPath(serialPath).partialTest(pathname) || {};
-  
+
   id && CommonStore.serials.setCurrentId(+id);
 };
 const episodePathChecker = pathname => {

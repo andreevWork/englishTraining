@@ -1,4 +1,4 @@
-const parseSRT = require('parse-srt');
+const parseSRT = require('./parser');
 const fs = require('fs');
 const path = require('path');
 
