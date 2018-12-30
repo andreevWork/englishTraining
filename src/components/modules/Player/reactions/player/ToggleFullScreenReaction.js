@@ -54,6 +54,11 @@ export class ToggleFullScreenReaction extends BasePlayerReaction {
             typeof screen.orientation.lock === 'function' && screen.orientation.lock("landscape-primary");
             typeof screen.lockOrientation === 'function' && screen.lockOrientation("landscape-primary");
           });
+        } else {
+          window.requestAnimationFrame(() => {
+            typeof screen.orientation.unlock === 'function' && screen.orientation.unlock();
+            typeof screen.unlockOrientation === 'function' && screen.unlockOrientation();
+          });
         }
     }
 
