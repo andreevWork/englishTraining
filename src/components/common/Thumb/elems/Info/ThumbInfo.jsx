@@ -9,10 +9,15 @@ export class ThumbInfo extends React.PureComponent {
   };
   
   render() {
-    const { title } = this.props;
+    const { title, description } = this.props;
     
     return <div className={s.info}>
-      {title}
+      <div>
+        {title}
+      </div>
+      <div className={s.desc}>
+        {description}
+      </div>
     </div>;
   }
 }

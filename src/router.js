@@ -8,26 +8,19 @@ import { CommonStore } from './store';
 import { Serial } from './components/pages/Serial/Serial';
 import { Header } from './components/modules/Header/Header';
 import Path from 'path-parser'
-import { Episode } from './components/pages/Episode/Episode';
 import { HistoryTranslate } from './components/pages/HistoryTranslate/HistoryTranslate';
 
 const myHistory = createBrowserHistory();
 const serialPath = "/serial/:id/";
-const episodePath = `${serialPath}episode/:id/`;
 
 const serialPathChecker = pathname => {
   const { id } = Path.createPath(serialPath).partialTest(pathname) || {};
 
   id && CommonStore.serials.setCurrentId(+id);
 };
-const episodePathChecker = pathname => {
-  const { id } = Path.createPath(episodePath).partialTest(pathname) || {};
 
-  id && CommonStore.episodes.setCurrentId(+id);
-};
 const routerChecker = () => {
   serialPathChecker(myHistory.location.pathname);
-  episodePathChecker(myHistory.location.pathname);
 };
 
 routerChecker();
@@ -42,7 +35,5 @@ export const RootRouter = () => <Router history={myHistory}>
     <Route exact path="/history/translate" component={HistoryTranslate} />
     
     <Route path={serialPath} exact component={Serial} />
-    
-    <Route path={episodePath} component={Episode} />
   </React.Fragment>
 </Router>;

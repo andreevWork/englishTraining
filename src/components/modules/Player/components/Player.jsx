@@ -43,12 +43,8 @@ export class Player extends React.Component {
       
       this.props.player.setIsReady(true);
       this.props.player.setDuration(duration);
-      
-      if (this.props.autoPlay) {
-        this.props.player.play();
-      } else {
-        this.props.player.pause();
-      }
+  
+      this.props.player.play();
     }
 
     @autobind
@@ -78,7 +74,7 @@ export class Player extends React.Component {
     }
 
     render() {
-        return <div className={cn(this.props.className, s.container, 'fullscreen-container')}>
+        return <div className={cn(this.props.className, s.container, 'fullscreen-container', this.props.player.isFullScreen && s.fullScreen)}>
             <figure className={s.figure}>
                 <video
                     ref={el => this._videoEl = el}
@@ -95,7 +91,7 @@ export class Player extends React.Component {
   
                 <div
                   onClick={this.onClick}
-                  className={cn(s.elements, this.props.player.isFullScreen && s.fullScreen)}
+                  className={cn(s.elements)}
                 >
                   <PlayerPopup />
                   

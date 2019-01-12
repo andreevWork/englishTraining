@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "webpack  --config .webpack/webpack.prod.js",
+    "deploy": "npm run build && scp -r dist/. root@194.87.92.106:/var/html/www/",
     "start": "webpack-dev-server --config .webpack/webpack.dev.js"
   },
   "repository": {

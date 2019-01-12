@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
@@ -6,19 +7,27 @@ import s from './ThumbWrap.sass';
 
 export class ThumbWrap extends React.PureComponent {
   static propTypes = {
-    posterSrc: PropTypes.string.isRequired,
-    href: PropTypes.string.isRequired
+    posterSrc: PropTypes.string.isRequired
   };
   
   render() {
-    const { posterSrc, href, children } = this.props;
+    const { posterSrc, href, children, className, onClick } = this.props;
     
-    return <Link to={href} className={s.thumb}>
-      
-      <div className={s.poster} style={{ backgroundImage: `url(${posterSrc})` }} />
-      
+    if (href) {
+      return <Link to={href} className={cn(s.thumb, className)}>
+  
+        <div className="poster" style={{ backgroundImage: `url(${posterSrc})` }} />
+  
+        {children}
+      </Link>;
+    }
+    
+    return <div onClick={onClick} className={cn(s.thumb, className)}>
+  
+      <div className="poster" style={{ backgroundImage: `url(${posterSrc})` }} />
+  
       {children}
   
-    </Link>;
+    </div>;
   }
 }

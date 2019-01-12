@@ -6,25 +6,28 @@ import { SerialsLoaderContainer } from 'modules/LoaderContainer/Serials/LoaderCo
 import { FullPlayerLazy } from 'modules/Player/indexLazy';
 import { inject } from 'mobx-react';
 import { PageTitle } from 'common/PageTitle/PageTitle';
+import Path from 'path-parser/typings/Path';
+import { CommonStore } from '../../../store';
 
 @inject('episodes')
 export class Episode extends React.Component {
   @autobind
   renderPlayer(episodes) {
-    const episode = episodes.getCurrentEpisode();
   
     return <React.Fragment>
       <PageTitle>
         {this.props.episodes.getCurrentEpisode().title}
       </PageTitle>
       
-      <FullPlayerLazy
-        key={episode.id}
-        videoSrc={episode.videoSrc}
-        subtitleSrc={episode.subtitleSrc}
-      />
+
     </React.Fragment>;
   }
+  
+  const episodePathChecker = pathname => {
+    const { id } = Path.createPath(episodePath).partialTest(pathname) || {};
+    
+    id && CommonStore.episodes.setCurrentId(+id);
+  };
   
   render() {
     return <SerialsLoaderContainer>

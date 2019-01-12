@@ -5,6 +5,10 @@ import { inject, observer } from 'mobx-react';
 @inject('episodes')
 @observer
 export class EpisodesLoaderContainer extends LoaderContainer {
+  
+  componentWillUnmount() {
+    this.props.episodes.clear();
+  }
 
   loadData() {
     this.props.episodes.load();

@@ -5,6 +5,7 @@ import { EpisodeThumb } from 'common/Thumb/EpisodeThumb/EpisodeThumb';
 import { SerialsLoaderContainer } from 'modules/LoaderContainer/Serials/LoaderContainer.Serials';
 import { PageTitle } from 'common/PageTitle/PageTitle';
 import { inject } from 'mobx-react';
+import s from './Serial.sass';
 
 @inject('serials')
 export class Serial extends React.PureComponent {
@@ -15,10 +16,19 @@ export class Serial extends React.PureComponent {
   
   @autobind
   renderContent() {
+    const { title, description, posterSrc } = this.props.serials.getCurrentSerial();
+    
     return <React.Fragment>
       <PageTitle>
-        {this.props.serials.getCurrentSerial().title}
+        {title}
       </PageTitle>
+      
+      <div className={s.info}>
+        <div className={s.poster} style={{ backgroundImage: `url(${posterSrc})` }} />
+        <div>
+          {description}
+        </div>
+      </div>
   
       <EpisodesLoaderContainer>
         {this.renderEpisodes}

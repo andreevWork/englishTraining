@@ -21,6 +21,10 @@ export const EpisodesModel = types
   .views(self => ({
     getCurrentEpisode() {
       return self.items.get(self.currentId);
+    },
+    
+    hasCurrentEpisode() {
+      return Boolean(self.getCurrentEpisode());
     }
   }))
   .actions(self => {
@@ -54,6 +58,10 @@ export const EpisodesModel = types
   
       setCurrentId(id) {
         self.currentId = id;
+      },
+      
+      clear() {
+        self.items.clear();
       }
     };
   });
